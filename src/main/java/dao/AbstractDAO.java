@@ -38,8 +38,8 @@ public abstract class AbstractDAO<T extends Serializable> {
     }
 
     public void remove(Object id) {
-        T entiry = (T) getEntityManager().find(entityClass, id);
-        remove(entiry);
+        T entity = getEntityManager().find(entityClass, id);
+        remove(entity);
     }
 
     public T find(Object id) {

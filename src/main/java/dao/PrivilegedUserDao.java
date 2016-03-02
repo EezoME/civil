@@ -9,10 +9,10 @@ import java.util.List;
 /**
  * Created by User on 02.03.2016.
  */
-public class PrivalegedUserDao extends AbstractDAO<PrivilegedUser> {
+public class PrivilegedUserDao extends AbstractDAO<PrivilegedUser> {
     private EntityManager em = Persistence.createEntityManagerFactory("civil").createEntityManager();
 
-    public PrivalegedUserDao(Class<PrivilegedUser> entityClass) {
+    public PrivilegedUserDao(Class<PrivilegedUser> entityClass) {
         super(entityClass);
     }
 
@@ -25,3 +25,4 @@ public class PrivalegedUserDao extends AbstractDAO<PrivilegedUser> {
         return namedQuery("PrivilegedUser.getAll").getResultList();
     }
 }
+
