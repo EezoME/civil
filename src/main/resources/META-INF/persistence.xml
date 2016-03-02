@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
+    <persistence-unit name="civil" transaction-type="RESOURCE_LOCAL">
+
+
+        <class>entity.User</class>
+        <class>entity.Project</class>
+        <class>entity.Comment</class>
+        <class>entity.Donation</class>
+        <class>entity.PrivilegedUser</class>
+
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+            <!--TODO: create database-->
+            <property name="javax.persistence.jdbc.url"
+                      value="jdbc:mysql://localhost:3306/database" /> <!--TODO: change databaseUrl-->
+            <property name="javax.persistence.jdbc.user" value="admin" /> <!--TODO: change username-->
+            <property name="javax.persistence.jdbc.password" value="admin" />  <!--TODO: change password-->
+
+
+            <property name="eclipselink.ddl-generation" value="create-tables" />
+            <property name="eclipselink.ddl-generation.output-mode"
+                      value="database" />
+        </properties>
+
+    </persistence-unit>
+</persistence>
