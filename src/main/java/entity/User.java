@@ -1,8 +1,13 @@
 package entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by User on 01.03.2016.
@@ -13,13 +18,63 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int userId;
+
+    @NotNull
+    @Size( min = 5 )
     private String fullName;
+
+    @Past
+    @Temporal(TemporalType.DATE)
     private Date bDate;
+
+    @NotNull
+    @Size( min = 3, max = 32)
     private String username;
-    private String password;
+
+    @NotNull
+    private String password;    // Если это хеш пароля то валидировать его исходное значение нужно где-то в другом месте
+
+    @NotNull
+    @Pattern(regexp =
+            "^[\\\\w!#$%&’*+/=?`{|}~^-]+(?:\\\\.[\\\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\\\.)+[a-zA-Z]{2,6}$")
     private String email;
+
+    @NotNull
     private String role;
 
+    @ManyToMany
+    private List<Project> createdProjects;
+
+    @OneToMany(mappedBy = "user")
+    private List<Donation> donations;
+
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "author")
+    private List<Comment> comments;
+
+
+    public List<Project> getCreatedProjects() {
+        return createdProjects;
+    }
+
+    public void setCreatedProjects(List<Project> createdProjects) {
+        this.createdProjects = createdProjects;
+    }
+
+    public List<Donation> getDonations() {
+        return donations;
+    }
+
+    public void setDonations(List<Donation> donations) {
+        this.donations = donations;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
     public int getUserId() {
         return userId;

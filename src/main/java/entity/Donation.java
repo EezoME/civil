@@ -1,9 +1,8 @@
 package entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -13,11 +12,17 @@ import java.io.Serializable;
 @NamedQuery(name = "Donation.getAll", query = "SELECT donations from Donation donations")
 public class Donation implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int donationId;
+
+    @NotNull
+    @Min(1)
     private int amount;
     private String comment;
+
     @ManyToOne
     private User user;      //?????????????????????????
+
     @ManyToOne
     private Project project;   //?????????????????????????
 

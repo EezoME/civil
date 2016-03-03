@@ -2,8 +2,10 @@ package entity;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by User on 01.03.2016.
@@ -14,34 +16,89 @@ public class Project implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int projectId;
+
+    @NotNull
+    @Size(min = 5, max = 64)
     private String title;
+
+    @NotNull
+    @Size(min = 15)
     private String desc;
+
+    @NotNull
     private String category;
+
+    @Past
+    @Temporal(TemporalType.DATE)
     private Date registrationDate;
+
+    @Future
+    @Temporal(TemporalType.DATE)
     private Date expirationDate;
+
+    @NotNull
+    @Min(1)
     private int goalCost;
+
     private int fundedSum;
     private String status;
+
+    @NotNull
     private boolean privilegedStatus;
-    @ManyToOne
-    private User creator;    //????????????????????????
-    @ManyToOne
-    private User donator;      //????????????????????????
 
-    public User getDonator() {
-        return donator;
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "project")  // Если Project удален - удаляем все его BudgetItems
+    private List<BudgetItem> budgetItems;
+
+    @ManyToMany
+    private List<User> creators;    // Один проект - один или несколько создателей (команда)
+
+    @ManyToMany
+    private List<User> donors;   // Один проект - несколько доноров
+
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "project")
+    private List<Comment> comments;
+
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "project")
+    private List<Donation> donations;
+
+    public List<User> getCreators() {
+        return creators;
     }
 
-    public void setDonator(User donator) {
-        this.donator = donator;
+    public void setCreators(List<User> creators) {
+        this.creators = creators;
     }
 
-    public User getCreator() {
-        return creator;
+    public List<User> getDonors() {
+        return donors;
     }
 
-    public void setCreator(User creator) {
-        this.creator = creator;
+    public void setDonors(List<User> donors) {
+        this.donors = donors;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public List<Donation> getDonations() {
+        return donations;
+    }
+
+    public void setDonations(List<Donation> donations) {
+        this.donations = donations;
+    }
+
+    public List<BudgetItem> getBudgetItems() {
+        return budgetItems;
+    }
+
+    public void setBudgetItems(List<BudgetItem> budgetItems) {
+        this.budgetItems = budgetItems;
     }
 
     public int getProjectId() {

@@ -1,9 +1,9 @@
 package entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 /**
@@ -13,10 +13,20 @@ import java.io.Serializable;
 @NamedQuery(name = "BudgetItem.getAll", query = "SELECT BudgetItems from BudgetItem BudgetItems")
 public class BudgetItem implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int budgetItemId;
+
+    @NotNull
+    @Size(min = 2, max = 64)
     private String name;
+
+    @Size(max = 128)
     private String desc;
+
+    @NotNull
+    @Min(1)
     private int cost;
+
     @ManyToOne
     private Project project;
 

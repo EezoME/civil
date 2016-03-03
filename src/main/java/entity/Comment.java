@@ -2,6 +2,9 @@ package entity;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -14,11 +17,19 @@ public class Comment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int commentId;
+
     @ManyToOne
     private User author;       //??????????????????????
+
     @ManyToOne
     private Project project;  //??????????????????????
+
+    @NotNull
+    @Size(min = 5, max = 1024)
     private String content;
+
+    @Past
+    @Temporal(TemporalType.DATE)
     private Date timePosted;
 
 
