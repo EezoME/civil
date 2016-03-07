@@ -3,14 +3,15 @@ package dao;
 import entity.Comment;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
  * Created by User on 02.03.2016.
  */
 public class CommentDao extends AbstractDAO<Comment> {
-    private EntityManager em = Persistence.createEntityManagerFactory("civil").createEntityManager();
+    @PersistenceContext(unitName = "civil")
+    private EntityManager em;
 
     public CommentDao(Class<Comment> entityClass) {
         super(entityClass);

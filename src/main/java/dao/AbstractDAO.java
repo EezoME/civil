@@ -31,14 +31,10 @@ public abstract class AbstractDAO<T extends Serializable> {
         getEntityManager().merge(entity);
     }
 
-    public void remove(T entity) {
-        if (entity != null) {
-            getEntityManager().remove(entity);
-        }
-    }
+    public void remove(T entity) { getEntityManager().remove(entity); }
 
     public void remove(Object id) {
-        T entity = getEntityManager().find(entityClass, id);
+        T entity = find(id);
         remove(entity);
     }
 

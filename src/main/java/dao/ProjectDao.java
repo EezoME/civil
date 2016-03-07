@@ -3,14 +3,15 @@ package dao;
 import entity.Project;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
  * Created by User on 02.03.2016.
  */
 public class ProjectDao extends AbstractDAO<Project> {
-    private EntityManager em = Persistence.createEntityManagerFactory("civil").createEntityManager();
+    @PersistenceContext(unitName = "civil")
+    private EntityManager em;
 
     public ProjectDao(Class<Project> entityClass) {
         super(entityClass);

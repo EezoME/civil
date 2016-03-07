@@ -3,14 +3,15 @@ package dao;
 import entity.PrivilegedUser;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
  * Created by User on 02.03.2016.
  */
 public class PrivilegedUserDao extends AbstractDAO<PrivilegedUser> {
-    private EntityManager em = Persistence.createEntityManagerFactory("civil").createEntityManager();
+    @PersistenceContext(unitName = "civil")
+    private EntityManager em;
 
     public PrivilegedUserDao(Class<PrivilegedUser> entityClass) {
         super(entityClass);
