@@ -1,6 +1,8 @@
 package entity;
 
 
+import enums.Category;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
@@ -26,7 +28,7 @@ public class Project implements Serializable {
     private String desc;
 
     @NotNull
-    private String category;
+    private Category category;
 
     @Past
     @Temporal(TemporalType.DATE)
@@ -125,11 +127,11 @@ public class Project implements Serializable {
         this.desc = desc;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 

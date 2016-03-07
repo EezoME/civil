@@ -1,5 +1,7 @@
 package entity;
 
+import enums.Role;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -40,7 +42,7 @@ public class User implements Serializable {
     private String email;
 
     @NotNull
-    private String role;
+    private Role role;
 
     @ManyToMany
     private List<Project> createdProjects;
@@ -124,11 +126,11 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
