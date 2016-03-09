@@ -5,11 +5,11 @@
     <persistence-unit name="civil" transaction-type="RESOURCE_LOCAL">
 
 
-        <class>entity.User</class>
-        <class>entity.Project</class>
-        <class>entity.Comment</class>
-        <class>entity.Donation</class>
-        <class>entity.PrivilegedUser</class>
+        <class>org.rssms.entity.User</class>
+        <class>org.rssms.entity.Project</class>
+        <class>org.rssms.entity.Comment</class>
+        <class>org.rssms.entity.Donation</class>
+        <class>org.rssms.entity.PrivilegedUser</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />

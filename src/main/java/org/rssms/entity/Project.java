@@ -1,7 +1,7 @@
-package entity;
+package org.rssms.entity;
 
 
-import enums.Category;
+import org.rssms.enums.Category;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;

@@ -1,4 +1,4 @@
-package dao;
+package org.rssms.dao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;

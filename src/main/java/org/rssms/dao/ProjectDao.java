@@ -1,6 +1,6 @@
-package dao;
+package org.rssms.dao;
 
-import entity.PrivilegedUser;
+import org.rssms.entity.Project;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -9,11 +9,11 @@ import java.util.List;
 /**
  * Created by User on 02.03.2016.
  */
-public class PrivilegedUserDao extends AbstractDAO<PrivilegedUser> {
+public class ProjectDao extends AbstractDAO<Project> {
     @PersistenceContext(unitName = "civil")
     private EntityManager em;
 
-    public PrivilegedUserDao(Class<PrivilegedUser> entityClass) {
+    public ProjectDao(Class<Project> entityClass) {
         super(entityClass);
     }
 
@@ -22,8 +22,7 @@ public class PrivilegedUserDao extends AbstractDAO<PrivilegedUser> {
         return em;
     }
 
-    public List<PrivilegedUser> getAll() {
-        return namedQuery("PrivilegedUser.getAll").getResultList();
+    public List<Project> getAll() {
+        return namedQuery("Project.getAll").getResultList();
     }
 }
-

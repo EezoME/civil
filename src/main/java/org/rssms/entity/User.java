@@ -1,6 +1,6 @@
-package entity;
+package org.rssms.entity;
 
-import enums.Role;
+import org.rssms.enums.Role;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

@@ -1,4 +1,4 @@
-package entity;
+package org.rssms.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.NamedQuery;

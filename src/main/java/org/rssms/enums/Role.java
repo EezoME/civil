@@ -1,4 +1,4 @@
-package enums;
+package org.rssms.enums;
 
 /**
  *

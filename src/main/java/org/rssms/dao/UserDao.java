@@ -1,19 +1,19 @@
-package dao;
+package org.rssms.dao;
 
-import entity.BudgetItem;
+import org.rssms.entity.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
- * Created by User on 02.03.2016.
+ * Created by User on 01.03.2016.
  */
-public class BudgetItemDao extends AbstractDAO<BudgetItem> {
+public class UserDao extends AbstractDAO<User> {
     @PersistenceContext(unitName = "civil")
     private EntityManager em;
 
-    public BudgetItemDao(Class<BudgetItem> entityClass) {
+    public UserDao(Class<User> entityClass) {
         super(entityClass);
     }
 
@@ -22,7 +22,7 @@ public class BudgetItemDao extends AbstractDAO<BudgetItem> {
         return em;
     }
 
-    public List<BudgetItem> getAll() {
-        return namedQuery("BudgetItem.getAll").getResultList();
+    public List<User> getAll() {
+        return namedQuery("User.getAll").getResultList();
     }
 }

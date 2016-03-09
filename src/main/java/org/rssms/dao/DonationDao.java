@@ -1,6 +1,6 @@
-package dao;
+package org.rssms.dao;
 
-import entity.Comment;
+import org.rssms.entity.Donation;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -9,11 +9,11 @@ import java.util.List;
 /**
  * Created by User on 02.03.2016.
  */
-public class CommentDao extends AbstractDAO<Comment> {
+public class DonationDao extends AbstractDAO<Donation> {
     @PersistenceContext(unitName = "civil")
     private EntityManager em;
 
-    public CommentDao(Class<Comment> entityClass) {
+    public DonationDao(Class<Donation> entityClass) {
         super(entityClass);
     }
 
@@ -22,7 +22,7 @@ public class CommentDao extends AbstractDAO<Comment> {
         return em;
     }
 
-    public List<Comment> getAll() {
-        return namedQuery("Comment.getAll").getResultList();
+    public List<Donation> getAll() {
+        return namedQuery("Donation.getAll").getResultList();
     }
 }
