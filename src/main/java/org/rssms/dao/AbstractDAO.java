@@ -1,6 +1,7 @@
 package org.rssms.dao;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.io.Serializable;
 
@@ -8,6 +9,8 @@ import java.io.Serializable;
  * Created by User on 02.03.2016.
  */
 public abstract class AbstractDAO<T extends Serializable> {
+    @PersistenceContext(unitName = "civil")
+    private EntityManager em;
     private Class<T> entityClass;
 
     public AbstractDAO() {
@@ -17,7 +20,9 @@ public abstract class AbstractDAO<T extends Serializable> {
         this.entityClass = entityClass;
     }
 
-    protected abstract EntityManager getEntityManager();
+    protected EntityManager getEntityManager(){
+        return em;
+    }
 
     public Class<T> getEntityClass() {
         return entityClass;
