@@ -2,14 +2,12 @@ package org.rssms.dao;
 
 import org.rssms.entity.User;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
  * Created by User on 01.03.2016.
  */
-public class UserDao extends AbstractDAO<User> {
+public class UserDao extends AbstractJpaDao<User> {
 
     public UserDao(Class<User> entityClass) {
         super(entityClass);
