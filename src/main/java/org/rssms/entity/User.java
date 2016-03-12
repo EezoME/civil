@@ -15,10 +15,7 @@ import java.util.List;
  * Created by User on 01.03.2016.
  */
 @Entity
-@NamedQueries({
-        @NamedQuery(name = "User.getAll", query = "SELECT users from User users"),
-        @NamedQuery(name = "User.findByUsername", query = "SELECT users from User users WHERE users.username = :username")
-})
+@NamedQuery(name = "User.getAll", query = "SELECT users from User users")
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -47,7 +44,7 @@ public class User implements Serializable {
     @NotNull
     private Role role;
 
-    @ManyToMany
+    @OneToMany
     private List<Project> createdProjects;
 
     @OneToMany(mappedBy = "user")
@@ -55,7 +52,6 @@ public class User implements Serializable {
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "author")
     private List<Comment> comments;
-
 
     public List<Project> getCreatedProjects() {
         return createdProjects;

@@ -11,7 +11,6 @@ import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
-import java.util.HashMap;
 import java.util.Set;
 
 /**
@@ -21,10 +20,9 @@ import java.util.Set;
 @Stateless
 public class UserServiceBean implements UserService {
 
-    private UserDao userDao;
-
     @Resource
     Validator validator;
+    private UserDao userDao;
 
     public UserServiceBean(UserDao userDao) {
         this.userDao = userDao;
@@ -62,9 +60,8 @@ public class UserServiceBean implements UserService {
     }
 
     public User findUser(String username) throws UserNotFoundException {
-        HashMap<String, String> queryParams = new HashMap<String, String>();
-        queryParams.put("username", username);
-        User user = userDao.namedQuery("User.findByUsername", queryParams).getSingleResult();
+
+        User user = userDao.findByUsername(username);
         if (user == null) {
             throw new UserNotFoundException("User with username: " + username + " was not found!");
         }

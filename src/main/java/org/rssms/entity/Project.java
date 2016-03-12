@@ -51,8 +51,11 @@ public class Project implements Serializable {
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "project")  // Если Project удален - удаляем все его BudgetItems
     private List<BudgetItem> budgetItems;
 
+    @ManyToOne
+    private User creator;
+
     @ManyToMany
-    private List<User> creators;    // Один проект - один или несколько создателей (команда)
+    private List<User> team;    // Один проект - один или несколько создателей (команда)
 
     @ManyToMany
     private List<User> donors;   // Один проект - несколько доноров
@@ -63,12 +66,21 @@ public class Project implements Serializable {
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "project")
     private List<Donation> donations;
 
-    public List<User> getCreators() {
-        return creators;
+
+    public User getCreator() {
+        return creator;
     }
 
-    public void setCreators(List<User> creators) {
-        this.creators = creators;
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
+
+    public List<User> getTeam() {
+        return team;
+    }
+
+    public void setTeam(List<User> team) {
+        this.team = team;
     }
 
     public List<User> getDonors() {
