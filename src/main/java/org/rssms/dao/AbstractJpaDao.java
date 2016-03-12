@@ -4,8 +4,11 @@ import org.rssms.dao.interfaces.GenericDao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by User on 02.03.2016.
@@ -60,5 +63,14 @@ public abstract class AbstractJpaDao<T extends Serializable> implements GenericD
     @Override
     public TypedQuery<T> namedQuery(String queryName) {
         return getEntityManager().createNamedQuery(queryName, entityClass);
+    }
+
+    @Override
+    public TypedQuery<T> namedQuery(String queryName, HashMap<String, String> params) {
+        TypedQuery<T> query = getEntityManager().createNamedQuery(queryName, entityClass);
+        for (Map.Entry<String, String> parameter : params.entrySet()) {
+            query.setParameter(parameter.getKey(), parameter.getValue());
+        }
+        return query;
     }
 }

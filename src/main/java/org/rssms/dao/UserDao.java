@@ -16,4 +16,8 @@ public class UserDao extends AbstractJpaDao<User> {
     public List<User> getAll() {
         return namedQuery("User.getAll").getResultList();
     }
+
+    public User findByUsername() {
+        return namedQuery("User.findByUsername").getSingleResult();
+    }
 }

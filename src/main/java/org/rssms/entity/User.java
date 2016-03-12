@@ -15,7 +15,10 @@ import java.util.List;
  * Created by User on 01.03.2016.
  */
 @Entity
-@NamedQuery(name = "Student.getAll", query = "SELECT users from User users")
+@NamedQueries({
+        @NamedQuery(name = "User.getAll", query = "SELECT users from User users"),
+        @NamedQuery(name = "User.findByUsername", query = "SELECT users from User users WHERE users.username = :username")
+})
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,19 +29,19 @@ public class User implements Serializable {
     private String fullName;
 
     @Past
-    @Temporal(TemporalType.DATE)
+    @Temporal( TemporalType.DATE )
     private Date bDate;
 
     @NotNull
-    @Size( min = 3, max = 32)
+    @Size( min = 3, max = 32 )
     private String username;
 
     @NotNull
     private String password;    // Если это хеш пароля то валидировать его исходное значение нужно где-то в другом месте
 
     @NotNull
-    @Pattern(regexp =
-            "^[\\\\w!#$%&’*+/=?`{|}~^-]+(?:\\\\.[\\\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\\\.)+[a-zA-Z]{2,6}$")
+    @Pattern( regexp =
+            "^[\\\\w!#$%&’*+/=?`{|}~^-]+(?:\\\\.[\\\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\\\.)+[a-zA-Z]{2,6}$" )
     private String email;
 
     @NotNull
