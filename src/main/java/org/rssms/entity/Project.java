@@ -2,6 +2,7 @@ package org.rssms.entity;
 
 
 import org.rssms.enums.Category;
+import org.rssms.enums.Status;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -43,7 +44,7 @@ public class Project implements Serializable {
     private int goalCost;
 
     private int fundedSum;
-    private String status;
+    private Status status;
 
     @NotNull
     private boolean privilegedStatus;
@@ -179,11 +180,11 @@ public class Project implements Serializable {
         this.fundedSum = fundedSum;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
