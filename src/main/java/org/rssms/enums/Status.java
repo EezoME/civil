@@ -6,15 +6,15 @@ package org.rssms.enums;
 public enum Status {
     OPEN{
         @Override
-        public String getUkrainianName(){return "Відкритий";};
+        public String getUkrainianName(){return "Р’С–РґРєСЂРёС‚РёР№";};
     },
     CLOSED{
         @Override
-        public String getUkrainianName(){return "Закритий";};
+        public String getUkrainianName(){return "Р—Р°РєСЂРёС‚РёР№";};
     },
     BANNED{
         @Override
-        public String getUkrainianName(){return "Заборонений";};  //Возможно в укр. есть слово лучше
+        public String getUkrainianName(){return "Р—Р°Р±РѕСЂРѕРЅРµРЅРёР№";};  //Р’РѕР·РјРѕР¶РЅРѕ РІ СѓРєСЂ. РµСЃС‚СЊ СЃР»РѕРІРѕ Р»СѓС‡С€Рµ
     };
 
     public abstract String getUkrainianName();
