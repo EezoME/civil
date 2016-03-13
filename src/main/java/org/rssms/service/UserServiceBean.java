@@ -36,7 +36,7 @@ public class UserServiceBean implements UserService {
     private MailService mailService;
 
     @Inject
-    public void setUserServiceBean(UserDao userDao) {
+    public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
     }
 
