@@ -1,6 +1,7 @@
 package org.rssms.service.interfaces;
 
 import org.rssms.entity.User;
+import org.rssms.exception.EmailConfirmationNotFoundException;
 import org.rssms.exception.InvalidUserException;
 import org.rssms.exception.UserNotFoundException;
 
@@ -15,9 +16,9 @@ public interface UserService {
 
     void updateUser(User user) throws InvalidUserException;
 
-    User findUserById(int id) throws UserNotFoundException;
+    User findUser(int id) throws UserNotFoundException;
 
     User findUser(String username) throws UserNotFoundException;
 
-    void verifyUser(String username, String verificationCode);
+    void verifyUser(String username, String confirmationCode) throws EmailConfirmationNotFoundException, UserNotFoundException;
 }
