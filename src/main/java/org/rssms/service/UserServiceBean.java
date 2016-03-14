@@ -112,8 +112,9 @@ public class UserServiceBean implements UserService {
             throw new UserNotFoundException("User with username: " + username + " was not found!");
         }
 
-        if (confirmation.equals(confirmationCode)) {
+        if (confirmation.getConfirmationCode().equals(confirmationCode)) {
             user.setRole(Role.SIMPLE);
+            userDao.persist(user);
             emailConfirmationDao.remove(confirmation);
         }
     }
