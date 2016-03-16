@@ -14,6 +14,7 @@ import java.util.Properties;
 @Singleton
 public class MailServiceBean implements MailService {
 
+    // Method used to send email messages using SMTP protocol and gmail as host
     @Override
     public void sendMail(String address, String subject, String body) {
         Properties properties = System.getProperties();

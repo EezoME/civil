@@ -29,11 +29,13 @@ import java.util.Set;
 @Stateless
 public class UserServiceBean implements UserService {
 
+    // Is this correct way of getting validator?
+    // http://www.thejavageek.com/2014/05/27/jpa-bean-validation/
     @Resource
     Validator validator;
     private UserDao userDao;
     private EmailConfirmationDao emailConfirmationDao;
-    private MailService mailService;
+    private MailServiceBean mailServiceBean;
 
     @Inject
     public void setUserDao(UserDao userDao) {
@@ -46,27 +48,32 @@ public class UserServiceBean implements UserService {
     }
 
     @Inject
-    public void setMailService(MailService mailService) {
-        this.mailService = mailService;
+    public void setMailService(MailServiceBean mailServiceBean) {
+        this.mailServiceBean = mailServiceBean;
     }
 
     public void addUser(User user) throws InvalidUserException {
+
+        //Validate user with Entity validations (@NotNull, @Size, etc.)
         Set<ConstraintViolation<User>> violationSet =  validator.validate(user);
         for (ConstraintViolation<User> violation : violationSet) {
             throw new InvalidUserException(violation.getPropertyPath() + " " + violation.getMessage());
         }
 
+        //Create new EmailConfirmation entity and set randomly generated confirmationCode
         EmailConfirmation confirmation = new EmailConfirmation();
         confirmation.setUsername(user.getUsername());
         String confirmationCode = DigestUtils.md5Hex(new Date().toString() + new Random().nextInt());
         confirmation.setConfirmationCode(confirmationCode);
         emailConfirmationDao.persist(confirmation);
 
+        //Send confirmation email using MailServiceBean
         String messageBody = "Для підтвердження реєстрації на rssms.org Вам необхідно перейти за посиланням: <br>"
                                 + "<a href='http://rssms.org/emailConfirm?user=" + user.getUsername()
                                 + "&code=" + confirmationCode + "'>Підтвердити реєстрацію</a>";
-        mailService.sendMail(user.getEmail(), "Підтвердження реєстрації", messageBody);
+        mailServiceBean.sendMail(user.getEmail(), "Підтвердження реєстрації", messageBody);
 
+        //Generate password hash and set user role to Role.UNCONFIRMED
         String passwordHash = DigestUtils.md5Hex(user.getPassword());
         user.setPassword(passwordHash);
         user.setRole(Role.UNCONFIRMED);
@@ -78,6 +85,7 @@ public class UserServiceBean implements UserService {
     }
 
     public void updateUser(User user) throws InvalidUserException {
+        //Validate user with Entity validations (@NotNull, @Size, etc.)
         Set<ConstraintViolation<User>> violationSet = validator.validate(user);
         for (ConstraintViolation<User> violation : violationSet) {
             throw new InvalidUserException(violation.getPropertyPath() + " " + violation.getMessage());
@@ -94,7 +102,6 @@ public class UserServiceBean implements UserService {
     }
 
     public User findUser(String username) throws UserNotFoundException {
-
         User user = userDao.findByUsername(username);
         if (user == null) {
             throw new UserNotFoundException("User with username: " + username + " was not found!");
@@ -102,16 +109,20 @@ public class UserServiceBean implements UserService {
         return user;
     }
 
+    // Method called when user confirms his email
     public void verifyUser(String username, String confirmationCode) throws EmailConfirmationNotFoundException, UserNotFoundException {
+        // Get EmailConfirmation record by username
         EmailConfirmation confirmation = emailConfirmationDao.getByUsername(username);
         if (confirmation == null) {
             throw new EmailConfirmationNotFoundException("Email confirmation not found for user: " + username);
         }
+        // Get User record by username
         User user = userDao.findByUsername(username);
         if (user == null) {
             throw new UserNotFoundException("User with username: " + username + " was not found!");
         }
-
+        // If confirmation code from DB matches code from parameters - set user role to Role.SIMPLE
+        // and remove EmailConfirmation record associated with this user
         if (confirmation.getConfirmationCode().equals(confirmationCode)) {
             user.setRole(Role.SIMPLE);
             userDao.persist(user);
