@@ -13,7 +13,7 @@ public interface BudgetItemDaoInterface extends GenericDao<BudgetItem> {
 
     List<BudgetItem> findByProject(Project project);
 
-    List<BudgetItem> findByName(String name);
+    BudgetItem findByName(String name);
 
 
 }
