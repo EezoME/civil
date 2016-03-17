@@ -3,6 +3,7 @@ package org.rssms.service.interfaces;
 import org.rssms.entity.Project;
 import org.rssms.entity.User;
 import org.rssms.enums.Category;
+import org.rssms.enums.Status;
 import org.rssms.exception.InvalidProjectException;
 import org.rssms.exception.InvalidProjectStatusException;
 import org.rssms.exception.InvalidUserRoleException;
@@ -31,15 +32,16 @@ public interface ProjectService {
     List<Project> findPrivilegedProjects() throws ProjectNotFoundException;
 
     /**
-     * Confirms project.<br/>
-     * <b>NOTE:</b> Administrator or Moderator must confirm project order to it could be available to viewing.
+     * Changes project status.<br/>
+     * <b>NOTE:</b> Administrator or Moderator must confirm project order to it could be available to viewing.<br/>
+     * <b>NOTE:</b> Only Administrator or Moderator can ban project.
      * @param person a user who confirms
      * @param projectId a project you want to confirm
      * @throws InvalidUserRoleException
      * @throws ProjectNotFoundException
      * @throws InvalidProjectStatusException
      */
-    void confirmProject(User person, int projectId) throws InvalidUserRoleException, ProjectNotFoundException, InvalidProjectStatusException;
+    void changeProjectStatus(User person, int projectId, Status status) throws InvalidUserRoleException, ProjectNotFoundException, InvalidProjectStatusException;
 
     /**
      * Marks project as privileged.

@@ -93,19 +93,27 @@ public class ProjectServiceBean implements ProjectService {
     }
 
     @Override
-    public void confirmProject(User person, int projectId) throws InvalidUserRoleException, ProjectNotFoundException, InvalidProjectStatusException {
-        // check user access level ( might worth add integer value for roles? )
-        if (person.getRole() != Role.MODERATOR && person.getRole() != Role.ADMINISTRATOR){
-            throw new InvalidUserRoleException("You ("+person.getUsername()+") have low access.");
-        }
+    public void changeProjectStatus(User person, int projectId, Status status) throws InvalidUserRoleException, ProjectNotFoundException, InvalidProjectStatusException {
         Project project = projectDao.find(projectId);
         if (project == null){
             throw new ProjectNotFoundException("No project with id "+projectId);
         }
-        if (project.getStatus() != null && project.getStatus() != Status.BANNED){
-            throw new InvalidProjectStatusException("Project with id "+projectId+" has already confirmed.");
+        if (status == null){
+            throw new InvalidProjectStatusException("status = null");
         }
-        project.setStatus(Status.OPEN);
+        if (status == Status.BANNED) {
+            // check user access level ( might worth add integer value for roles? )
+            if (person.getRole() != Role.MODERATOR && person.getRole() != Role.ADMINISTRATOR) {
+                throw new InvalidUserRoleException("Only administrator and moderator can ban project.");
+            }
+            if (project.getStatus() == null){
+                throw new InvalidProjectStatusException("You can't ban unconfirmed project.");
+            }
+        }
+        if (status == project.getStatus()){
+            throw new InvalidProjectStatusException("Project already has '"+status.getUkrainianName()+"' status.");
+        }
+        project.setStatus(status);
         projectDao.persist(project);
     }
 
@@ -130,7 +138,7 @@ public class ProjectServiceBean implements ProjectService {
         // validate project with entity validations
         Set<ConstraintViolation<Project>> violationSet = validator.validate(project);
         for (ConstraintViolation<Project> violation : violationSet){
-            if (violation.getInvalidValue().equals("something wrong")){
+            if (violation.getInvalidValue().equals("something wrong")){ // may be not
                 throw new InvalidProjectException(violation.getPropertyPath() + " " + violation.getMessage());
             }
         }
