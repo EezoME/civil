@@ -13,4 +13,8 @@ public class InvalidProjectException extends Exception {
     public InvalidProjectException(String message) {
         super(message);
     }
+
+    public InvalidProjectException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }

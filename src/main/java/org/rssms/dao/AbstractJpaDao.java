@@ -25,12 +25,10 @@ public abstract class AbstractJpaDao<T extends Serializable> implements GenericD
         this.entityClass = entityClass;
     }
 
-    @Override
     public EntityManager getEntityManager() {
         return em;
     }
 
-    @Override
     public Class<T> getEntityClass() {
         return entityClass;
     }
@@ -60,12 +58,10 @@ public abstract class AbstractJpaDao<T extends Serializable> implements GenericD
         return getEntityManager().find(entityClass, id);
     }
 
-    @Override
     public TypedQuery<T> namedQuery(String queryName) {
         return getEntityManager().createNamedQuery(queryName, entityClass);
     }
 
-    @Override
     public TypedQuery<T> namedQuery(String queryName, HashMap<String, String> params) {
         TypedQuery<T> query = getEntityManager().createNamedQuery(queryName, entityClass);
         for (Map.Entry<String, String> parameter : params.entrySet()) {

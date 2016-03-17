@@ -12,4 +12,8 @@ public class EmailConfirmationNotFoundException extends Exception {
     public EmailConfirmationNotFoundException(String message) {
         super(message);
     }
+
+    public EmailConfirmationNotFoundException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }

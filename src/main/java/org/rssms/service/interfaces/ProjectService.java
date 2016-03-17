@@ -8,6 +8,7 @@ import org.rssms.exception.InvalidProjectException;
 import org.rssms.exception.InvalidProjectStatusException;
 import org.rssms.exception.InvalidUserRoleException;
 import org.rssms.exception.ProjectNotFoundException;
+import org.rssms.service.AbstractService;
 
 import java.util.List;
 
@@ -35,7 +36,7 @@ public interface ProjectService {
      * Changes project status.<br/>
      * <b>NOTE:</b> Administrator or Moderator must confirm project order to it could be available to viewing.<br/>
      * <b>NOTE:</b> Only Administrator or Moderator can ban project.
-     * @param person a user who confirms
+     * @param person a user who changes project status
      * @param projectId a project you want to confirm
      * @throws InvalidUserRoleException
      * @throws ProjectNotFoundException

@@ -9,9 +9,6 @@ import java.util.HashMap;
  * Created by User on 12.03.2016.
  */
 public interface GenericDao <T extends Serializable> {
-    EntityManager getEntityManager();
-
-    Class<T> getEntityClass();
 
     void persist(T entity);
 
@@ -22,8 +19,4 @@ public interface GenericDao <T extends Serializable> {
     void remove(Object id);
 
     T find(Object id);
-
-    TypedQuery<T> namedQuery(String queryName);
-
-    TypedQuery<T> namedQuery(String queryName, HashMap<String, String> parameters);
 }

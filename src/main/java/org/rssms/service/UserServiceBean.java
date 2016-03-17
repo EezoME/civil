@@ -9,25 +9,21 @@ import org.rssms.enums.Role;
 import org.rssms.exception.EmailConfirmationNotFoundException;
 import org.rssms.exception.InvalidUserException;
 import org.rssms.exception.UserNotFoundException;
-import org.rssms.service.interfaces.MailService;
 import org.rssms.service.interfaces.UserService;
 
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.jws.soap.SOAPBinding;
-import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import java.util.Date;
 import java.util.Random;
-import java.util.Set;
 
 /**
  * Created by WRKSPACE2 on 3/12/2016.
  */
 
 @Stateless
-public class UserServiceBean implements UserService {
+public class UserServiceBean extends AbstractService<User> implements UserService {
 
     // Is this correct way of getting validator?
     // http://www.thejavageek.com/2014/05/27/jpa-bean-validation/
@@ -55,11 +51,10 @@ public class UserServiceBean implements UserService {
     public void addUser(User user) throws InvalidUserException {
 
         //Validate user with Entity validations (@NotNull, @Size, etc.)
-        Set<ConstraintViolation<User>> violationSet =  validator.validate(user);
-        for (ConstraintViolation<User> violation : violationSet) {
-            throw new InvalidUserException(violation.getPropertyPath() + " " + violation.getMessage());
+        String s = validateEntity(user);
+        if (s != null){
+            throw new InvalidUserException(s);
         }
-
         //Create new EmailConfirmation entity and set randomly generated confirmationCode
         EmailConfirmation confirmation = new EmailConfirmation();
         confirmation.setUsername(user.getUsername());
@@ -86,9 +81,9 @@ public class UserServiceBean implements UserService {
 
     public void updateUser(User user) throws InvalidUserException {
         //Validate user with Entity validations (@NotNull, @Size, etc.)
-        Set<ConstraintViolation<User>> violationSet = validator.validate(user);
-        for (ConstraintViolation<User> violation : violationSet) {
-            throw new InvalidUserException(violation.getPropertyPath() + " " + violation.getMessage());
+        String s = validateEntity(user);
+        if (s != null){
+            throw new InvalidUserException(s);
         }
         userDao.persist(user);
     }

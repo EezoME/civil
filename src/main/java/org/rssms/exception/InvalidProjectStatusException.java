@@ -13,4 +13,8 @@ public class InvalidProjectStatusException extends Exception {
     public InvalidProjectStatusException(String message){
         super(message);
     }
+
+    public InvalidProjectStatusException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }

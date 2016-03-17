@@ -10,16 +10,14 @@ import org.rssms.service.interfaces.DonationService;
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by User on 16.03.2016.
  */
 @Stateless
-public class DonationServiceBean implements DonationService {
+public class DonationServiceBean extends AbstractService<Donation> implements DonationService {
 
     @Resource
     Validator validator;
@@ -38,9 +36,9 @@ public class DonationServiceBean implements DonationService {
         donation.setAmount(amount);
         donation.setComment(comment);
         donation.setProject(project);
-        Set<ConstraintViolation<Donation>> violationSet = validator.validate(donation);
-        for (ConstraintViolation<Donation> violation : violationSet) {
-            throw new InvalidDonationException(violation.getPropertyPath() + " " + violation.getMessage());
+        String s = validateEntity(donation);
+        if (s != null){
+            throw new InvalidDonationException(s);
         }
         donationDao.persist(donation);
     }

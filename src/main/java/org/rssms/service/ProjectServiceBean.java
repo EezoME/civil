@@ -6,29 +6,20 @@ import org.rssms.entity.User;
 import org.rssms.enums.Category;
 import org.rssms.enums.Role;
 import org.rssms.enums.Status;
-import org.rssms.exception.InvalidProjectException;
-import org.rssms.exception.InvalidProjectStatusException;
-import org.rssms.exception.InvalidUserRoleException;
-import org.rssms.exception.ProjectNotFoundException;
+import org.rssms.exception.*;
 import org.rssms.service.interfaces.ProjectService;
 
-import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validator;
 import java.util.List;
-import java.util.Set;
 
 /**
  *
  * Created by Eezo on 17.03.2016.
  */
 @Stateless
-public class ProjectServiceBean implements ProjectService {
+public class ProjectServiceBean extends AbstractService<Project> implements ProjectService {
 
-    @Resource
-    Validator validator;
     private ProjectDao projectDao;
 
     @Inject
@@ -38,7 +29,7 @@ public class ProjectServiceBean implements ProjectService {
 
     @Override
     public void addProject(Project project) throws InvalidProjectException {
-        validateProject(project);
+        validateEntity(project);
         if (project.getCategory() == null){
             project.setCategory(Category.OTHER);
         }
@@ -52,7 +43,10 @@ public class ProjectServiceBean implements ProjectService {
 
     @Override
     public void updateProject(Project project) throws InvalidProjectException {
-        validateProject(project);
+        String s = validateEntity(project);
+        if (s != null){
+            throw new InvalidProjectException(s);
+        }
         projectDao.persist(project);
     }
 
@@ -93,13 +87,14 @@ public class ProjectServiceBean implements ProjectService {
     }
 
     @Override
-    public void changeProjectStatus(User person, int projectId, Status status) throws InvalidUserRoleException, ProjectNotFoundException, InvalidProjectStatusException {
+    public void changeProjectStatus(User person, int projectId, Status status) throws InvalidUserRoleException,
+            ProjectNotFoundException, InvalidProjectStatusException {
         Project project = projectDao.find(projectId);
         if (project == null){
             throw new ProjectNotFoundException("No project with id "+projectId);
         }
         if (status == null){
-            throw new InvalidProjectStatusException("status = null");
+            throw new InvalidProjectStatusException("Project status == null");
         }
         if (status == Status.BANNED) {
             // check user access level ( might worth add integer value for roles? )
@@ -110,37 +105,26 @@ public class ProjectServiceBean implements ProjectService {
                 throw new InvalidProjectStatusException("You can't ban unconfirmed project.");
             }
         }
-        if (status == project.getStatus()){
-            throw new InvalidProjectStatusException("Project already has '"+status.getUkrainianName()+"' status.");
-        }
         project.setStatus(status);
         projectDao.persist(project);
     }
 
     @Override
-    public void makeProjectPrivileged(User person, int projectId) throws InvalidProjectStatusException, ProjectNotFoundException, InvalidUserRoleException {
+    public void makeProjectPrivileged(User person, int projectId) throws InvalidProjectStatusException,
+            ProjectNotFoundException, InvalidUserRoleException {
         // check user for privileged status
-        if (person.getRole() != Role.PRIVILEGED){
-            throw new InvalidUserRoleException("You ("+person.getUsername()+") have no privileged level.");
+        if (person.getRole() == null || person.getRole() != Role.PRIVILEGED) {
+            throw new InvalidUserRoleException("You (" + person.getUsername() + ") have no privileged level.");
         }
         Project project = projectDao.find(projectId);
-        if (project == null){
-            throw new ProjectNotFoundException("No project with id "+projectId);
+        if (project == null) {
+            throw new ProjectNotFoundException("No project with id " + projectId);
         }
-        if (project.isPrivilegedStatus()){
-            throw new InvalidProjectStatusException("Project with id "+projectId+" already has privileged status.");
+        if (project.isPrivilegedStatus()) {
+            throw new InvalidProjectStatusException("Project with id " + projectId + " already has privileged status.");
         }
         project.setPrivilegedStatus(true);
         projectDao.persist(project);
     }
 
-    private void validateProject(Project project) throws InvalidProjectException {
-        // validate project with entity validations
-        Set<ConstraintViolation<Project>> violationSet = validator.validate(project);
-        for (ConstraintViolation<Project> violation : violationSet){
-            if (violation.getInvalidValue().equals("something wrong")){ // may be not
-                throw new InvalidProjectException(violation.getPropertyPath() + " " + violation.getMessage());
-            }
-        }
-    }
 }
