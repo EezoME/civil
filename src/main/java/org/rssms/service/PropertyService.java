@@ -13,21 +13,14 @@ import java.util.Properties;
 
 @Singleton
 public class PropertyService implements IPropertyService {
+    
     @Override
     public Properties getProperties(String propertyFile) {
         Properties properties = new Properties();
-        InputStream inputStream = null;
-        try {
-            inputStream = getClass().getClassLoader().getResourceAsStream(propertyFile);
+        try(InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propertyFile)) {
             properties.load(inputStream);
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            try {   // T_T
-                inputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
         return properties;
     }
