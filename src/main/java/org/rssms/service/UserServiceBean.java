@@ -31,7 +31,7 @@ public class UserServiceBean extends AbstractService<User> implements UserServic
     Validator validator;
     private UserDao userDao;
     private EmailConfirmationDao emailConfirmationDao;
-    private MailServiceBean mailServiceBean;
+    private MailService mailService;
 
     @Inject
     public void setUserDao(UserDao userDao) {
@@ -44,8 +44,8 @@ public class UserServiceBean extends AbstractService<User> implements UserServic
     }
 
     @Inject
-    public void setMailService(MailServiceBean mailServiceBean) {
-        this.mailServiceBean = mailServiceBean;
+    public void setMailService(MailService mailService) {
+        this.mailService = mailService;
     }
 
     public void addUser(User user) throws InvalidUserException {
@@ -62,11 +62,11 @@ public class UserServiceBean extends AbstractService<User> implements UserServic
         confirmation.setConfirmationCode(confirmationCode);
         emailConfirmationDao.persist(confirmation);
 
-        //Send confirmation email using MailServiceBean
+        //Send confirmation email using MailService
         String messageBody = "Для підтвердження реєстрації на rssms.org Вам необхідно перейти за посиланням: <br>"
                                 + "<a href='http://rssms.org/emailConfirm?user=" + user.getUsername()
                                 + "&code=" + confirmationCode + "'>Підтвердити реєстрацію</a>";
-        mailServiceBean.sendMail(user.getEmail(), "Підтвердження реєстрації", messageBody);
+        mailService.sendMail(user.getEmail(), "Підтвердження реєстрації", messageBody);
 
         //Generate password hash and set user role to Role.UNCONFIRMED
         String passwordHash = DigestUtils.md5Hex(user.getPassword());

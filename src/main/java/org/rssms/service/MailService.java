@@ -1,10 +1,12 @@
 package org.rssms.service;
 
-import org.rssms.service.interfaces.MailService;
+import org.rssms.service.interfaces.IMailService;
 
 import javax.ejb.Singleton;
+import javax.inject.Inject;
 import javax.mail.*;
 import javax.mail.internet.*;
+import java.io.IOException;
 import java.util.Properties;
 
 /**
@@ -12,35 +14,31 @@ import java.util.Properties;
  */
 
 @Singleton
-public class MailServiceBean implements MailService {
+public class MailService implements IMailService {
+
+    private PropertyService propertyService;
+
+    @Inject
+    public void setPropertyService(PropertyService propertyService) {
+        this.propertyService = propertyService;
+    }
 
     // Method used to send email messages using SMTP protocol and gmail as host
     @Override
     public void sendMail(String address, String subject, String body) {
-        Properties properties = System.getProperties();
-
-        String host = "smtp.gmail.com";
-        String from = "user@gmail.com";
-        String password = "123456";
-
-        properties.put("mail.smtp.starttls.enable", "true");
-        properties.put("mail.smtp.host", host);
-        properties.put("mail.smtp.user", from);
-        properties.put("mail.smtp.password", password);
-        properties.put("mail.smtp.port", "587");
-        properties.put("mail.smtp.auth", "true");
-
+        Properties properties = propertyService.getProperties("mail.properties");
         Session session = Session.getDefaultInstance(properties);
         MimeMessage message = new MimeMessage(session);
-
         try {
-            message.setFrom(new InternetAddress(from));
+            message.setFrom(new InternetAddress(properties.getProperty("mail.smtp.user")));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(address));
             message.setSubject(subject);
             message.setText(body);
 
             Transport transport = session.getTransport("smtp");
-            transport.connect(host, from, password);
+            transport.connect(properties.getProperty("mail.smtp.host"),
+                                properties.getProperty("mail.smtp.user"),
+                                properties.getProperty("mail.smtp.password"));
             transport.sendMessage(message, message.getAllRecipients());
             transport.close();
         } catch (MessagingException e) {
