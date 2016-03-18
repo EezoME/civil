@@ -8,5 +8,5 @@ import java.util.Properties;
  */
 public interface IPropertyService {
 
-    Properties getProperties(String propertyFile) throws IOException;
+    Properties getProperties(String propertyFile);
 }

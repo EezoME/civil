@@ -13,7 +13,7 @@ import java.util.Properties;
 
 @Singleton
 public class PropertyService implements IPropertyService {
-    
+
     @Override
     public Properties getProperties(String propertyFile) {
         Properties properties = new Properties();
