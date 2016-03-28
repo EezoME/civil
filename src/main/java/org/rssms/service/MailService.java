@@ -2,6 +2,7 @@ package org.rssms.service;
 
 import org.rssms.service.interfaces.IMailService;
 
+import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.inject.Inject;
 import javax.mail.*;
@@ -18,7 +19,7 @@ public class MailService implements IMailService {
 
     private PropertyService propertyService;
 
-    @Inject
+    @EJB
     public void setPropertyService(PropertyService propertyService) {
         this.propertyService = propertyService;
     }

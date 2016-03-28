@@ -3,16 +3,20 @@ package org.rssms.dao;
 import org.rssms.dao.interfaces.PrivilegedUserDaoInterface;
 import org.rssms.entity.PrivilegedUser;
 
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 import java.util.List;
 
 /**
  * Created by User on 02.03.2016.
  */
+@Stateless
 public class PrivilegedUserDao extends AbstractJpaDao<PrivilegedUser> implements PrivilegedUserDaoInterface {
 
-    public PrivilegedUserDao(Class<PrivilegedUser> entityClass) {
-        super(entityClass);
-    }
+
+//    public PrivilegedUserDao(Class<PrivilegedUser> entityClass) {
+//        super(entityClass);
+//    }
 
     public List<PrivilegedUser> getAll() {
         return namedQuery("PrivilegedUser.getAll").getResultList();

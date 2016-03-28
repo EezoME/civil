@@ -5,17 +5,21 @@ import org.rssms.entity.Comment;
 import org.rssms.entity.Project;
 import org.rssms.entity.User;
 
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 import java.util.Date;
 import java.util.List;
 
 /**
  * Created by User on 02.03.2016.
  */
+@Stateless
 public class CommentDao extends AbstractJpaDao<Comment> implements CommentDaoInterface {
 
-    public CommentDao(Class<Comment> entityClass) {
-        super(entityClass);
-    }
+
+//    public CommentDao(Class<Comment> entityClass) {
+//        super(entityClass);
+//    }
 
     public List<Comment> getAll() {
         return namedQuery("Comment.getAll").getResultList();

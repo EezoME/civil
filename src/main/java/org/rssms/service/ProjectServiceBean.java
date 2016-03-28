@@ -9,6 +9,7 @@ import org.rssms.enums.Status;
 import org.rssms.exception.*;
 import org.rssms.service.interfaces.ProjectService;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.List;
@@ -22,7 +23,7 @@ public class ProjectServiceBean extends AbstractService<Project> implements Proj
 
     private ProjectDao projectDao;
 
-    @Inject
+    @EJB
     public void setProjectDao(ProjectDao projectDao){
         this.projectDao = projectDao;
     }

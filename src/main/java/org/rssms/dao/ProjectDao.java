@@ -5,18 +5,20 @@ import org.rssms.entity.Project;
 import org.rssms.entity.User;
 import org.rssms.enums.Category;
 
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 import java.util.Date;
 import java.util.List;
 
 /**
  * Created by User on 02.03.2016.
  */
+@Stateless
 public class ProjectDao extends AbstractJpaDao<Project> implements ProjectDaoInterface {
 
-    public ProjectDao(Class<Project> entityClass) {
-        super(entityClass);
-    }
-
+//    public ProjectDao(Class<Project> entityClass) {
+//        super(entityClass);
+//    }
 
     public List<Project> getAll() {
         return namedQuery("Project.getAll").getResultList();

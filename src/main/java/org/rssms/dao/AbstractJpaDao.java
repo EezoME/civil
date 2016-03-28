@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,11 +20,17 @@ public abstract class AbstractJpaDao<T extends Serializable> implements GenericD
     private Class<T> entityClass;
 
     public AbstractJpaDao() {
+        ParameterizedType genericSuperclass = (ParameterizedType) getClass().getGenericSuperclass();
+        this.entityClass = (Class<T>) genericSuperclass.getActualTypeArguments()[0];
     }
 
-    public AbstractJpaDao(Class<T> entityClass) {
-        this.entityClass = entityClass;
-    }
+//    public AbstractJpaDao(Class<T> entityClass) {
+//        this.entityClass = entityClass;
+//    }
+
+//    public AbstractJpaDao() {
+//
+//    }
 
     public EntityManager getEntityManager() {
         return em;

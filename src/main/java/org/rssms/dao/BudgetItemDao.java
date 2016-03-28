@@ -4,18 +4,20 @@ import org.rssms.dao.interfaces.BudgetItemDaoInterface;
 import org.rssms.entity.BudgetItem;
 import org.rssms.entity.Project;
 
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 import java.util.List;
 
 /**
  * Created by User on 02.03.2016.
  */
+@Stateless
 public class BudgetItemDao extends AbstractJpaDao<BudgetItem> implements BudgetItemDaoInterface {
 
 
-    public BudgetItemDao(Class<BudgetItem> entityClass) {
-        super(entityClass);
-    }
-
+//    public BudgetItemDao(Class<BudgetItem> entityClass) {
+//        super(entityClass);
+//    }
 
     public List<BudgetItem> getAll() {
         return namedQuery("BudgetItem.getAll").getResultList();

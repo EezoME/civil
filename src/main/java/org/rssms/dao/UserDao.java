@@ -3,17 +3,22 @@ package org.rssms.dao;
 import org.rssms.dao.interfaces.UserDaoInterface;
 import org.rssms.entity.User;
 
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 import java.util.Date;
 import java.util.List;
 
 /**
  * Created by User on 01.03.2016.
  */
+@Stateless
 public class UserDao extends AbstractJpaDao<User> implements UserDaoInterface {
 
-    public UserDao(Class<User> entityClass) {
-        super(entityClass);
-    }
+//    public UserDao(Class<User> entityClass) {
+//        super(entityClass);
+//    }
+
+
 
     public List<User> getAll() {
         return namedQuery("User.getAll").getResultList();

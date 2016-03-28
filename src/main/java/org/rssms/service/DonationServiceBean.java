@@ -8,6 +8,7 @@ import org.rssms.exception.InvalidDonationException;
 import org.rssms.service.interfaces.DonationService;
 
 import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.validation.Validator;
@@ -23,7 +24,7 @@ public class DonationServiceBean extends AbstractService<Donation> implements Do
     Validator validator;
     private DonationDao donationDao;
 
-    @Inject
+    @EJB
     public void setDonationDao(DonationDao donationDao) {
         this.donationDao = donationDao;
     }

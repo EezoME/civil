@@ -12,6 +12,7 @@ import org.rssms.exception.UserNotFoundException;
 import org.rssms.service.interfaces.UserService;
 
 import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.validation.Validator;
@@ -33,17 +34,17 @@ public class UserServiceBean extends AbstractService<User> implements UserServic
     private EmailConfirmationDao emailConfirmationDao;
     private MailService mailService;
 
-    @Inject
+    @EJB
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
     }
 
-    @Inject
+    @EJB
     public void setEmailConfirmationDao(EmailConfirmationDao emailConfirmationDao) {
         this.emailConfirmationDao = emailConfirmationDao;
     }
 
-    @Inject
+    @EJB
     public void setMailService(MailService mailService) {
         this.mailService = mailService;
     }

@@ -5,18 +5,22 @@ import org.rssms.entity.Donation;
 import org.rssms.entity.Project;
 import org.rssms.entity.User;
 
+import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 import java.util.List;
 
 /**
  * Created by User on 02.03.2016.
  */
+@Stateless
 public class DonationDao extends AbstractJpaDao<Donation> implements DonationDaoInterface {
 
 
-    public DonationDao(Class<Donation> entityClass) {
-        super(entityClass);
-    }
-
+//    public DonationDao(Class<Donation> entityClass) {
+//        super(entityClass);
+//    }
 
     public List<Donation> getAll() {
         return namedQuery("Donation.getAll").getResultList();
