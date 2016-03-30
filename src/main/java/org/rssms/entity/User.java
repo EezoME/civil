@@ -15,42 +15,53 @@ import java.util.List;
  * Created by User on 01.03.2016.
  */
 @Entity
+@Table(name = "Users")
 @NamedQuery(name = "User.getAll", query = "SELECT users from User users")
 public class User implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "userId")
     private int userId;
 
     @NotNull
     @Size( min = 5 )
+    @Column(name = "fullName")
     private String fullName;
 
     @Past
     @Temporal( TemporalType.DATE )
+    @Column(name = "bDate")
     private Date bDate;
 
     @NotNull
     @Size( min = 3, max = 32 )
+    @Column(name = "username", length = 32)
     private String username;
 
     @NotNull
+    @Column(name = "password")
     private String password;    // Если это хеш пароля то валидировать его исходное значение нужно где-то в другом месте
 
     @NotNull
     @Pattern( regexp =
             "^[\\\\w!#$%&’*+/=?`{|}~^-]+(?:\\\\.[\\\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\\\.)+[a-zA-Z]{2,6}$" )
+    @Column(name = "email")
     private String email;
 
     @NotNull
+    @Column(name = "role")
     private Role role;
 
     @OneToMany
+    @JoinColumn(name = "createdProjects")
     private List<Project> createdProjects;
 
     @OneToMany(mappedBy = "user")
+    @JoinColumn(name = "donations")
     private List<Donation> donations;
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "author")
+    @JoinColumn(name = "comments")
     private List<Comment> comments;
 
     public List<Project> getCreatedProjects() {

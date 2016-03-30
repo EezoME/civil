@@ -12,24 +12,30 @@ import java.util.Date;
  * Created by User on 01.03.2016.
  */
 @Entity
+@Table(name = "Comments")
 @NamedQuery(name = "Comment.getAll", query = "SELECT comments from Comment comments")
 public class Comment implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "commentId", nullable = false)
     private int commentId;
 
     @ManyToOne
+    @JoinColumn(name = "author", nullable = false)
     private User author;       //??????????????????????
 
     @ManyToOne
+    @JoinColumn(name = "project", nullable = false)
     private Project project;  //??????????????????????
 
     @NotNull
     @Size(min = 5, max = 1024)
+    @Column(name = "content", length = 1024, nullable = false)
     private String content;
 
     @Past
     @Temporal(TemporalType.DATE)
+    @Column(name = "timePosted", nullable = false)
     private Date timePosted;
 
 

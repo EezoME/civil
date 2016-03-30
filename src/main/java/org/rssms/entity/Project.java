@@ -14,57 +14,67 @@ import java.util.List;
  * Created by User on 01.03.2016.
  */
 @Entity
+@Table(name = "Projects")
 @NamedQuery(name = "Project.getAll", query = "SELECT Projects from Project Projects")
 public class Project implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "projectId")
     private int projectId;
 
     @NotNull
     @Size(min = 5, max = 64)
+    @Column(name = "title", nullable = false, length = 64)
     private String title;
 
     @NotNull
     @Size(min = 15)
+    @Column(name = "desc", nullable = false)
     private String desc;
 
     @NotNull
+    @Column(name = "category", nullable = false)
     private Category category;
 
     @Past
     @Temporal(TemporalType.DATE)
+    @Column(name = "registrationDate")
     private Date registrationDate;
 
     @Future
     @Temporal(TemporalType.DATE)
+    @Column(name = "expirationDate")
     private Date expirationDate;
 
     @NotNull
     @Min(1)
+    @Column(name = "goalCost")
     private int goalCost;
 
+    @Column(name = "fundedSum")
     private int fundedSum;
+
+    @Column(name = "status")
     private Status status;
 
     @NotNull
+    @Column(name = "privilegedStatus")
     private boolean privilegedStatus;
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "project")  // Если Project удален - удаляем все его BudgetItems
+    @JoinColumn(name = "budgetItems")
     private List<BudgetItem> budgetItems;
 
     @ManyToOne
+    @JoinColumn(name = "creator")
     private User creator;
 
-    @ManyToMany
-    private List<User> team;    // Один проект - один или несколько создателей (команда)
-
-    @ManyToMany
-    private List<User> donors;   // Один проект - несколько доноров
-
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "project")
+    @JoinColumn(name = "comments")
     private List<Comment> comments;
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "project")
+    @JoinColumn(name = "donations")
     private List<Donation> donations;
 
 
@@ -74,22 +84,6 @@ public class Project implements Serializable {
 
     public void setCreator(User creator) {
         this.creator = creator;
-    }
-
-    public List<User> getTeam() {
-        return team;
-    }
-
-    public void setTeam(List<User> team) {
-        this.team = team;
-    }
-
-    public List<User> getDonors() {
-        return donors;
-    }
-
-    public void setDonors(List<User> donors) {
-        this.donors = donors;
     }
 
     public List<Comment> getComments() {

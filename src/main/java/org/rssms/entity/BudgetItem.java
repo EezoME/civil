@@ -10,24 +10,30 @@ import java.io.Serializable;
  * Created by User on 02.03.2016.
  */
 @Entity
+@Table(name = "BudgetItems")
 @NamedQuery(name = "BudgetItem.getAll", query = "SELECT BudgetItems from BudgetItem BudgetItems")
 public class BudgetItem implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "budgetItemId", nullable = false)
     private int budgetItemId;
 
     @NotNull
     @Size(min = 2, max = 64)
+    @Column(name = "name", nullable = false, length = 64)
     private String name;
 
     @Size(max = 128)
+    @Column(name = "desc", nullable = true, length = 128)
     private String desc;
 
     @NotNull
     @Min(1)
+    @Column(name = "cost", nullable = false)
     private int cost;
 
     @ManyToOne
+    @JoinColumn(name = "project", nullable = false)
     private Project project;
 
     public int getBudgetItemId() {

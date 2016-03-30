@@ -1,8 +1,6 @@
 package org.rssms.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -10,13 +8,17 @@ import java.io.Serializable;
  */
 
 @Entity
+@Table(name = "EmailConfirmations")
 public class EmailConfirmation implements Serializable {
 
     @Id
+    @Column(name = "id")
     private int id;
 
+    @Column(name = "username")
     private String username;
 
+    @Column(name = "confirmationCode")
     private String confirmationCode;
 
     public String getUsername() {
