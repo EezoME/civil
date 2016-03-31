@@ -20,8 +20,6 @@ import java.util.List;
 @Stateless
 public class DonationServiceBean extends AbstractService<Donation> implements DonationService {
 
-    @Resource
-    Validator validator;
     private DonationDao donationDao;
 
     @EJB

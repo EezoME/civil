@@ -43,8 +43,8 @@ public class User implements Serializable {
     private String password;    // Если это хеш пароля то валидировать его исходное значение нужно где-то в другом месте
 
     @NotNull
-    @Pattern( regexp =
-            "^[\\\\w!#$%&’*+/=?`{|}~^-]+(?:\\\\.[\\\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\\\.)+[a-zA-Z]{2,6}$" )
+    //@Pattern( regexp =
+    //        "^[\\\\w!#$%&’*+/=?`{|}~^-]+(?:\\\\.[\\\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\\\.)+[a-zA-Z]{2,6}$" )
     @Column(name = "email")
     private String email;
 

@@ -15,9 +15,11 @@ import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import java.util.Date;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * Created by WRKSPACE2 on 3/12/2016.
@@ -26,10 +28,6 @@ import java.util.Random;
 @Stateless
 public class UserServiceBean extends AbstractService<User> implements UserService {
 
-    // Is this correct way of getting validator?
-    // http://www.thejavageek.com/2014/05/27/jpa-bean-validation/
-    @Resource
-    Validator validator;
     private UserDao userDao;
     private EmailConfirmationDao emailConfirmationDao;
     private MailService mailService;
@@ -72,7 +70,6 @@ public class UserServiceBean extends AbstractService<User> implements UserServic
         //Generate password hash and set user role to Role.UNCONFIRMED
         String passwordHash = DigestUtils.md5Hex(user.getPassword());
         user.setPassword(passwordHash);
-        user.setRole(Role.UNCONFIRMED);
         userDao.persist(user);
     }
 

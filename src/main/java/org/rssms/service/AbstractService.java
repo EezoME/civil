@@ -3,7 +3,9 @@ package org.rssms.service;
 
 import javax.annotation.Resource;
 import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
 import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.util.Set;
 
 /**
@@ -11,8 +13,8 @@ import java.util.Set;
  * Created by Eezo on 18.03.2016.
  */
 public abstract class AbstractService<T> {
-    @Resource
-    Validator validator;
+    ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
+    Validator validator = validatorFactory.getValidator();
 
     /**
      * Validates entity using {Validator}
