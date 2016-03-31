@@ -14,8 +14,9 @@ import java.io.Serializable;
 @NamedQuery(name = "BudgetItem.getAll", query = "SELECT BudgetItems from BudgetItem BudgetItems")
 public class BudgetItem implements Serializable {
     @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "budgetItemId", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "budgetItemId")
+//    @Column(name = "budgetItemId", nullable = false)
     private int budgetItemId;
 
     @NotNull
@@ -24,8 +25,8 @@ public class BudgetItem implements Serializable {
     private String name;
 
     @Size(max = 128)
-    @Column(name = "desc", nullable = true, length = 128)
-    private String desc;
+    @Column(name = "description", nullable = true, length = 128)
+    private String description;
 
     @NotNull
     @Min(1)
@@ -52,12 +53,12 @@ public class BudgetItem implements Serializable {
         this.name = name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String desc) {
+        this.description = desc;
     }
 
     public int getCost() {

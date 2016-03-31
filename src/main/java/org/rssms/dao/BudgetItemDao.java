@@ -26,7 +26,7 @@ public class BudgetItemDao extends AbstractJpaDao<BudgetItem> implements BudgetI
 
     @Override
     public List<BudgetItem> findByDesc(String desc) {
-        return getEntityManager().createQuery("select bi from BudgetItem bi where bi.desc like :desc").setParameter("desc", "%"+desc+"%").getResultList();
+        return getEntityManager().createQuery("select bi from BudgetItem bi where bi.description like :desc").setParameter("desc", "%"+desc+"%").getResultList();
     }
 
     @Override

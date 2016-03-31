@@ -31,7 +31,7 @@ public class ProjectDao extends AbstractJpaDao<Project> implements ProjectDaoInt
 
     @Override
     public List<Project> findByDesc(String desc) {
-        return getEntityManager().createQuery("select p from Project p where p.desc LIKE :desc").setParameter("desc", "%" + desc + "%").getResultList();
+        return getEntityManager().createQuery("select p from Project p where p.description LIKE :desc").setParameter("desc", "%" + desc + "%").getResultList();
     }
 
     @Override

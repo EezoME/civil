@@ -18,7 +18,7 @@ import java.util.List;
 @NamedQuery(name = "Project.getAll", query = "SELECT Projects from Project Projects")
 public class Project implements Serializable {
     @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "projectId")
     private int projectId;
 
@@ -29,8 +29,8 @@ public class Project implements Serializable {
 
     @NotNull
     @Size(min = 15)
-    @Column(name = "desc", nullable = false)
-    private String desc;
+    @Column(name = "description", nullable = false)
+    private String description;
 
     @NotNull
     @Column(name = "category", nullable = false)
@@ -126,12 +126,12 @@ public class Project implements Serializable {
         this.title = title;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String desc) {
+        this.description = desc;
     }
 
     public Category getCategory() {

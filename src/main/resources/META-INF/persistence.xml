@@ -7,14 +7,16 @@
         <jta-data-source>jdbc/civil</jta-data-source>
 
 
-        <class>org.rssms.entity.User</class>
-        <class>org.rssms.entity.Project</class>
+        <class>org.rssms.entity.BudgetItem</class>
         <class>org.rssms.entity.Comment</class>
         <class>org.rssms.entity.Donation</class>
+        <class>org.rssms.entity.EmailConfirmation</class>
         <class>org.rssms.entity.PrivilegedUser</class>
+        <class>org.rssms.entity.Project</class>
+        <class>org.rssms.entity.User</class>
 
         <properties>
-            <property name="eclipselink.ddl-generation" value="drop-and-create-tables" />
+            <property name="eclipselink.ddl-generation" value="create-tables" />
             <property name="eclipselink.ddl-generation.output-mode"
                       value="database" />
         </properties>
