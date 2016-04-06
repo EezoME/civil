@@ -4,6 +4,7 @@ import org.rssms.entity.User;
 import org.rssms.enums.Role;
 import org.rssms.exception.InvalidUserException;
 import org.rssms.service.UserServiceBean;
+import org.rssms.service.interfaces.UserService;
 
 import javax.annotation.ManagedBean;
 import javax.ejb.EJB;
@@ -22,16 +23,11 @@ import java.util.Date;
 /**
  * Created by WRKSPACE2 on 3/30/2016.
  */
-@WebServlet(urlPatterns = "/signup", loadOnStartup = 1)
-@ManagedBean
+@WebServlet(urlPatterns = "/signup")
 public class RegistrationServlet extends HttpServlet {
 
-//    UserServiceBean userServiceBean;
-//
-//    @EJB
-//    public void setUserServiceBean(UserServiceBean userServiceBean) {
-//        this.userServiceBean = userServiceBean;
-//    }
+    @EJB
+    private UserService userServiceBean;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String fullName = request.getParameter("fullName");
@@ -59,7 +55,7 @@ public class RegistrationServlet extends HttpServlet {
             }
             user.setPassword(password);
             try {
-                new UserServiceBean().addUser(user);    // Replace with Inject
+                userServiceBean.addUser(user);
             } catch (InvalidUserException e) {
                 request.setAttribute("error", e.getMessage());
                 request.getRequestDispatcher("/signup.jsp").forward(request, response);

@@ -1,6 +1,7 @@
 package org.rssms.service;
 
 import org.rssms.service.interfaces.IMailService;
+import org.rssms.service.interfaces.IPropertyService;
 
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
@@ -17,10 +18,10 @@ import java.util.Properties;
 @Singleton
 public class MailService implements IMailService {
 
-    private PropertyService propertyService;
+    private IPropertyService propertyService;
 
     @EJB
-    public void setPropertyService(PropertyService propertyService) {
+    public void setPropertyService(IPropertyService propertyService) {
         this.propertyService = propertyService;
     }
 

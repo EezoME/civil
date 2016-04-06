@@ -26,7 +26,7 @@ public class Donation implements Serializable {
     private String comment;
 
     @ManyToOne
-    @JoinColumn(name = "user")
+    @JoinColumn(name = "donated_user")
     private User user;      //?????????????????????????
 
     @ManyToOne

@@ -3,12 +3,15 @@ package org.rssms.service;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.rssms.dao.EmailConfirmationDao;
 import org.rssms.dao.UserDao;
+import org.rssms.dao.interfaces.EmailConfirmationdaoInterface;
+import org.rssms.dao.interfaces.UserDaoInterface;
 import org.rssms.entity.EmailConfirmation;
 import org.rssms.entity.User;
 import org.rssms.enums.Role;
 import org.rssms.exception.EmailConfirmationNotFoundException;
 import org.rssms.exception.InvalidUserException;
 import org.rssms.exception.UserNotFoundException;
+import org.rssms.service.interfaces.IMailService;
 import org.rssms.service.interfaces.UserService;
 
 import javax.annotation.Resource;
@@ -28,22 +31,22 @@ import java.util.Set;
 @Stateless
 public class UserServiceBean extends AbstractService<User> implements UserService {
 
-    private UserDao userDao;
-    private EmailConfirmationDao emailConfirmationDao;
-    private MailService mailService;
+    private UserDaoInterface userDao;
+    private EmailConfirmationdaoInterface emailConfirmationDao;
+    private IMailService mailService;
 
     @EJB
-    public void setUserDao(UserDao userDao) {
+    public void setUserDao(UserDaoInterface userDao) {
         this.userDao = userDao;
     }
 
     @EJB
-    public void setEmailConfirmationDao(EmailConfirmationDao emailConfirmationDao) {
+    public void setEmailConfirmationDao(EmailConfirmationdaoInterface emailConfirmationDao) {
         this.emailConfirmationDao = emailConfirmationDao;
     }
 
     @EJB
-    public void setMailService(MailService mailService) {
+    public void setMailService(IMailService mailService) {
         this.mailService = mailService;
     }
 
@@ -105,7 +108,7 @@ public class UserServiceBean extends AbstractService<User> implements UserServic
     // Method called when user confirms his email
     public void verifyUser(String username, String confirmationCode) throws EmailConfirmationNotFoundException, UserNotFoundException {
         // Get EmailConfirmation record by username
-        EmailConfirmation confirmation = emailConfirmationDao.getByUsername(username);
+        EmailConfirmation confirmation = (EmailConfirmation) emailConfirmationDao.getByUsername(username);
         if (confirmation == null) {
             throw new EmailConfirmationNotFoundException("Email confirmation not found for user: " + username);
         }
