@@ -68,7 +68,7 @@ public class UserServiceBean extends AbstractService<User> implements UserServic
         String messageBody = "Для підтвердження реєстрації на rssms.org Вам необхідно перейти за посиланням: <br>"
                                 + "<a href='http://rssms.org/emailConfirm?user=" + user.getUsername()
                                 + "&code=" + confirmationCode + "'>Підтвердити реєстрацію</a>";
-        mailService.sendMail(user.getEmail(), "Підтвердження реєстрації", messageBody);
+        // mailService.sendMail(user.getEmail(), "Підтвердження реєстрації", messageBody);
 
         //Generate password hash and set user role to Role.UNCONFIRMED
         String passwordHash = DigestUtils.md5Hex(user.getPassword());

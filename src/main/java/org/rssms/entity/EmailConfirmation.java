@@ -12,6 +12,7 @@ import java.io.Serializable;
 public class EmailConfirmation implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private int id;
 

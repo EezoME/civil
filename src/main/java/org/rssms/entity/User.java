@@ -19,7 +19,7 @@ import java.util.List;
 @NamedQuery(name = "User.getAll", query = "SELECT users from User users")
 public class User implements Serializable {
     @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "userId")
     private int userId;
 

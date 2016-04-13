@@ -16,7 +16,7 @@ import java.util.Date;
 @NamedQuery(name = "Comment.getAll", query = "SELECT comments from Comment comments")
 public class Comment implements Serializable {
     @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "commentId", nullable = false)
     private int commentId;
 

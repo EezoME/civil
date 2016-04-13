@@ -13,7 +13,7 @@ import java.io.Serializable;
 @NamedQuery(name = "Donation.getAll", query = "SELECT donations from Donation donations")
 public class Donation implements Serializable {
     @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "donationId")
     private int donationId;
 
