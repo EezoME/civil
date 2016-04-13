@@ -105,6 +105,14 @@ public class UserServiceBean extends AbstractService<User> implements UserServic
         return user;
     }
 
+    public User findUserByEmail(String email) throws UserNotFoundException {
+        User user = userDao.findByEmail(email);
+        if (user == null) {
+            throw new UserNotFoundException("User with email: " + email + " was not found!");
+        }
+        return user;
+    }
+
     // Method called when user confirms his email
     public void verifyUser(String username, String confirmationCode) throws EmailConfirmationNotFoundException, UserNotFoundException {
         // Get EmailConfirmation record by username
@@ -124,5 +132,19 @@ public class UserServiceBean extends AbstractService<User> implements UserServic
             userDao.persist(user);
             emailConfirmationDao.remove(confirmation);
         }
+    }
+
+    // Checks user's password and returns true if it's correct.
+    public boolean authUser(String username, String password) throws UserNotFoundException {
+        User user = userDao.findByUsername(username);
+        if (user == null) {
+            throw new UserNotFoundException("User with username: " + username + " was not found!");
+        }
+
+        String passwordHash = DigestUtils.md5Hex(password);
+        if (user.getPassword().equals(passwordHash)) {
+            return true;
+        }
+        return false;
     }
 }

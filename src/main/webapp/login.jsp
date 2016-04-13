@@ -1,4 +1,4 @@
-<%--
+<%@ page import="org.rssms.entity.User" %><%--
   Created by IntelliJ IDEA.
   User: WRKSPACE2
   Date: 4/13/2016
@@ -23,7 +23,15 @@
             <div class="float-right">
                 <a class="head-link" href="explore.html">Список проектів</a>
                 <a class="head-link" href="help.html">Допомога</a>
-                <a class="head-link" href="login.html">Вхід</a><a class="head-link" href="signup.html">Реєстрація</a>
+                <c:choose>
+                    <c:when  test="${empty user}">
+                        <a class="head-link" href="login">Вхід</a><a class="head-link" href="signup">Реєстрація</a>
+                    </c:when>
+                    <c:when test="${not empty user}">
+                        <a class="head-link profile-link" href="profile"><%= ((User) session.getAttribute("user")).getUsername() %></a>
+                        <a class="head-link" href="logout">Logout</a>
+                    </c:when>
+                </c:choose>
             </div>
             <div id="slogan">
                 <h1 class="slogan-title">Інформаційна Система Підтримки<br>Громадських Ініціатив</h1>
@@ -34,12 +42,15 @@
     </div>
 </header>
 <div class="content">
+    <c:if test="${not empty error}">
+        <div class="error"><%= request.getAttribute("error").toString() %></div>
+    </c:if>
     <div class="content-title">
         <h2>Вхід</h2>
         <h4>Вхід на сайт для зареєстрованих користувачів</h4>
     </div>
     <div class="login-form">
-        <form>
+        <form action="login" method="post">
             <label>Ім'я користувача</label><br>
             <input type="text" name="username" placeholder="Username" /><br>
             <label>Пароль</label><br>

@@ -15,7 +15,8 @@ import java.util.List;
  * Created by User on 01.03.2016.
  */
 @Entity
-@Table(name = "Users")
+@Table(name = "Users",
+uniqueConstraints = @UniqueConstraint(columnNames = "USERNAME"))
 @NamedQuery(name = "User.getAll", query = "SELECT users from User users")
 public class User implements Serializable {
     @Id
@@ -35,7 +36,7 @@ public class User implements Serializable {
 
     @NotNull
     @Size( min = 3, max = 32 )
-    @Column(name = "username", length = 32)
+    @Column(name = "username", length = 32, unique = true)
     private String username;
 
     @NotNull

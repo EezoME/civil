@@ -20,5 +20,9 @@ public interface UserService {
 
     User findUser(String username) throws UserNotFoundException;
 
+    User findUserByEmail(String email) throws UserNotFoundException;
+
     void verifyUser(String username, String confirmationCode) throws EmailConfirmationNotFoundException, UserNotFoundException;
+
+    boolean authUser(String username, String password) throws UserNotFoundException;
 }

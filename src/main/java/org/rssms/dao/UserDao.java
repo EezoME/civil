@@ -47,6 +47,5 @@ public class UserDao extends AbstractJpaDao<User> implements UserDaoInterface {
     @Override
     public User findByEmail(String email) {
         return (User) getEntityManager().createQuery("select u from User u where u.email=:email").setParameter("email", email).getSingleResult();
-
     }
 }
