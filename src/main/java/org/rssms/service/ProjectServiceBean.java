@@ -1,17 +1,19 @@
 package org.rssms.service;
 
-import org.rssms.dao.ProjectDao;
+import org.rssms.dao.interfaces.ProjectDaoInterface;
 import org.rssms.entity.Project;
 import org.rssms.entity.User;
 import org.rssms.enums.Category;
 import org.rssms.enums.Role;
 import org.rssms.enums.Status;
-import org.rssms.exception.*;
+import org.rssms.exception.InvalidProjectException;
+import org.rssms.exception.InvalidProjectStatusException;
+import org.rssms.exception.InvalidUserRoleException;
+import org.rssms.exception.ProjectNotFoundException;
 import org.rssms.service.interfaces.ProjectService;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import java.util.List;
 
 /**
@@ -21,10 +23,10 @@ import java.util.List;
 @Stateless
 public class ProjectServiceBean extends AbstractService<Project> implements ProjectService {
 
-    private ProjectDao projectDao;
+    private ProjectDaoInterface projectDao;
 
     @EJB
-    public void setProjectDao(ProjectDao projectDao){
+    public void setProjectDao(ProjectDaoInterface projectDao) {
         this.projectDao = projectDao;
     }
 

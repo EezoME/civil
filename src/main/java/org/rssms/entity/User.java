@@ -5,7 +5,6 @@ import org.rssms.enums.Role;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
@@ -54,15 +53,15 @@ public class User implements Serializable {
     private Role role;
 
     @OneToMany
-    @JoinColumn(name = "createdProjects")
+    @JoinColumn(name = "creator")
     private List<Project> createdProjects;
 
     @OneToMany(mappedBy = "user")
-    @JoinColumn(name = "donations")
+    @JoinColumn(name = "donated_user")
     private List<Donation> donations;
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "author")
-    @JoinColumn(name = "comments")
+    @JoinColumn(name = "author")
     private List<Comment> comments;
 
     public List<Project> getCreatedProjects() {

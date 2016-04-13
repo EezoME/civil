@@ -62,7 +62,7 @@ public class Project implements Serializable {
     private boolean privilegedStatus;
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "project")  // Если Project удален - удаляем все его BudgetItems
-    @JoinColumn(name = "budgetItems")
+    @JoinColumn(name = "project")
     private List<BudgetItem> budgetItems;
 
     @ManyToOne
@@ -70,11 +70,11 @@ public class Project implements Serializable {
     private User creator;
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "project")
-    @JoinColumn(name = "comments")
+    @JoinColumn(name = "project")
     private List<Comment> comments;
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "project")
-    @JoinColumn(name = "donations")
+    @JoinColumn(name = "project")
     private List<Donation> donations;
 
 
