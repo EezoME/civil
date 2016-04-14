@@ -19,7 +19,7 @@
         <div id="head-bar">
 
             <img id="logo" src="http://placehold.it/150x30" />
-            <a class="link-button" href="new.html">Запропонувати проект</a>
+            <a class="link-button" href="newProject">Запропонувати проект</a>
             <div class="float-right">
                 <a class="head-link" href="explore.html">Список проектів</a>
                 <a class="head-link" href="help.html">Допомога</a>

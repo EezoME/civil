@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="org.rssms.entity.User" %>
 <%@ page import="org.rssms.enums.Category" %><%--
   Created by IntelliJ IDEA.
   User: User
@@ -24,7 +25,17 @@
             <div class="float-right">
                 <a class="head-link" href="explore.html">Список проектів</a>
                 <a class="head-link" href="help.html">Допомога</a>
-                <a class="head-link" href="login.html">Вхід</a><a class="head-link" href="signup.html">Реєстрація</a>
+                <c:choose>
+                    <c:when test="${empty user}">
+                        <a class="head-link" href="login">Вхід</a><a class="head-link" href="signup">Реєстрація</a>
+                    </c:when>
+                    <c:when test="${not empty user}">
+                        <a class="head-link profile-link"
+                           href="profile"><%= ((User) session.getAttribute("user")).getUsername() %>
+                        </a>
+                        <a class="head-link" href="logout">Logout</a>
+                    </c:when>
+                </c:choose>
             </div>
             <div id="slogan">
                 <h1 class="slogan-title">Інформаційна Система Підтримки<br>Громадських Ініціатив</h1>
