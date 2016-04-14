@@ -3,19 +3,15 @@ package org.rssms.servlet;
 import org.rssms.entity.User;
 import org.rssms.enums.Role;
 import org.rssms.exception.InvalidUserException;
-import org.rssms.service.UserServiceBean;
 import org.rssms.service.interfaces.UserService;
 
-import javax.annotation.ManagedBean;
 import javax.ejb.EJB;
-import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -36,7 +32,7 @@ public class RegistrationServlet extends HttpServlet {
         String bDate = request.getParameter("bDate");
         String password = request.getParameter("password");
         String password2 = request.getParameter("password_2");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("mm/dd/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         if (!password.equals(password2)) {
             request.setAttribute("error", "Паролі не співпадають");
