@@ -1,6 +1,5 @@
 package org.rssms.service;
 
-import org.rssms.dao.BudgetItemDao;
 import org.rssms.dao.interfaces.BudgetItemDaoInterface;
 import org.rssms.entity.BudgetItem;
 import org.rssms.entity.Project;
@@ -19,7 +18,7 @@ public class BudgetItemServiceBean extends AbstractService<BudgetItem> implement
     private BudgetItemDaoInterface budgetItemDao;
 
     @EJB
-    public void setBudgetItemDao(BudgetItemDao budgetItemDao) {
+    public void setBudgetItemDao(BudgetItemDaoInterface budgetItemDao) {
         this.budgetItemDao = budgetItemDao;
     }
 
