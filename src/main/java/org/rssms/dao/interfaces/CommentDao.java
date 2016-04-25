@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by User on 12.03.2016.
  */
-public interface CommentDaoInterface extends GenericDao<Comment> {
+public interface CommentDao extends GenericDao<Comment> {
     List<Comment> findByAutor(User author);
 
     List<Comment> findByProject(Project project);

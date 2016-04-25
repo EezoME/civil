@@ -1,6 +1,6 @@
 package org.rssms.service;
 
-import org.rssms.dao.interfaces.CommentDaoInterface;
+import org.rssms.dao.interfaces.CommentDao;
 import org.rssms.entity.Comment;
 import org.rssms.entity.Project;
 import org.rssms.entity.User;
@@ -17,10 +17,10 @@ import java.util.List;
  */
 public class CommentServiceBean extends AbstractService<Comment> implements CommentService {
 
-    private CommentDaoInterface commentDao;
+    private CommentDao commentDao;
 
     @EJB
-    public void setCommentDao(CommentDaoInterface commentDao) {
+    public void setCommentDao(CommentDao commentDao) {
         this.commentDao = commentDao;
     }
 

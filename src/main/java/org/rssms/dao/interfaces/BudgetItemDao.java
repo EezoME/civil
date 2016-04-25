@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by User on 12.03.2016.
  */
-public interface BudgetItemDaoInterface extends GenericDao<BudgetItem> {
+public interface BudgetItemDao extends GenericDao<BudgetItem> {
     List<BudgetItem> findByDesc(String desc);
 
     List<BudgetItem> findByProject(Project project);

@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by User on 12.03.2016.
  */
-public interface DonationDaoInterface extends GenericDao<Donation> {
+public interface DonationDao extends GenericDao<Donation> {
     List<Donation> getByAmount(int amount);
 
     List<Donation> getByComment(String comment);

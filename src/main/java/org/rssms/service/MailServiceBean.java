@@ -1,14 +1,15 @@
 package org.rssms.service;
 
-import org.rssms.service.interfaces.IMailService;
-import org.rssms.service.interfaces.IPropertyService;
+import org.rssms.service.interfaces.PropertyService;
 
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
-import javax.inject.Inject;
-import javax.mail.*;
-import javax.mail.internet.*;
-import java.io.IOException;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
 /**
@@ -16,12 +17,12 @@ import java.util.Properties;
  */
 
 @Singleton
-public class MailService implements IMailService {
+public class MailServiceBean implements org.rssms.service.interfaces.MailService {
 
-    private IPropertyService propertyService;
+    private PropertyService propertyService;
 
     @EJB
-    public void setPropertyService(IPropertyService propertyService) {
+    public void setPropertyService(PropertyService propertyService) {
         this.propertyService = propertyService;
     }
 

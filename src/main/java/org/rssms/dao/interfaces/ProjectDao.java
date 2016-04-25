@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by User on 12.03.2016.
  */
-public interface ProjectDaoInterface extends GenericDao<Project> {
+public interface ProjectDao extends GenericDao<Project> {
     Project findByTitle(String title);
 
     List<Project> findByDesc(String desc);

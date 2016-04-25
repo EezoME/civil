@@ -1,15 +1,15 @@
 package org.rssms.service;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import org.rssms.dao.interfaces.EmailConfirmationdaoInterface;
-import org.rssms.dao.interfaces.UserDaoInterface;
+import org.rssms.dao.interfaces.EmailConfirmationDao;
+import org.rssms.dao.interfaces.UserDao;
 import org.rssms.entity.EmailConfirmation;
 import org.rssms.entity.User;
 import org.rssms.enums.Role;
 import org.rssms.exception.EmailConfirmationNotFoundException;
 import org.rssms.exception.InvalidUserException;
 import org.rssms.exception.UserNotFoundException;
-import org.rssms.service.interfaces.IMailService;
+import org.rssms.service.interfaces.MailService;
 import org.rssms.service.interfaces.UserService;
 
 import javax.ejb.EJB;
@@ -24,22 +24,22 @@ import java.util.Random;
 @Stateless
 public class UserServiceBean extends AbstractService<User> implements UserService {
 
-    private UserDaoInterface userDao;
-    private EmailConfirmationdaoInterface emailConfirmationDao;
-    private IMailService mailService;
+    private UserDao userDao;
+    private EmailConfirmationDao emailConfirmationDao;
+    private MailService mailService;
 
     @EJB
-    public void setUserDao(UserDaoInterface userDao) {
+    public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
     }
 
     @EJB
-    public void setEmailConfirmationDao(EmailConfirmationdaoInterface emailConfirmationDao) {
+    public void setEmailConfirmationDao(EmailConfirmationDao emailConfirmationDao) {
         this.emailConfirmationDao = emailConfirmationDao;
     }
 
     @EJB
-    public void setMailService(IMailService mailService) {
+    public void setMailService(MailService mailService) {
         this.mailService = mailService;
     }
 
@@ -57,7 +57,7 @@ public class UserServiceBean extends AbstractService<User> implements UserServic
         confirmation.setConfirmationCode(confirmationCode);
         emailConfirmationDao.persist(confirmation);
 
-        //Send confirmation email using MailService
+//        Send confirmation email using MailService
         String messageBody = "Для підтвердження реєстрації на rssms.org Вам необхідно перейти за посиланням: <br>"
                                 + "<a href='http://rssms.org/emailConfirm?user=" + user.getUsername()
                                 + "&code=" + confirmationCode + "'>Підтвердити реєстрацію</a>";

@@ -1,6 +1,6 @@
 package org.rssms.service;
 
-import org.rssms.dao.interfaces.DonationDaoInterface;
+import org.rssms.dao.interfaces.DonationDao;
 import org.rssms.entity.Donation;
 import org.rssms.entity.Project;
 import org.rssms.entity.User;
@@ -17,10 +17,10 @@ import java.util.List;
 @Stateless
 public class DonationServiceBean extends AbstractService<Donation> implements DonationService {
 
-    private DonationDaoInterface donationDao;
+    private DonationDao donationDao;
 
     @EJB
-    public void setDonationDao(DonationDaoInterface donationDao) {
+    public void setDonationDao(DonationDao donationDao) {
         this.donationDao = donationDao;
     }
 

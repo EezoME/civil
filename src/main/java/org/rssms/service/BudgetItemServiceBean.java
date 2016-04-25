@@ -1,6 +1,6 @@
 package org.rssms.service;
 
-import org.rssms.dao.interfaces.BudgetItemDaoInterface;
+import org.rssms.dao.interfaces.BudgetItemDao;
 import org.rssms.entity.BudgetItem;
 import org.rssms.entity.Project;
 import org.rssms.exception.BudgetItemNotFoundException;
@@ -15,10 +15,10 @@ import java.util.List;
  */
 public class BudgetItemServiceBean extends AbstractService<BudgetItem> implements BudgetItemService {
 
-    private BudgetItemDaoInterface budgetItemDao;
+    private BudgetItemDao budgetItemDao;
 
     @EJB
-    public void setBudgetItemDao(BudgetItemDaoInterface budgetItemDao) {
+    public void setBudgetItemDao(BudgetItemDao budgetItemDao) {
         this.budgetItemDao = budgetItemDao;
     }
 

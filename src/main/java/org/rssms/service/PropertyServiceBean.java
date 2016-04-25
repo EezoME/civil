@@ -1,7 +1,5 @@
 package org.rssms.service;
 
-import org.rssms.service.interfaces.IPropertyService;
-
 import javax.ejb.Singleton;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,7 +10,7 @@ import java.util.Properties;
  */
 
 @Singleton
-public class PropertyService implements IPropertyService {
+public class PropertyServiceBean implements org.rssms.service.interfaces.PropertyService {
 
     @Override
     public Properties getProperties(String propertyFile) {

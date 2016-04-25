@@ -1,6 +1,6 @@
 package org.rssms.service;
 
-import org.rssms.dao.interfaces.ProjectDaoInterface;
+import org.rssms.dao.interfaces.ProjectDao;
 import org.rssms.entity.Project;
 import org.rssms.entity.User;
 import org.rssms.enums.Category;
@@ -23,10 +23,10 @@ import java.util.List;
 @Stateless
 public class ProjectServiceBean extends AbstractService<Project> implements ProjectService {
 
-    private ProjectDaoInterface projectDao;
+    private ProjectDao projectDao;
 
     @EJB
-    public void setProjectDao(ProjectDaoInterface projectDao) {
+    public void setProjectDao(ProjectDao projectDao) {
         this.projectDao = projectDao;
     }
 
