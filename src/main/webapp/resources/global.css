@@ -16,13 +16,13 @@ h4 {
 }
 
 #header {
-    background: url('img/header-bg.jpg');
+    background: url('/resources/img/header-bg.jpg');
     background-position-y: -155px;
     height: 400px;
 }
 
 #header-small {
-    background: url('img/header-bg.jpg');
+    background: url('/resources/img/header-bg.jpg');
     background-position-y: -155px;
     height: 50px;
 }

@@ -1,4 +1,4 @@
-<%@ page import="org.rssms.entity.User" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: WRKSPACE2
   Date: 4/13/2016
@@ -10,10 +10,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="global.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/global.css"/>
     <title>UI Prototype</title>
 </head>
 <body>
+<% if (request.getUserPrincipal() != null) response.sendRedirect("/");%>
 <header>
     <div id="header">
         <div id="head-bar">
@@ -23,15 +24,13 @@
             <div class="float-right">
                 <a class="head-link" href="explore.html">Список проектів</a>
                 <a class="head-link" href="help.html">Допомога</a>
-                <c:choose>
-                    <c:when  test="${empty user}">
-                        <a class="head-link" href="login">Вхід</a><a class="head-link" href="signup">Реєстрація</a>
-                    </c:when>
-                    <c:when test="${not empty user}">
-                        <a class="head-link profile-link" href="profile"><%= ((User) session.getAttribute("user")).getUsername() %></a>
-                        <a class="head-link" href="logout">Logout</a>
-                    </c:when>
-                </c:choose>
+                <% if (request.getRemoteUser() != null) {%>
+                <a class="head-link profile-link" href="profile"><%= request.getRemoteUser()%>
+                </a>
+                <a class="head-link" href="logout">Вихід</a>
+                <%} else {%>
+                <a class="head-link" href="login">Вхід</a><a class="head-link" href="signup">Реєстрація</a>
+                <%}%>
             </div>
             <div id="slogan">
                 <h1 class="slogan-title">Інформаційна Система Підтримки<br>Громадських Ініціатив</h1>
@@ -50,11 +49,11 @@
         <h4>Вхід на сайт для зареєстрованих користувачів</h4>
     </div>
     <div class="login-form">
-        <form action="login" method="post">
+        <form action="j_security_check" method="POST">
             <label>Ім'я користувача</label><br>
-            <input type="text" name="username" placeholder="Username" /><br>
+            <input type="text" name="j_username" placeholder="Username"/><br>
             <label>Пароль</label><br>
-            <input type="text" name="password" placeholder="Password" /><br>
+            <input type="text" name="j_password" placeholder="Password"/><br>
             <input type="checkbox" name="category">Запам'ятати<br><br>
             <input type="submit" value="Вхід" />
         </form>

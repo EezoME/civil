@@ -1,8 +1,6 @@
 package org.rssms.service;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import org.rssms.dao.EmailConfirmationDao;
-import org.rssms.dao.UserDao;
 import org.rssms.dao.interfaces.EmailConfirmationdaoInterface;
 import org.rssms.dao.interfaces.UserDaoInterface;
 import org.rssms.entity.EmailConfirmation;
@@ -14,15 +12,10 @@ import org.rssms.exception.UserNotFoundException;
 import org.rssms.service.interfaces.IMailService;
 import org.rssms.service.interfaces.UserService;
 
-import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validator;
 import java.util.Date;
 import java.util.Random;
-import java.util.Set;
 
 /**
  * Created by WRKSPACE2 on 3/12/2016.
@@ -71,7 +64,7 @@ public class UserServiceBean extends AbstractService<User> implements UserServic
         // mailService.sendMail(user.getEmail(), "Підтвердження реєстрації", messageBody);
 
         //Generate password hash and set user role to Role.UNCONFIRMED
-        String passwordHash = DigestUtils.md5Hex(user.getPassword());
+        String passwordHash = DigestUtils.sha256Hex(user.getPassword());
         user.setPassword(passwordHash);
         userDao.persist(user);
     }

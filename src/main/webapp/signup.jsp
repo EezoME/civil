@@ -1,4 +1,4 @@
-<%@ page import="org.rssms.entity.User" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: WRKSPACE2
   Date: 3/30/2016
@@ -10,28 +10,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="global.css" />
+    <link rel="stylesheet" href="resources/global.css"/>
     <title>Реєстрація</title>
 </head>
+
 <body>
+<% if (request.getUserPrincipal() != null) response.sendRedirect("/");%>
 <header>
     <div id="header">
         <div id="head-bar">
 
-            <img id="logo" src="http://placehold.it/150x30" />
+            <img id="logo" src="http://placehold.it/150x30"/>
             <a class="link-button" href="new.html">Запропонувати проект</a>
             <div class="float-right">
                 <a class="head-link" href="explore.html">Список проектів</a>
                 <a class="head-link" href="help.html">Допомога</a>
-                <c:choose>
-                    <c:when  test="${empty user}">
-                        <a class="head-link" href="login">Вхід</a><a class="head-link" href="signup">Реєстрація</a>
-                    </c:when>
-                    <c:when test="${not empty user}">
-                        <a class="head-link profile-link" href="profile"><%= ((User) session.getAttribute("user")).getUsername() %></a>
-                        <a class="head-link" href="logout">Logout</a>
-                    </c:when>
-                </c:choose>
+                <% if (request.getRemoteUser() != null) {%>
+                <a class="head-link profile-link" href="profile"><%= request.getRemoteUser()%>
+                </a>
+                <a class="head-link" href="logout">Вихід</a>
+                <%} else {%>
+                <a class="head-link" href="login">Вхід</a><a class="head-link" href="signup">Реєстрація</a>
+                <%}%>
             </div>
             <div id="slogan">
                 <h1 class="slogan-title">Інформаційна Система Підтримки<br>Громадських Ініціатив</h1>
@@ -43,7 +43,8 @@
 </header>
 <div class="content">
     <c:if test="${not empty error}">
-        <div class="error"><%= request.getAttribute("error").toString() %></div>
+        <div class="error"><%= request.getAttribute("error").toString() %>
+        </div>
     </c:if>
     <div class="content-title">
         <h2>Реєстрація</h2>
@@ -52,18 +53,18 @@
     <div class="login-form">
         <form action="signup" method="post">
             <label>Ім'я користувача</label><br>
-            <input type="text" name="username" placeholder="Username" /><br>
+            <input type="text" name="username" placeholder="Username"/><br>
             <label>Email</label><br>
-            <input type="email" name="email" placeholder="Email" /><br>
+            <input type="email" name="email" placeholder="Email"/><br>
             <label>Дата народження</label><br>
-            <input type="date" name="bDate" /><br>
+            <input type="date" name="bDate"/><br>
             <label>ПІБ</label><br>
-            <input type="text" name="fullName" placeholder="ПІБ" /><br>
+            <input type="text" name="fullName" placeholder="ПІБ"/><br>
             <label>Пароль</label><br>
-            <input type="text" name="password" placeholder="Password" /><br>
+            <input type="text" name="password" placeholder="Password"/><br>
             <label>Пароль ще раз</label><br>
-            <input type="text" name="password_2" placeholder="Password" /><br><br>
-            <input type="submit" value="Реєстрація" />
+            <input type="text" name="password_2" placeholder="Password"/><br><br>
+            <input type="submit" value="Реєстрація"/>
         </form>
     </div>
 </div>

@@ -50,6 +50,7 @@ public class User implements Serializable {
 
     @NotNull
     @Column(name = "role")
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     @OneToMany

@@ -1,8 +1,5 @@
 package org.rssms.servlet;
 
-import com.sun.net.httpserver.HttpServer;
-import org.rssms.exception.UserNotFoundException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,15 +13,10 @@ import java.io.IOException;
  */
 @WebServlet(urlPatterns = "/logout")
 public class LogoutServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        session.setAttribute("user", null);
-        request.getRequestDispatcher("/login.jsp").forward(request, response);
-    }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        session.setAttribute("user", null);
-        request.getRequestDispatcher("/login.jsp").forward(request, response);
+        session.invalidate();
+        request.logout();
+        response.sendRedirect(request.getContextPath() + "/login");
     }
 }
