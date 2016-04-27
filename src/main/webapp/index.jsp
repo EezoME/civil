@@ -15,7 +15,7 @@
 </head>
 <body>
 <header>
-    <jsp:include page="partial/header.jsp" />
+    <jsp:include page="partial/header.jsp"/>
 </header>
 <div class="content">
     <div class="content-title">
@@ -373,6 +373,7 @@
                         </div>
                     </div>
                     <div class="spacer"></div>
+                </div>
             </td>
         </tr>
     </table>

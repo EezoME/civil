@@ -58,6 +58,7 @@ public class RegistrationServlet extends HttpServlet {
                 return;
             }
         }
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

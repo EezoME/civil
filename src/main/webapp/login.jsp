@@ -31,7 +31,7 @@
             <label>Ім'я користувача</label><br>
             <input type="text" name="j_username" placeholder="Username"/><br>
             <label>Пароль</label><br>
-            <input type="text" name="j_password" placeholder="Password"/><br>
+            <input type="password" name="j_password" placeholder="Password"/><br>
             <input type="checkbox" name="category">Запам'ятати<br><br>
             <input type="submit" value="Вхід" />
         </form>

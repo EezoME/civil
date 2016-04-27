@@ -39,9 +39,9 @@
             <label>ПІБ</label><br>
             <input type="text" name="fullName" placeholder="ПІБ"/><br>
             <label>Пароль</label><br>
-            <input type="text" name="password" placeholder="Password"/><br>
+            <input type="password" name="password" placeholder="Password"/><br>
             <label>Пароль ще раз</label><br>
-            <input type="text" name="password_2" placeholder="Password"/><br><br>
+            <input type="password" name="password_2" placeholder="Password"/><br><br>
             <input type="submit" value="Реєстрація"/>
         </form>
     </div>
