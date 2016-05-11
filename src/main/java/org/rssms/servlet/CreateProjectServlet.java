@@ -64,7 +64,8 @@ public class CreateProjectServlet extends HttpServlet {
         } catch (UserNotFoundException e) {
             e.printStackTrace();
         }
-
+        req.getRequestDispatcher("/index.jsp").forward(req, resp);
+        //req.getRequestDispatcher("/explore.html").forward(req, resp);
     }
 
     @Override
