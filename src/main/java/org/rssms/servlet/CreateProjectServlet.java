@@ -11,11 +11,14 @@ import org.rssms.service.interfaces.UserService;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,6 +27,10 @@ import java.util.Date;
  * Created by User on 13.04.2016.
  */
 @WebServlet(urlPatterns = "/newProject")
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 10,    // 10 MB
+        maxFileSize = 1024 * 1024 * 50,          // 50 MB
+        maxRequestSize = 1024 * 1024 * 100,      // 100 MB
+        location = "/")
 public class CreateProjectServlet extends HttpServlet {
 
     @EJB
@@ -42,6 +49,12 @@ public class CreateProjectServlet extends HttpServlet {
         int goalCost = Integer.valueOf(req.getParameter("sum"));
         Status status = Status.OPEN;
 
+
+        Part filePart = req.getPart("img");
+        InputStream is = filePart.getInputStream();
+        byte imageData[] = new byte[(int) filePart.getSize()];
+        is.read(imageData);
+
         Project project = new Project();
         project.setTitle(title);
         project.setDescription(description);
@@ -50,6 +63,7 @@ public class CreateProjectServlet extends HttpServlet {
         project.setGoalCost(goalCost);
         project.setStatus(status);
         project.setPrivilegedStatus(false);
+        project.setAvatar(imageData);
         try {
             User creator = userService.findUser(req.getRemoteUser());
             project.setCreator(creator);

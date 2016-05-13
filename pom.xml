@@ -43,6 +43,10 @@
             <version>${mysql.version}</version>
         </dependency>
         <dependency>
+            <groupId></groupId>
+            <artifactId></artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>eclipselink</artifactId>
             <version>${eclipse.persistence.version}</version>

@@ -1,6 +1,7 @@
 package org.rssms.entity;
 
 
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import org.rssms.enums.Category;
 import org.rssms.enums.Status;
 
@@ -26,6 +27,9 @@ public class Project implements Serializable {
     @Size(min = 5, max = 64)
     @Column(name = "title", nullable = false, length = 64)
     private String title;
+
+    @Column(name = "avatar")
+    private byte[] avatar;
 
     @NotNull
     @Size(min = 15)
@@ -77,6 +81,13 @@ public class Project implements Serializable {
     @JoinColumn(name = "project")
     private List<Donation> donations;
 
+    public String getAvatar() {
+        return Base64.encode(avatar);
+    }
+
+    public void setAvatar(byte[] avatar) {
+        this.avatar = avatar;
+    }
 
     public User getCreator() {
         return creator;
@@ -189,4 +200,6 @@ public class Project implements Serializable {
     public void setPrivilegedStatus(boolean privilegedStatus) {
         this.privilegedStatus = privilegedStatus;
     }
+
+
 }

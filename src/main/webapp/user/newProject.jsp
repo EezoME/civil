@@ -50,7 +50,7 @@
         <h4>Помістити новий проект на розгляд</h4>
     </div>
     <div class="new-form">
-        <form action="newProject" method="post">
+        <form action="newProject" method="post" enctype="multipart/form-data">
             <label for="prj-title">Назва проекту</label><br>
             <input type="text" name="title" id="prj-title" placeholder="Назва"/><br>
 
