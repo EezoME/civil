@@ -130,4 +130,15 @@ public class ProjectServiceBean extends AbstractService<Project> implements Proj
         projectDao.persist(project);
     }
 
+    @Override
+    public List<Project> findAllProjects() {
+        List<Project> list = projectDao.findAllProjects();
+        return list;
+    }
+
+    @Override
+    public List<Project> findAllPopularProjects() {
+        List<Project> list = projectDao.findAllPopularProjects();
+        return list;
+    }
 }

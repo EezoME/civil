@@ -32,6 +32,11 @@ public interface ProjectService {
 
     List<Project> findPrivilegedProjects() throws ProjectNotFoundException;
 
+    List<Project> findAllProjects();
+
+    List<Project> findAllPopularProjects();
+
+
     /**
      * Changes project status.<br/>
      * <b>NOTE:</b> Administrator or Moderator must confirm project order to it could be available to viewing.<br/>

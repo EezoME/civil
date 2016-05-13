@@ -57,7 +57,7 @@ public class Project implements Serializable {
     @Column(name = "status")
     private Status status;
 
-    @NotNull
+    //@NotNull
     @Column(name = "privilegedStatus")
     private boolean privilegedStatus;
 

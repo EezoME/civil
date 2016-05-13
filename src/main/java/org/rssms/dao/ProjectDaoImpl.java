@@ -64,4 +64,16 @@ public class ProjectDaoImpl extends AbstractJpaDao<Project> implements ProjectDa
     public List<Project> findByExpirationDate(Date expirationDate) {
         return getEntityManager().createQuery("select p from Project p where p.expirationDate=:expirationDate").setParameter("expirationDate", expirationDate).getResultList();
     }
+
+    @Override
+    public List<Project> findAllProjects() {
+        return getEntityManager().createNamedQuery("Project.getAll").getResultList();
+    }
+
+    @Override
+    public List<Project> findAllPopularProjects() {
+        return getEntityManager().createQuery("select p from Project p order by p.fundedSum desc").getResultList();
+    }
+
+
 }

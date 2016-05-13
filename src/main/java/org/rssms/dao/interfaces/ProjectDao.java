@@ -29,5 +29,7 @@ public interface ProjectDao extends GenericDao<Project> {
 
     List<Project> findByExpirationDate(Date expirationDate);
 
+    List<Project> findAllProjects();
 
+    List<Project> findAllPopularProjects();
 }

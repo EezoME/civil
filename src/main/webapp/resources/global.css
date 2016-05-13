@@ -15,6 +15,10 @@ h4 {
     line-height: 1px;
 }
 
+a {
+    text-decoration: none;
+}
+
 #header {
     background: url('img/header-bg.jpg');
     background-position-y: -155px;
@@ -88,6 +92,7 @@ h4 {
 #project-table {
     text-align:  left;
     display: inline-block;
+    margin-bottom: 25px;
 }
 
 .cover-image {
@@ -108,9 +113,14 @@ td {
     margin-top: -5px;
 }
 
+.description h3 {
+    word-break: break-all;
+}
+
 .description-text {
     text-indent: 10px;
     color: #879195;
+    word-break: break-all;
 }
 
 .green-badge {
@@ -154,6 +164,7 @@ td {
 
 .add-user-info {
     color: #879195;
+    word-break: break-all;
 }
 
 .project-footer {
@@ -375,4 +386,12 @@ label {
 
 .profile-link {
     color: deepskyblue;
+}
+
+.project-card {
+    display: inline-block;
+    max-width: 32%;
+    margin-right: 5px;
+    vertical-align: middle;
+    margin-bottom: 10px;
 }
