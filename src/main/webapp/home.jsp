@@ -39,7 +39,8 @@
                         </p>
                     </a>
                     <p>
-                        <span class="green-badge"><a href="/categories/${project.category}">${project.category}</a></span>
+                        <span class="green-badge"><a
+                                href="/categories/${project.category}">${project.category.ukrainianName}</a></span>
                     </p>
                 </div>
                 <div class="project-footer">
