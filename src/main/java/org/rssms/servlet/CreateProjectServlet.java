@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import java.awt.*;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -56,8 +58,15 @@ public class CreateProjectServlet extends HttpServlet {
         Part filePart = req.getPart("img");
         InputStream is = filePart.getInputStream();
         BufferedImage originalImage = ImageIO.read(is);
+        Image resizedImage = originalImage.getScaledInstance(-1, 500, Image.SCALE_SMOOTH);
+
+        BufferedImage bufferedThumbnail = new BufferedImage(resizedImage.getWidth(null),
+                resizedImage.getHeight(null),
+                BufferedImage.TYPE_INT_RGB);
+        bufferedThumbnail.getGraphics().drawImage(resizedImage, 0, 0, null);
+
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ImageIO.write( originalImage, "jpg", baos );
+        ImageIO.write(bufferedThumbnail, "png", baos);
         baos.flush();
         byte[] imageData = baos.toByteArray();
         baos.close();

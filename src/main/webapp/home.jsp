@@ -29,7 +29,9 @@
         <c:forEach items="${projects}" var="project">
             <div class="project-card">
                 <a href="/projects/${project.projectId}">
-                    <img class="cover-image" src="data:image/jpeg;base64,${project.avatar}"/>
+                    <div class="img-wrapper-cover">
+                        <img class="cover-image" src="data:image/png;base64,${project.avatar}"/>
+                    </div>
                 </a>
                 <div class="description">
                     <a href="/projects/${project.projectId}">
