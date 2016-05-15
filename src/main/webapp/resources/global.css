@@ -123,28 +123,14 @@ td {
     word-break: break-all;
 }
 
-.green-badge {
-    background: darkolivegreen;
+.badge {
     color: #DDD;
     padding: 5px;
     font-size: smaller;
     border-radius: 3px;
 }
 
-.green-badge a {
-    color: #DDD;
-    text-decoration: none;
-}
-
-.blue-badge {
-    background: dodgerblue;
-    color: #DDD;
-    padding: 5px;
-    font-size: smaller;
-    border-radius: 3px;
-}
-
-.blue-badge a {
+.badge a {
     color: #DDD;
     text-decoration: none;
 }
