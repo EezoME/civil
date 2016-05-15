@@ -10,6 +10,7 @@ import org.rssms.service.interfaces.ProjectService;
 import org.rssms.service.interfaces.UserService;
 
 import javax.ejb.EJB;
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -17,6 +18,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
@@ -52,8 +55,13 @@ public class CreateProjectServlet extends HttpServlet {
 
         Part filePart = req.getPart("img");
         InputStream is = filePart.getInputStream();
-        byte imageData[] = new byte[(int) filePart.getSize()];
-        is.read(imageData);
+        BufferedImage originalImage = ImageIO.read(is);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write( originalImage, "jpg", baos );
+        baos.flush();
+        byte[] imageData = baos.toByteArray();
+        baos.close();
+
 
         Project project = new Project();
         project.setTitle(title);
