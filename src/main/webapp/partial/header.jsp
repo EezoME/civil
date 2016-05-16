@@ -5,7 +5,7 @@
         <img id="logo" src="http://placehold.it/150x30"/>
         <a class="link-button" href="newProject">Запропонувати проект</a>
         <div class="float-right">
-            <a class="head-link" href="/explore.html">Список проектів</a>
+            <a class="head-link" href="/explore">Список проектів</a>
             <a class="head-link" href="/help.html">Допомога</a>
             <% if (request.getRemoteUser() != null) {%>
             <a class="head-link profile-link" href="/profile"><%= request.getRemoteUser()%>

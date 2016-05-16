@@ -90,9 +90,10 @@ a {
 }
 
 #project-table {
-    text-align:  left;
+    text-align:  center;
     display: inline-block;
     margin-bottom: 25px;
+    width: 96.5%;
 }
 
 .cover-image {
@@ -124,14 +125,19 @@ td {
 }
 
 .badge {
-    color: #DDD;
+    color: #FFF;
     padding: 5px;
     font-size: smaller;
     border-radius: 3px;
 }
 
+.filter-badge {
+    margin-right: 3px;
+    line-height: 26px;
+}
+
 .badge a {
-    color: #DDD;
+    color: #FFF;
     text-decoration: none;
 }
 
@@ -306,6 +312,8 @@ label {
     text-align: left;
     border: 1px solid #eee;
     border-radius: 4px;
+    padding-bottom: 35px;
+    margin-bottom: 15px;
 }
 
 .text-left {
@@ -381,6 +389,7 @@ label {
 
 .project-card {
     display: inline-block;
+    text-align: left;
     max-width: 32%;
     margin-right: 5px;
     vertical-align: middle;
@@ -394,3 +403,18 @@ label {
     min-height: 430px;
     max-height: 430px;
 }
+
+.sort-by a {
+    color: #FFF;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.reset-filter-button {
+    float: right;
+    background: maroon;
+    color: #FFF;
+    padding: 5px;
+    border-radius: 4px;
+}
+

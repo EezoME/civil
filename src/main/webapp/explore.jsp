@@ -22,8 +22,28 @@
 </header>
 <div class="content">
     <div class="content-title">
-        <h2>Найпопулярніші проекти</h2>
-        <h4>Проекти, які зібрали найбільшу кількість коштів</h4>
+        <h2>Список проектів</h2>
+        <h4>Проекти, які потребують фінансової допомоги</h4>
+    </div>
+    <div id="filter-wrapper">
+        <div id="filter">
+            <div class="sort-by">
+                Впорядковувати за:
+                <a style="background-color: ${sort == "popularity" ? 'dodgerblue' : 'darkgray'};" href="/explore?sort=popularity&${not empty category ? 'category=' : ''}${category}">популярністью</a>
+                <a style="background-color: ${sort == "date" ? 'dodgerblue' : 'darkgray'};" href="/explore?sort=date&${not empty category ? 'category=' : ''}${category}">датою</a>
+                <a style="background-color: ${sort == "goal" ? 'dodgerblue' : 'darkgray'};" href="/explore?sort=goal&${not empty category ? 'category=' : ''}${category}">фінальною сумою</a>
+            </div>
+            <br>
+            <div class="category">
+                Категорія:
+                <c:forEach items="${categories}" var="ctg">
+                    <span class="badge filter-badge" style="background-color: ${empty category || ctg == category ? ctg.tagColor : 'darkgray'}">
+                        <a href="/explore?category=${ctg}&${not empty sort ? 'sort=' : ''}${sort}">${ctg.ukrainianName}</a>
+                    </span>
+                </c:forEach>
+            </div>
+            <a class="reset-filter-button" href="/explore">Очистити</a>
+        </div>
     </div>
     <div id="project-table">
         <c:forEach items="${projects}" var="project">
@@ -37,7 +57,7 @@
                     <a href="/projects/${project.projectId}">
                         <h3>${project.title}</h3>
                         <p class="description-text">
-                            ${project.description}
+                                ${project.description}
                         </p>
                     </a>
                     <p>
