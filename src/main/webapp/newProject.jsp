@@ -31,28 +31,27 @@
     <div class="new-form">
         <form action="newProject" method="post" accept-charset="utf-8">
             <label for="prj-title">Назва проекту</label><br>
-            <input type="text" name="title" id="prj-title" placeholder="Назва"/><br>
+            <input type="text" name="title" id="prj-title" placeholder="Назва" value="${not empty savedValues.title ? savedValues.title[0] : ''}"/><br>
 
             <label for="prj-img">Зображення</label><br>
             <input type="file" name="img" id="prj-img"/><br>
 
             <label for="prj-description">Опис проекту</label><br>
-            <textarea name="desc" id="prj-description"></textarea><br>
+            <textarea name="desc" id="prj-description">${not empty savedValues.desc ? savedValues.desc[0] : ''}</textarea><br>
 
             <label for="prj-sum">Необхідна сума</label><br>
-            <input type="text" name="sum" id="prj-sum" placeholder="5 000"/><span
+            <input type="text" name="sum" id="prj-sum" placeholder="5 000" value="${not empty savedValues.sum ? savedValuesr.sum[0] : ''}"/><span
                 class="larger">&nbsp;&#8372;</span><br>
 
             <label for="prj-sum">Дата завершення</label><br>
-            <input type="date" name="date" id="prj-date"/><br>
+            <input type="date" name="date" id="prj-date" value="${not empty savedValues.date ? savedValues.date[0] : ''}"/><br>
 
             <label>Категорія</label><br>
             <c:set var="categotries" value="<%=Category.values()%>"/>
             <select name="category">
                 <%--<option value=""></option>--%>
                 <c:forEach items="${categotries}" var="category">
-                    <%--<input type="radio" name="category" value="${category.ukrainianName}"><span class="green-badge">${category.ukrainianName}</span><br>--%>
-                    <option value="${category.name()}">${category.ukrainianName}</option>
+                    <option value="${category.name()}" ${not empty savedValues.category && savedValues.category == category.name ? 'selected' : ''}>${category.ukrainianName}</option>
                 </c:forEach>
             </select><br>
             <input type="submit" value="Додати"/>

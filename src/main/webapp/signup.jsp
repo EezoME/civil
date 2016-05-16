@@ -31,13 +31,13 @@
     <div class="login-form">
         <form action="signup" method="post">
             <label>Ім'я користувача</label><br>
-            <input type="text" name="username" placeholder="Username"/><br>
+            <input type="text" name="username" placeholder="Username" value="${not empty savedValues.username ? savedValues.username[0] : ''}"/><br>
             <label>Email</label><br>
-            <input type="email" name="email" placeholder="Email"/><br>
+            <input type="email" name="email" placeholder="Email"  value="${not empty savedValues.email ? savedValues.email[0] : ''}"/><br>
             <label>Дата народження</label><br>
-            <input type="date" name="bDate"/><br>
+            <input type="date" name="bDate"  value="${not empty savedValues.bDate ? savedValues.bDate[0] : ''}"/><br>
             <label>ПІБ</label><br>
-            <input type="text" name="fullName" placeholder="ПІБ"/><br>
+            <input type="text" name="fullName" placeholder="ПІБ"  value="${not empty savedValues.fullName ? savedValues.fullName[0] : ''}"/><br>
             <label>Пароль</label><br>
             <input type="password" name="password" placeholder="Password"/><br>
             <label>Пароль ще раз</label><br>

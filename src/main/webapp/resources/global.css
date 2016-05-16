@@ -408,6 +408,7 @@ label {
     color: #FFF;
     border-radius: 4px;
     padding: 5px;
+    font-size: smaller;
 }
 
 .reset-filter-button {

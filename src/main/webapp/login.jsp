@@ -29,7 +29,7 @@
     <div class="login-form">
         <form action="j_security_check" method="POST">
             <label>Ім'я користувача</label><br>
-            <input type="text" name="j_username" placeholder="Username"/><br>
+            <input type="text" name="j_username" placeholder="Username" value="${not empty savedValues.j_username ? savedValues.j_username[0] : ''}"/><br>
             <label>Пароль</label><br>
             <input type="password" name="j_password" placeholder="Password"/><br>
             <input type="checkbox" name="category">Запам'ятати<br><br>

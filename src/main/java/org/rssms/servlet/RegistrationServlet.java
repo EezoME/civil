@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * Created by WRKSPACE2 on 3/30/2016.
@@ -33,6 +34,9 @@ public class RegistrationServlet extends HttpServlet {
         String password = request.getParameter("password");
         String password2 = request.getParameter("password_2");
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        Map<String, String[]> savedValues = request.getParameterMap();
+        request.setAttribute("savedValues", savedValues);
 
         if (!password.equals(password2)) {
             request.setAttribute("error", "Паролі не співпадають");

@@ -27,6 +27,7 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * Created by User on 13.04.2016.
@@ -46,6 +47,9 @@ public class CreateProjectServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Map<String, String[]> savedValues = req.getParameterMap();
+        req.setAttribute("savedValues", savedValues);
+
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String title = req.getParameter("title");
         String description = req.getParameter("desc");
