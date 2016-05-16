@@ -121,11 +121,7 @@
     </div>
 </div>
 <footer>
-    <div id="footer">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        Fusce hendrerit enim eget sem sodales, at semper...
-    </div>
-
+    <jsp:include page="/partial/footer.jsp"/>
 </footer>
 </body>
 </html>

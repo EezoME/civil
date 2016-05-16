@@ -68,7 +68,7 @@ a {
 }
 
 #slogan {
-    margin-top: 110px;
+    margin-top: 15px;
 }
 
 .slogan-title {
@@ -239,12 +239,12 @@ td {
 
 #footer {
     background: #eee;
-    height: 100px;
-    padding: 15px 160px;
+    height: 150px;
+    padding: 15px 20px;
     position: relative;
-    margin-top: 25px;
+    margin-top: 50px;
     text-align: center;
-    color: #444;
+    color: #456;
 }
 
 input[type='date'], input[type='email'], input[type='text'], input[type='password'], select {
