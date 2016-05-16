@@ -30,17 +30,18 @@ public class ExploreServlet extends HttpServlet {
         String category = request.getParameter("category");
         String sortBy = request.getParameter("sort");
         List<Project> projects = projectService.findAllPopularProjects();
+        boolean founded = false;
 
         if (category != null) {
             try {
                 projects = projectService.findProjectsByCategory(Category.valueOf(category));
+                founded = true;
             } catch (ProjectNotFoundException e) {
                 e.printStackTrace();
             }
         }
-
-        if (sortBy != null) {
-            switch(sortBy) {
+        if (projects != null && sortBy != null) {
+            switch (sortBy) {
                 case "popularity":
                     Collections.sort(projects, new Comparator<Project>() {
                         @Override
@@ -66,6 +67,10 @@ public class ExploreServlet extends HttpServlet {
                     });
                     break;
             }
+
+        }
+        if (!founded) {
+            request.setAttribute("error", "У цій категорії немає жодного проекту.\nВи можете <a href='/newProject'>додати свій</a>.");
         }
         request.setAttribute("projects", projects);
         request.setAttribute("sort", sortBy);

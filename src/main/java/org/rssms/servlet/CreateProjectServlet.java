@@ -10,6 +10,7 @@ import org.rssms.service.interfaces.ProjectService;
 import org.rssms.service.interfaces.UserService;
 
 import javax.ejb.EJB;
+import javax.ejb.EJBTransactionRolledbackException;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -94,6 +95,10 @@ public class CreateProjectServlet extends HttpServlet {
             project.setExpirationDate(new Date());
         } catch (InvalidProjectException e) {
             req.setAttribute("error", e.getMessage());
+            req.getRequestDispatcher("/user/newProject.jsp").forward(req, resp);
+            return;
+        } catch (EJBTransactionRolledbackException e) {
+            req.setAttribute("error", "Перевірте правильність вводу даних: назва проекту від 5 до 64 символів, опис - не менше 15 символів.");
             req.getRequestDispatcher("/user/newProject.jsp").forward(req, resp);
             return;
         } catch (UserNotFoundException e) {

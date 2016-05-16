@@ -12,7 +12,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="global.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/global.css"/>
     <title>UI Prototype</title>
 </head>
 <body>

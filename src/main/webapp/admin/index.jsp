@@ -8,9 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Admin Page</title>
 </head>
 <body>
+TODO: manage users, projects; MODERATOR role
 Admin page admins page!!!
 <a href="${pageContext.request.contextPath}/logout">logout</a>
 </body>

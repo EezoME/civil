@@ -2,17 +2,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div id="header">
     <div id="head-bar">
-        <img id="logo" src="http://placehold.it/150x30"/>
+        <a href="/"><img id="logo" src="http://placehold.it/150x30" title="Інформаційна Система Підтримки Громадських Ініціатив" alt="logo"/></a>
         <a class="link-button" href="newProject">Запропонувати проект</a>
         <div class="float-right">
-            <a class="head-link" href="/explore">Список проектів</a>
-            <a class="head-link" href="/help.html">Допомога</a>
+            <a class="head-link" href="${pageContext.request.contextPath}/explore">Список проектів</a>
+            <a class="head-link" href="${pageContext.request.contextPath}/help.html">Допомога</a>
             <% if (request.getRemoteUser() != null) {%>
-            <a class="head-link profile-link" href="/profile"><%= request.getRemoteUser()%>
+            <a class="head-link profile-link" href="${pageContext.request.contextPath}/profile"><%= request.getRemoteUser()%>
             </a>
-            <a class="head-link" href="/logout">Вихід</a>
+            <a class="head-link" href="${pageContext.request.contextPath}/logout">Вихід</a>
             <%} else {%>
-            <a class="head-link" href="/login">Вхід</a><a class="head-link" href="/signup">Реєстрація</a>
+            <a class="head-link" href="${pageContext.request.contextPath}/login">Вхід</a><a class="head-link" href="${pageContext.request.contextPath}/signup">Реєстрація</a>
             <%}%>
         </div>
         <div id="slogan">

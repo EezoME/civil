@@ -13,7 +13,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/resources/global.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/global.css"/>
     <title>UI Prototype</title>
 </head>
 <body>
@@ -21,6 +21,10 @@
     <jsp:include page="partial/header.jsp"/>
 </header>
 <div class="content">
+    <c:if test="${not empty error}">
+        <div class="error"><%= request.getAttribute("error").toString() %>
+        </div>
+    </c:if>
     <div class="content-title">
         <h2>Список проектів</h2>
         <h4>Проекти, які потребують фінансової допомоги</h4>
@@ -38,11 +42,11 @@
                 Категорія:
                 <c:forEach items="${categories}" var="ctg">
                     <span class="badge filter-badge" style="background-color: ${ctg == category ? ctg.tagColor : 'darkgray'}">
-                        <a href="/explore?category=${ctg}&${not empty sort ? 'sort=' : ''}${sort}">${ctg.ukrainianName}</a>
+                        <a href="${pageContext.request.contextPath}/explore?category=${ctg}&${not empty sort ? 'sort=' : ''}${sort}">${ctg.ukrainianName}</a>
                     </span>
                 </c:forEach>
             </div>
-            <a class="reset-filter-button" href="/explore">Очистити</a>
+            <a class="reset-filter-button" href="${pageContext.request.contextPath}/explore">Очистити</a>
         </div>
     </div>
     <div id="project-table">

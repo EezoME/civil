@@ -32,7 +32,7 @@
             <input type="text" name="j_username" placeholder="Username" value="${not empty savedValues.j_username ? savedValues.j_username[0] : ''}"/><br>
             <label>Пароль</label><br>
             <input type="password" name="j_password" placeholder="Password"/><br>
-            <input type="checkbox" name="category">Запам'ятати<br><br>
+            <label><input type="checkbox" name="category"/>Запам'ятати</label><br><br>
             <input type="submit" value="Вхід" />
         </form>
     </div>
