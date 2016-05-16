@@ -84,7 +84,7 @@
                         <c:set var="project" scope="request" value="${project}"></c:set>
                         <%
                             Project project = (Project) pageContext.getAttribute("project");
-                            int width = Math.round(project.getFundedSum() / project.getGoalCost()) * 100;
+                            double width = ((double) project.getFundedSum() / (double) project.getGoalCost()) * 100;
                         %>
                         <div class="progressbar" style="width: <%= width %>%"></div>
                     </div>
