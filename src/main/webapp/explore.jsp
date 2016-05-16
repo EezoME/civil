@@ -37,7 +37,7 @@
             <div class="category">
                 Категорія:
                 <c:forEach items="${categories}" var="ctg">
-                    <span class="badge filter-badge" style="background-color: ${empty category || ctg == category ? ctg.tagColor : 'darkgray'}">
+                    <span class="badge filter-badge" style="background-color: ${ctg == category ? ctg.tagColor : 'darkgray'}">
                         <a href="/explore?category=${ctg}&${not empty sort ? 'sort=' : ''}${sort}">${ctg.ukrainianName}</a>
                     </span>
                 </c:forEach>
