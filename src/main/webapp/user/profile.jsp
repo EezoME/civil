@@ -13,6 +13,9 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/global.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/user/user_style.css"/>
+    <link rel="icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico" type="image/x-icon"/>
     <title>Персональній кабінет</title>
 </head>
 <body>
@@ -24,9 +27,10 @@
         <div class="error"><%= request.getAttribute("error").toString() %>
         </div>
     </c:if>
-    Hello on simpleuser page!!
 
-    My Projects<br/>
+    <h2 class="titles">Мої проекти</h2>
+    <h4>Список проектів, які Ви створили</h4>
+
     <div id="project-table">
         <c:forEach items="${projects}" var="project">
             <div class="project-card">
@@ -89,6 +93,15 @@
                 <div class="spacer"></div>
             </div>
         </c:forEach>
+    </div>
+
+    <div class="donated-projects">
+        <h2 class="titles">Підтримані проекти</h2>
+        <h4>Проекти, на які Ви пожертвували кошти</h4>
+    </div>
+    <br/>
+    <div class="comments">
+        <h2 class="titles">Коментарі</h2>
     </div>
 </div>
 
