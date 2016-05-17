@@ -10,7 +10,8 @@
             <%}%>
             <a class="head-link" href="${pageContext.request.contextPath}/explore">Список проектів</a>
             <% if (request.getRemoteUser() != null) {%>
-            <a class="head-link profile-link" href="${pageContext.request.contextPath}/user/profile.jsp"><%= request.getRemoteUser()%>
+            <a class="head-link profile-link"
+               href="${pageContext.request.contextPath}/user/profile"><%= request.getRemoteUser()%>
             </a>
             <a class="head-link" href="${pageContext.request.contextPath}/logout">Вихід</a>
             <%} else {%>
