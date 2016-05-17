@@ -29,17 +29,18 @@ public class ExploreServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String category = request.getParameter("category");
         String sortBy = request.getParameter("sort");
-        List<Project> projects = projectService.findAllPopularProjects();
-        boolean founded = false;
+        List<Project> projects = null;
 
         if (category != null) {
             try {
                 projects = projectService.findProjectsByCategory(Category.valueOf(category));
-                founded = true;
             } catch (ProjectNotFoundException e) {
                 e.printStackTrace();
             }
+        } else {
+            projects = projectService.findAllPopularProjects();
         }
+
         if (projects != null && sortBy != null) {
             switch (sortBy) {
                 case "popularity":
@@ -69,7 +70,7 @@ public class ExploreServlet extends HttpServlet {
             }
 
         }
-        if (!founded) {
+        if (projects == null || projects.isEmpty()) {
             request.setAttribute("error", "У цій категорії немає жодного проекту.\nВи можете <a href='/newProject'>додати свій</a>.");
         }
         request.setAttribute("projects", projects);

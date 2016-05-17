@@ -68,7 +68,7 @@ a {
 }
 
 #slogan {
-    margin-top: 15px;
+    margin-top: 110px;
 }
 
 .slogan-title {
@@ -381,6 +381,11 @@ label {
     margin-top: 10px;
     border-radius: 4px;
     padding: 15px 0 0 0;
+}
+
+.error a {
+    font-weight: bold;
+    color: chocolate;
 }
 
 .profile-link {
