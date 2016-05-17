@@ -15,10 +15,6 @@ import java.util.List;
 @Stateless
 public class ProjectDaoImpl extends AbstractJpaDao<Project> implements ProjectDao {
 
-    public List<Project> getAll() {
-        return namedQuery("Project.getAll").getResultList();
-    }
-
     @Override
     public Project findByTitle(String title) {
         return (Project) getEntityManager().createQuery("select p from Project p where p.title=:title").setParameter("title", title).getSingleResult();

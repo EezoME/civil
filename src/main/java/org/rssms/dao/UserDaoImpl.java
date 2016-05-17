@@ -13,13 +13,14 @@ import java.util.List;
 @Stateless
 public class UserDaoImpl extends AbstractJpaDao<User> implements UserDao {
 
-    public List<User> getAll() {
-        return namedQuery("User.getAll").getResultList();
-    }
-
     @Override
     public User findByUsername(String username) {
         return (User) getEntityManager().createQuery("select u from User u where u.username=:username").setParameter("username", username).getSingleResult();
+    }
+
+    @Override
+    public List<User> findAll() {
+        return namedQuery("User.getAll").getResultList();
     }
 
     @Override

@@ -15,6 +15,7 @@ import org.rssms.service.interfaces.UserService;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -79,7 +80,7 @@ public class UserServiceBean extends AbstractService<User> implements UserServic
         if (s != null){
             throw new InvalidUserException(s);
         }
-        userDao.persist(user);
+        userDao.merge(user);
     }
 
     public User findUser(int id) throws UserNotFoundException {
@@ -140,4 +141,9 @@ public class UserServiceBean extends AbstractService<User> implements UserServic
         }
         return false;
     }
+
+    public List<User> findAllUsers() {
+        return userDao.findAll();
+    }
+
 }

@@ -11,6 +11,8 @@ import java.util.List;
 public interface UserDao extends GenericDao<User> {
     User findByUsername(String username);
 
+    List<User> findAll();
+
     List<String> findAllEmails();
 
     List<User> findByRole(String role);

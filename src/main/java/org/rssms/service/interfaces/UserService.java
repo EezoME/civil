@@ -5,10 +5,14 @@ import org.rssms.exception.EmailConfirmationNotFoundException;
 import org.rssms.exception.InvalidUserException;
 import org.rssms.exception.UserNotFoundException;
 
+import java.util.List;
+
 /**
  * Created by WRKSPACE2 on 3/12/2016.
  */
 public interface UserService {
+
+    List<User> findAllUsers();
 
     void addUser(User user) throws InvalidUserException;
 

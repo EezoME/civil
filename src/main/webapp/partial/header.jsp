@@ -5,8 +5,10 @@
         <a href="/"><img id="logo" src="http://placehold.it/150x30" title="Інформаційна Система Підтримки Громадських Ініціатив" alt="logo"/></a>
         <a class="link-button" href="newProject">Запропонувати проект</a>
         <div class="float-right">
+            <% if (request.isUserInRole("ADMINISTRATOR")) {%>
+            <a class="head-link" href="${pageContext.request.contextPath}/admin"> Панель адміністратора </a>
+            <%}%>
             <a class="head-link" href="${pageContext.request.contextPath}/explore">Список проектів</a>
-            <a class="head-link" href="${pageContext.request.contextPath}/help.html">Допомога</a>
             <% if (request.getRemoteUser() != null) {%>
             <a class="head-link profile-link" href="${pageContext.request.contextPath}/profile"><%= request.getRemoteUser()%>
             </a>
