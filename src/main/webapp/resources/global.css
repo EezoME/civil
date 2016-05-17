@@ -97,9 +97,8 @@ a {
 }
 
 .cover-image {
-    width: 100%;
-    border-radius: 4px;
     border-radius: 4px 4px 0 0;
+    height: 230px;
 }
 
 td {
@@ -348,7 +347,13 @@ label {
 }
 
 .img-wrapper-cover {
-    height: 230px;
+    text-align: center;
+    border-left: 1px solid #eee;
+    border-right: 1px solid #eee;
+    border-top: 1px solid #eee;
+    -webkit-border-radius: 4px 4px 0 4px;
+    -moz-border-radius: 4px 4px 0 4px;
+    border-radius: 4px 4px 0 4px;
     overflow: hidden;
 }
 
