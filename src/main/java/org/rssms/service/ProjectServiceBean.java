@@ -81,6 +81,15 @@ public class ProjectServiceBean extends AbstractService<Project> implements Proj
     }
 
     @Override
+    public List<Project> findProjectsByUser(User user) throws ProjectNotFoundException {
+        List<Project> list = projectDao.findByCreator(user);
+        if (list == null || list.isEmpty()){
+            throw new ProjectNotFoundException("No projects with user '"+user.getUsername()+"'.");
+        }
+        return list;
+    }
+
+    @Override
     public List<Project> findPrivilegedProjects() throws ProjectNotFoundException {
         List<Project> list = projectDao.findByPrivilegedStatus(true);
         if (list == null || list.isEmpty()){

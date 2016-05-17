@@ -30,6 +30,8 @@ public interface ProjectService {
 
     List<Project> findProjectsByCategory(Category category) throws ProjectNotFoundException;
 
+    List<Project> findProjectsByUser(User user) throws ProjectNotFoundException;
+
     List<Project> findPrivilegedProjects() throws ProjectNotFoundException;
 
     List<Project> findAllProjects();
