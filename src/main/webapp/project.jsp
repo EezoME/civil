@@ -63,7 +63,7 @@
         </div>
         <p>
             <span class='badge' style="background-color: ${project.category.tagColor};"><a
-                    href="/categories/${project.category}">${project.category.ukrainianName}</a></span>
+                    href="/explore?category=${project.category}">${project.category.ukrainianName}</a></span>
         </p>
         <div class="large-description">
             <h3 style="line-height: 1px;">Деталі (тут еще будут вкладки с комментами, репортами и т.д.)</h3>

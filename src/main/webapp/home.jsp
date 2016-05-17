@@ -42,7 +42,7 @@
                     </a>
                     <p>
                         <span class='badge' style="background-color: ${project.category.tagColor};"><a
-                                href="/categories/${project.category}">${project.category.ukrainianName}</a></span>
+                                href="/explore?category=${project.category}">${project.category.ukrainianName}</a></span>
                     </p>
                 </div>
                 <div class="project-footer">
