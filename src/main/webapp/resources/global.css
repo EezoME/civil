@@ -132,8 +132,9 @@ td {
 }
 
 .filter-badge {
-    margin-right: 3px;
-    line-height: 26px;
+    display: inline-block;
+    margin-bottom: 4px;
+
 }
 
 .badge a {

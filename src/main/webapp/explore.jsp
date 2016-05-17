@@ -41,9 +41,9 @@
             <div class="category">
                 Категорія:
                 <c:forEach items="${categories}" var="ctg">
-                    <span class="badge filter-badge" style="background-color: ${ctg == category ? ctg.tagColor : 'darkgray'}">
+                    <div class="badge filter-badge" style="background-color: ${ctg == category ? ctg.tagColor : 'darkgray'}">
                         <a href="${pageContext.request.contextPath}/explore?category=${ctg}&${not empty sort ? 'sort=' : ''}${sort}">${ctg.ukrainianName}</a>
-                    </span>
+                    </div>
                 </c:forEach>
             </div>
             <a class="reset-filter-button" href="${pageContext.request.contextPath}/explore">Очистити</a>
