@@ -4,6 +4,7 @@ import org.rssms.dao.interfaces.ProjectDao;
 import org.rssms.entity.Project;
 import org.rssms.entity.User;
 import org.rssms.enums.Category;
+import org.rssms.enums.Status;
 
 import javax.ejb.Stateless;
 import java.util.Date;
@@ -69,6 +70,11 @@ public class ProjectDaoImpl extends AbstractJpaDao<Project> implements ProjectDa
     @Override
     public List<Project> findAllPopularProjects() {
         return getEntityManager().createQuery("select p from Project p order by p.fundedSum desc").getResultList();
+    }
+
+    @Override
+    public List<Project> findProjectByStatus(Status status) {
+        return getEntityManager().createQuery("select p from Project p where p.status=:status").setParameter("status", status).getResultList();
     }
 
 

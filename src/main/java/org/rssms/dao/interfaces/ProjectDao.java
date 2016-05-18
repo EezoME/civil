@@ -3,6 +3,7 @@ package org.rssms.dao.interfaces;
 import org.rssms.entity.Project;
 import org.rssms.entity.User;
 import org.rssms.enums.Category;
+import org.rssms.enums.Status;
 
 import java.util.Date;
 import java.util.List;
@@ -32,4 +33,6 @@ public interface ProjectDao extends GenericDao<Project> {
     List<Project> findAllProjects();
 
     List<Project> findAllPopularProjects();
+
+    List<Project> findProjectByStatus(Status status);
 }

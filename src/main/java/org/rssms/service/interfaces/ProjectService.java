@@ -8,7 +8,6 @@ import org.rssms.exception.InvalidProjectException;
 import org.rssms.exception.InvalidProjectStatusException;
 import org.rssms.exception.InvalidUserRoleException;
 import org.rssms.exception.ProjectNotFoundException;
-import org.rssms.service.AbstractService;
 
 import java.util.List;
 
@@ -37,6 +36,9 @@ public interface ProjectService {
     List<Project> findAllProjects();
 
     List<Project> findAllPopularProjects();
+
+    List<Project> findProjectByStatus(Status status) throws ProjectNotFoundException;
+
 
 
     /**

@@ -50,7 +50,7 @@ public class ProjectServiceBean extends AbstractService<Project> implements Proj
         if (s != null){
             throw new InvalidProjectException(s);
         }
-        projectDao.persist(project);
+        projectDao.merge(project);
     }
 
     @Override
@@ -148,6 +148,15 @@ public class ProjectServiceBean extends AbstractService<Project> implements Proj
     @Override
     public List<Project> findAllPopularProjects() {
         List<Project> list = projectDao.findAllPopularProjects();
+        return list;
+    }
+
+    @Override
+    public List<Project> findProjectByStatus(Status status) throws ProjectNotFoundException {
+        List<Project> list = projectDao.findProjectByStatus(status);
+        if (list == null || list.isEmpty()) {
+            throw new ProjectNotFoundException("No closed projects");
+        }
         return list;
     }
 }

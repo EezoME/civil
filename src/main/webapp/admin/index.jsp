@@ -84,85 +84,102 @@
 
     </c:if>
     <c:if test='${param.action=="projects"}'>
-        <c:forEach items="${list}" var="project">
+        <c:set var="statuses" value='<%=Status.values()%>'/>
+        <div id="filter-wrapper">
+            <div id="filter">
+                <div class="status">
+                    Статус:
+                    <c:forEach items="${statuses}" var="status">
+                        <div class="badge filter-badge" style="background-color: green">
+                            <a href="${pageContext.request.contextPath}/admin?action=projects&status=${status.name()}">${status.ukrainianName}</a>
+                        </div>
+                    </c:forEach>
+                </div>
+                <a class="reset-filter-button"
+                   href="${pageContext.request.contextPath}/admin?action=projects">Очистити</a>
+            </div>
+        </div>
+        <div id="project-table">
+            <c:forEach items="${list}" var="project">
 
-            <div class="project-card">
-                <a href="/projects/${project.projectId}">
-                    <div class="img-wrapper-cover">
-                        <img class="cover-image" src="data:image/png;base64,${project.avatar}"/>
-                    </div>
-                </a>
-                <div class="description">
+                <div class="project-card">
                     <a href="/projects/${project.projectId}">
-                        <h3>${project.title}</h3>
-                        <p class="description-text">${project.description}</p>
+                        <div class="img-wrapper-cover">
+                            <img class="cover-image" src="data:image/png;base64,${project.avatar}"/>
+                        </div>
                     </a>
-                    <p>
+                    <div class="description">
+                        <a href="/projects/${project.projectId}">
+                            <h3>${project.title}</h3>
+                            <p class="description-text">${project.description}</p>
+                        </a>
+                        <p>
                     <span class='badge' style="background-color: ${project.category.tagColor};"><a
                             href="/explore?category=${project.category}">${project.category.ukrainianName}</a></span>
-                    </p>
-                </div>
-                <div class="project-footer">
-                    <div class="project-author">
-                        <a href="/users/${project.creator.userId}">
-                            <img class="userpic" src="http://placehold.it/50x50"/>
-                        </a>
-                        <div class="author-details">
-                            <p>
+                        </p>
+                    </div>
+                    <div class="project-footer">
+                        <div class="project-author">
+                            <a href="/users/${project.creator.userId}">
+                                <img class="userpic" src="http://placehold.it/50x50"/>
+                            </a>
+                            <div class="author-details">
+                                <p>
                             <span><a class="username"
                                      href="/users/${project.creator.userId}">${project.creator.username}</a></span>
-                                <br>
-                                <a href="/users/${project.creator.userId}">
-                                    <span class="add-user-info">${project.creator.fullName}</span>
-                                </a>
-                            </p>
+                                    <br>
+                                    <a href="/users/${project.creator.userId}">
+                                        <span class="add-user-info">${project.creator.fullName}</span>
+                                    </a>
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="progressbar-wrapper">
-                        <c:set var="project" scope="request" value="${project}"></c:set>
-                        <%
-                            Project project = (Project) pageContext.getAttribute("project");
-                            double width = ((double) project.getFundedSum() / (double) project.getGoalCost()) * 100;
-                        %>
-                        <div class="progressbar" style="width: <%= width %>%"></div>
-                    </div>
-                    <div class="funds">
-                        <div class="funded">${project.fundedSum} &#8372;</div>
-                        <div class="target">${project.goalCost} &#8372;</div>
-                    </div>
-                    <div class="exp-date">
-                        <div class="created-at">
-                            <fmt:formatDate pattern="yyyy-MM-dd" value="${project.expirationDate}"/>
+                        <div class="progressbar-wrapper">
+                            <c:set var="project" scope="request" value="${project}"></c:set>
+                            <%
+                                Project project = (Project) pageContext.getAttribute("project");
+                                double width = ((double) project.getFundedSum() / (double) project.getGoalCost()) * 100;
+                            %>
+                            <div class="progressbar" style="width: <%= width %>%"></div>
                         </div>
-                        <%
-                            long diff = Math.abs(project.getExpirationDate().getTime() - new Date().getTime());
-                            long diffDays = diff / (24 * 60 * 60 * 1000);
-                        %>
-                        <div class="time-left">Залишилось: <b><%= diffDays %> днів</b></div>
+                        <div class="funds">
+                            <div class="funded">${project.fundedSum} &#8372;</div>
+                            <div class="target">${project.goalCost} &#8372;</div>
+                        </div>
+                        <div class="exp-date">
+                            <div class="created-at">
+                                <fmt:formatDate pattern="yyyy-MM-dd" value="${project.expirationDate}"/>
+                            </div>
+                            <%
+                                long diff = Math.abs(project.getExpirationDate().getTime() - new Date().getTime());
+                                long diffDays = diff / (24 * 60 * 60 * 1000);
+                            %>
+                            <div class="time-left">Залишилось: <b><%= diffDays %> днів</b></div>
+                        </div>
+                        <form action="admin" method="get">
+                            <input type="hidden" name="action" value="updateProject">
+                            <input type="hidden" name="id" value="${project.projectId}">
+                            <c:set var="statuses" value="<%=Status.values()%>"></c:set>
+                            <select name="${project.projectId}_status">
+                                <c:forEach items="${statuses}" var="status">
+                                    <option value="${status.name()}" ${status.name()==project.status ? 'selected': ''}>${status.ukrainianName}</option>
+                                </c:forEach>
+                            </select>
+                            <c:set var="categories" value="<%=Category.values()%>"></c:set>
+                            <select name="${project.projectId}_category">
+                                <c:forEach items="${categories}" var="category">
+                                    <option value="${category.name()}" ${category.name()==project.category ? 'selected': ''}>${category.ukrainianName}</option>
+                                </c:forEach>
+                            </select>
+                            <input type="submit" value="Оновити">
+                        </form>
+                        <a href="admin?action=deleteProject&id=${project.projectId}"><input type="button"
+                                                                                            value="Видалити"></a>
                     </div>
-                    <form action="admin" method="get">
-                        <input type="hidden" name="action" value="updateProject">
-                        <input type="hidden" name="id" value="${project.projectId}">
-                        <c:set var="statuses" value="<%=Status.values()%>"></c:set>
-                        <select name="${project.projectId}_status">
-                            <c:forEach items="${statuses}" var="status">
-                                <option value="${status.name()}" ${status.name()==project.status ? 'selected': ''}>${status.ukrainianName}</option>
-                            </c:forEach>
-                        </select>
-                        <c:set var="categories" value="<%=Category.values()%>"></c:set>
-                        <select name="${project.projectId}_category">
-                            <c:forEach items="${categories}" var="category">
-                                <option value="${category.name()}" ${category.name()==project.category ? 'selected': ''}>${category.ukrainianName}</option>
-                            </c:forEach>
-                        </select>
-                        <input type="submit" value="Оновити">
-                    </form>
-                    <a href="admin?action=deleteProject&id=${project.projectId}"><input type="button" value="Видалити"></a>
+                    <div class="spacer"></div>
                 </div>
-                <div class="spacer"></div>
-            </div>
-        </c:forEach>
-
+            </c:forEach>
+        </div>
     </c:if>
 </div>
 
@@ -171,52 +188,3 @@
 </footer>
 </body>
 </html>
-<%--<table class="pure-table">--%>
-<%--<thead>--%>
-<%--<tr>--%>
-<%--<th>id</th>--%>
-<%--<th>Назва проекту</th>--%>
-<%--<th>Необхідна сума</th>--%>
-<%--<th>Зібрано</th>--%>
-<%--<th>Дата реєстрації</th>--%>
-<%--<th>Дата завершення</th>--%>
-<%--<th>Категорія</th>--%>
-<%--<th>Статус</th>--%>
-<%--<th colspan="2">Дія</th>--%>
-<%--</tr>--%>
-<%--</thead>--%>
-<%--<tbody>--%>
-<%--<c:forEach items="${list}" var="project">--%>
-<%--<tr>--%>
-<%--<form action="admin" method="get">--%>
-<%--<input type="hidden" name="action" value="updateProject">--%>
-<%--<input type="hidden" name="id" value="${project.projectId}">--%>
-<%--<td>${project.projectId}</td>--%>
-<%--<td>${project.title}</td>--%>
-<%--<td>${project.goalCost}</td>--%>
-<%--<td>${project.fundedSum}</td>--%>
-<%--<td><fmt:formatDate value="${project.registrationDate}" pattern="dd-MM-yyyy"></fmt:formatDate></td>--%>
-<%--<td><fmt:formatDate value="${project.expirationDate}" pattern="dd-MM-yyyy"></fmt:formatDate></td>--%>
-<%--<td>--%>
-<%--<c:set var="categories" value="<%=Category.values()%>"></c:set>--%>
-<%--<select name="${project.projectId}_category">--%>
-<%--<c:forEach items="${categories}" var="category">--%>
-<%--<option value="${category.name()}" ${category.name()==project.category ? 'selected': ''}>${category.ukrainianName}</option>--%>
-<%--</c:forEach>--%>
-<%--</select>--%>
-<%--</td>--%>
-<%--<td>--%>
-<%--<c:set var="statuses" value="<%=Status.values()%>"></c:set>--%>
-<%--<select name="${project.projectId}_status">--%>
-<%--<c:forEach items="${statuses}" var="status">--%>
-<%--<option value="${status.name()}" ${status.name()==project.status ? 'selected': ''}>${status.ukrainianName}</option>--%>
-<%--</c:forEach>--%>
-<%--</select>--%>
-<%--</td>--%>
-<%--<td><input type="submit" value="Оновити"/></td>--%>
-<%--</form>--%>
-<%--<td><a href="admin?action=deleteProject&id=${project.projectId}"><input type="submit" value="Видалити"/></a></td>--%>
-<%--</tr>--%>
-<%--</c:forEach>--%>
-<%--</tbody>--%>
-<%--</table>--%>

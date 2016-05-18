@@ -35,6 +35,7 @@ public class AdminServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
+        String status = req.getParameter("status");
         if (action == null) {
             resp.sendRedirect("/admin?action=users");
         } else {
@@ -56,13 +57,24 @@ public class AdminServlet extends HttpServlet {
                         user.setRole(Role.valueOf(req.getParameter(id + "_role")));
                         userService.updateUser(user);
                     } catch (UserNotFoundException | InvalidUserException e) {
-                        e.printStackTrace();
+                        req.setAttribute("error", e.getMessage());
                     }
                     resp.sendRedirect("/admin?action=users");
                     break;
                 case "projects":
-                    List<Project> projects = projectService.findAllProjects();
+                    List<Project> projects = null;
+                    if (status != null) {
+                        try {
+                            projects = projectService.findProjectByStatus(Status.valueOf(status));
+                        } catch (ProjectNotFoundException e) {
+                            req.setAttribute("error", e.getMessage());
+                            req.getRequestDispatcher("/admin/index.jsp").forward(req, resp);
+                        }
+                    } else {
+                        projects = projectService.findAllProjects();
+                    }
                     req.setAttribute("list", projects);
+                    req.getSession().setAttribute("lastAction", action);
                     req.getRequestDispatcher("/admin/index.jsp").forward(req, resp);
                     break;
                 case "deleteProject":
@@ -77,10 +89,20 @@ public class AdminServlet extends HttpServlet {
                         project.setStatus(Status.valueOf(req.getParameter(id + "_status")));
                         projectService.updateProject(project);
                     } catch (ProjectNotFoundException | InvalidProjectException e) {
-                        e.printStackTrace();
+                        req.setAttribute("error", e.getMessage());
                     }
                     resp.sendRedirect("/admin?action=projects");
                     break;
+                case "closedProjects":
+                    try {
+                        List<Project> closedProjects = projectService.findProjectByStatus(Status.CLOSED);
+                        req.setAttribute("list", closedProjects);
+                        req.getSession().setAttribute("lastAction", action);
+                        req.getRequestDispatcher("/admin/index.jsp").forward(req, resp);
+                    } catch (ProjectNotFoundException e) {
+                        req.setAttribute("error", e.getMessage());
+                        req.getRequestDispatcher("/admin/index.jsp").forward(req, resp);
+                    }
 
             }
         }
