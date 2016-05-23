@@ -10,7 +10,8 @@
 <div id="footer">
     <div class="container">
         <p class="credit">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce hendrerit enim eget sem
-            sodales, at semper... Інформаційна Система Підтримки Громадських Ініціатив &copy; 2016
+            sodales, at semper...<br/>
+            Інформаційна Система Підтримки Громадських Ініціатив &copy; 2016
             <br/>
             <br/> Смирнов Кирило, Стадник Дмитро, Чуріков Дмитро</p>
     </div>
