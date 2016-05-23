@@ -61,14 +61,14 @@
             <c:forEach items="${projects}" var="project">
                 <div class="col-sm-6 col-md-4">
                     <div class="thumbnail min-avatar ">
-                        <a href="projects/${projectId}">
+                        <a href="projects/${project.projectId}">
                             <img src="data:image/png;base64,${project.avatar}"/>
                         </a>
                         <div class="caption cut-caption">
-                            <a href="projects/${projectId}">
+                            <a href="projects/${project.projectId}">
                                 <h3>${project.title}</h3>
                             </a>
-                            <a href="projects/${projectId}">
+                            <a href="projects/${project.projectId}">
                                 <p>${project.description}</p>
                             </a>
                         </div>

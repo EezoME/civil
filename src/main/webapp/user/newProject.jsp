@@ -13,7 +13,6 @@
 <body>
 <div id="wrap">
     <jsp:include page="${pageContext.request.contextPath}/partial/header-small.jsp"/>
-    </header>
     <div class="container">
         <div id="login-container">
             <c:if test="${not empty error}">
@@ -37,9 +36,7 @@
                     </div>
                     <div class="form-group">
                         <label for="prj-description">Опис</label>
-                        <textarea class="form-control" name="desc" id="prj-description" placeholder="Опис">
-                            ${not empty savedValues.desc ? savedValues.desc[0] : ''}
-                        </textarea>
+                        <textarea class="form-control" name="desc" id="prj-description" placeholder="Опис">${not empty savedValues.desc ? savedValues.desc[0] : ''}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="prj-sum">Необхідна сума (₴)</label>
@@ -79,7 +76,7 @@
 </footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="js/bootstrap.min.js"></script>
+<script src="/resources/js/bootstrap.min.js"></script>
 </body>
 
 </html>
