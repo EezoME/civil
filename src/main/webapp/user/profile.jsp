@@ -1,112 +1,125 @@
 <%@ page import="org.rssms.entity.Project" %>
-<%@ page import="java.util.Date" %><%--
-  Created by IntelliJ IDEA.
-  User: Eezo
-  Date: 17.05.2016
-  Time: 21:44
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.util.Date" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/global.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/user/user_style.css"/>
-    <link rel="icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico" type="image/x-icon"/>
-    <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico" type="image/x-icon"/>
-    <title>Персональній кабінет</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css"/>
+    <title>UITest</title>
 </head>
+
 <body>
-<header>
+<div id="wrap">
     <jsp:include page="${pageContext.request.contextPath}/partial/header-small.jsp"/>
-</header>
-<div class="content">
-    <c:if test="${not empty error}">
-        <div class="error"><%= request.getAttribute("error").toString() %>
+    <div class="container">
+        <div class="row profile-page-header">
+            <h2>Мої проекти</h2>
+            <h4>Список проектів, які Ви створили</h4>
         </div>
-    </c:if>
-
-    <h2 class="titles">Мої проекти</h2>
-    <h4>Список проектів, які Ви створили</h4>
-
-    <div id="project-table">
-        <c:forEach items="${projects}" var="project">
-            <div class="project-card">
-                <a href="/projects/${project.projectId}">
-                    <div class="img-wrapper-cover">
-                        <img class="cover-image" src="data:image/png;base64,${project.avatar}"/>
-                    </div>
-                </a>
-                <div class="description">
-                    <a href="/projects/${project.projectId}">
-                        <h3>${project.title}</h3>
-                        <p class="description-text">
-                                ${project.description}
-                        </p>
-                    </a>
-                    <p>
-                        <span class='badge' style="background-color: ${project.category.tagColor};"><a
-                                href="/explore?category=${project.category}">${project.category.ukrainianName}</a></span>
-                    </p>
-                </div>
-                <div class="project-footer">
-                    <div class="project-author">
-                        <a href="/users/${project.creator.userId}">
-                            <img class="userpic" src="http://placehold.it/50x50"/>
+        <div class="row">
+            <c:forEach items="${projects}" var="project">
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail min-avatar ">
+                        <a href="/projects/${project.projectId}">
+                            <img src="data:image/png;base64,${project.avatar}"/>
                         </a>
-                        <div class="author-details">
-                            <p>
-                                <span><a class="username"
-                                         href="/users/${project.creator.userId}">${project.creator.username}</a></span>
-                                <br>
-                                <a href="/users/${project.creator.userId}">
-                                    <span class="add-user-info">${project.creator.fullName}</span>
-                                </a>
-                            </p>
+                        <div class="caption cut-caption">
+                            <a href="/projects/${project.projectId}">
+                                <h3>${project.title}</h3>
+                            </a>
+                            <a href="/projects/${project.projectId}">
+                                <p>${project.description}</p>
+                            </a>
                         </div>
-                    </div>
-                    <div class="progressbar-wrapper">
-                        <c:set var="project" scope="request" value="${project}"></c:set>
-                        <%
-                            Project project = (Project) pageContext.getAttribute("project");
-                            double width = ((double) project.getFundedSum() / (double) project.getGoalCost()) * 100;
-                        %>
-                        <div class="progressbar" style="width: <%= width %>%"></div>
-                    </div>
-                    <div class="funds">
-                        <div class="funded">${project.fundedSum} &#8372;</div>
-                        <div class="target">${project.goalCost} &#8372;</div>
-                    </div>
-                    <div class="exp-date">
-                        <div class="created-at">
-                            <fmt:formatDate pattern="yyyy-MM-dd" value="${project.expirationDate}"/>
+                        <br>
+                        <p><span class="badge" style="background-color: ${project.category.tagColor}">
+                        <a href="/explore?category=${project.category}">${project.category.ukrainianName}</a></span></p>
+                        <div class="project-footer">
+                            <div class="project-author">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <a href="/users/${project.creator.userId}">
+                                            <h4 class="media-heading">${project.creator.username}</h4>
+                                        </a>
+                                        <a href="/users/${project.creator.userId}">
+                                            <p>${project.creator.fullName}</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="progress">
+                                <c:set var="project" scope="request" value="${project}"></c:set>
+                                <%
+                                    Project project = (Project) pageContext.getAttribute("project");
+                                    double width = ((double) project.getFundedSum() / (double) project.getGoalCost()) * 100;
+                                %>
+                                <div class="progress-bar" role="progressbar" aria-valuemin="0"
+                                     aria-valuemax="100" style="width: <%=width%>;%">
+                                </div>
+                            </div>
+                            <div class="funds">
+                                <div class="funded">${project.fundedSum} ₴</div>
+                                <div class="pull-right funded">${project.goalCost} ₴</div>
+                            </div>
+                            <div class="exp-date">
+                                <div class="created-at">
+                                    <fmt:formatDate pattern="yyyy-MM-dd" value="${project.expirationDate}"/>
+                                </div>
+                                <%
+                                    long diff = Math.abs(project.getExpirationDate().getTime() - new Date().getTime());
+                                    long diffDays = diff / (24 * 60 * 60 * 1000);
+                                %>
+                                <div class="pull-right">Залишилось: <b><%= diffDays %> днів</b></div>
+                            </div>
                         </div>
-                        <%
-                            long diff = Math.abs(project.getExpirationDate().getTime() - new Date().getTime());
-                            long diffDays = diff / (24 * 60 * 60 * 1000);
-                        %>
-                        <div class="time-left">Залишилось: <b><%= diffDays %> днів</b></div>
                     </div>
                 </div>
-                <div class="spacer"></div>
-            </div>
-        </c:forEach>
+            </c:forEach>
+        </div>
+        <div class="row profile-page-header">
+            <h2>Підтримані проекти</h2>
+            <h4>Проекти, на які Ви пожертвували кошти</h4>
+            <!--Таблица проектов-->
+        </div>
+        <div class="row profile-page-header">
+            <h2>Коментарі</h2>
+        </div>
+        <!--Paginator-->
+        <!--<div class="row">-->
+        <!--<nav id="pages">-->
+        <!--<ul class="pagination">-->
+        <!--<li>-->
+        <!--<a href="#" aria-label="Previous">-->
+        <!--<span aria-hidden="true">&laquo;</span>-->
+        <!--</a>-->
+        <!--</li>-->
+        <!--<li><a href="#">1</a></li>-->
+        <!--<li><a href="#">2</a></li>-->
+        <!--<li><a href="#">3</a></li>-->
+        <!--<li><a href="#">4</a></li>-->
+        <!--<li><a href="#">5</a></li>-->
+        <!--<li>-->
+        <!--<a href="#" aria-label="Next">-->
+        <!--<span aria-hidden="true">&raquo;</span>-->
+        <!--</a>-->
+        <!--</li>-->
+        <!--</ul>-->
+        <!--</nav>-->
+        <!--</div>-->
     </div>
 
-    <div class="donated-projects">
-        <h2 class="titles">Підтримані проекти</h2>
-        <h4>Проекти, на які Ви пожертвували кошти</h4>
-    </div>
-    <br/>
-    <div class="comments">
-        <h2 class="titles">Коментарі</h2>
-    </div>
+    <div id="push"></div>
 </div>
-
 <footer>
     <jsp:include page="${pageContext.request.contextPath}/partial/footer.jsp"/>
 </footer>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
 </body>
+
 </html>

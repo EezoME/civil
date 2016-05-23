@@ -1,44 +1,56 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: WRKSPACE2
-  Date: 4/13/2016
-  Time: 9:23 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/global.css"/>
-    <title>UI Prototype</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css"/>
+    <title>UITest</title>
 </head>
+
 <body>
-<% if (request.getUserPrincipal() != null) response.sendRedirect("/");%>
-<header>
-    <jsp:include page="partial/header.jsp" />
-</header>
-<div class="content">
-    <c:if test="${not empty error}">
-        <div class="error"><%= request.getAttribute("error").toString() %></div>
-    </c:if>
-    <div class="content-title">
-        <h2>Вхід</h2>
-        <h4>Вхід на сайт для зареєстрованих користувачів</h4>
+<div id="wrap">
+    <jsp:include page="partial/header.jsp"/>
+    <div class="container">
+        <div id="login-container">
+            <div class="row">
+                <c:if test="${not empty error}">
+                    <div class="error"><%= request.getAttribute("error").toString() %>
+                    </div>
+                </c:if>
+                <h2>Вхід</h2>
+                <h4>Вхід на сайт для зареєстрованих користувачів</h4>
+            </div>
+            <div class="row">
+                <form action="j_security_check" method="POST">
+                    <div class="form-group">
+                        <label for="login">Ім'я користувача</label>
+                        <input type="text" class="form-control" name="j_username" id="login" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Пароль</label>
+                        <input type="password" class="form-control" name="j_password" id="password"
+                               placeholder="Password">
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"> Запам'ятати
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary form-button">Вхід</button>
+                </form>
+            </div>
+        </div>
     </div>
-    <div class="login-form">
-        <form action="j_security_check" method="POST">
-            <label>Ім'я користувача</label><br>
-            <input type="text" name="j_username" placeholder="Username" value="${not empty savedValues.j_username ? savedValues.j_username[0] : ''}"/><br>
-            <label>Пароль</label><br>
-            <input type="password" name="j_password" placeholder="Password"/><br>
-            <label><input type="checkbox" name="category"/>Запам'ятати</label><br><br>
-            <input type="submit" value="Вхід" />
-        </form>
-    </div>
+    <div id="push"></div>
 </div>
 <footer>
-    <jsp:include page="${pageContext.request.contextPath}/partial/footer.jsp"/>
+    <jsp:include page="partial/footer.jsp"/>
 </footer>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 </body>
+
 </html>

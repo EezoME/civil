@@ -1,0 +1,217 @@
+html, body {
+    background: url('../img/background.png');
+}
+
+.error {
+    background: pink;
+    height: 32px;
+    margin-top: 10px;
+    border-radius: 4px;
+    padding: 15px 0 0 0;
+}
+
+.error a {
+    font-weight: bold;
+    color: chocolate;
+}
+
+#big-header {
+    height: auto;
+    background: url('http://s6.pikabu.ru/post_img/big/2015/07/28/8/1438086382_1241855213.jpg') no-repeat center;
+}
+
+#small-header {
+    width: 100%;
+    height: auto;
+    background: url('http://s6.pikabu.ru/post_img/big/2015/07/28/8/1438086382_1241855213.jpg') -155px;
+}
+
+.navbar-default {
+    border: none;
+    background: none;
+}
+
+.navbar-default .navbar-nav > li > a {
+    text-shadow: 2px 2px 3px black;
+    color: #fff;
+    font-weight: 600;
+    font-size: larger;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+    color: #ddd;
+}
+
+.category p {
+    vertical-align: center;
+}
+
+#slogan {
+    margin-top: 4%;
+    padding-bottom: 3%;
+    text-shadow: 2px 2px 3px black;
+    color: #eee;
+}
+
+.min-avatar a > img {
+    height: 200px;
+}
+
+.thumbnail .caption a {
+    color: black;
+    text-decoration: none;
+}
+
+.
+.cut-caption {
+    height: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.badge {
+    color: #FFF;
+    margin: 2px 0;
+    padding: 10px;
+    font-size: smaller;
+    border-radius: 3px;
+}
+
+.badge a {
+    color: white;
+}
+
+.project-footer {
+    background-color: #f5f5f5;
+    border-radius: 0 0 4px 4px;
+    border: 1px solid #eee;
+    padding: 10px;
+}
+
+.funded {
+    display: inline-block;
+    font-weight: bold;
+    color: #444;
+}
+
+.exp-date {
+    margin-top: 10px;
+}
+
+.created-at {
+    display: inline-block;
+    color: #444;
+}
+
+.btn-supp {
+    margin: 2% 0;
+    width: 100%;
+}
+
+#pages {
+    text-align: center;
+}
+
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -60px;
+}
+
+/* Set the fixed height of the footer here */
+
+#push {
+    height: 90px;
+}
+
+#footer {
+    text-align: center;
+    height: auto;
+    bottom: 0;
+}
+
+#footer {
+
+    background-color: #f5f5f5;
+}
+
+.credit {
+    margin-top: 20px;
+}
+
+.form-control {
+    width: 30%;
+}
+
+#login-container {
+    margin-left: 10%;
+}
+
+.form-button {
+    width: 30%;
+}
+
+#filter-wrapper {
+    margin-top: 10px;
+    padding: 0 20px;
+}
+
+#filter {
+    background: #f5f5f5;
+    text-align: left;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    padding: 10px 10px 35px;
+    margin-bottom: 15px;
+}
+
+/*.sort-by a {*/
+/*color: #FFF;*/
+/*border-radius: 4px;*/
+/*padding: 5px;*/
+/*font-size: smaller;*/
+/*}*/
+
+.admin-control {
+    padding: 0 10px;
+    margin-top: 5%;
+    width: 100%;
+}
+
+.admin-control select {
+    margin: 7px 0;
+}
+
+#page-content-wrapper .row {
+    margin: 0;
+}
+
+.profile-page-header {
+    text-align: center;
+    color: cadetblue;
+}
+
+.admin-container > .form-control {
+    width: 100%;
+}
+
+/* Lastly, apply responsive CSS fixes as necessary */
+@media (max-width: 767px) {
+    #slogan {
+        margin-top: 40px;
+    }
+
+    #footer {
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+@media (min-width: 768px) {
+    .admin-container {
+        width: 1110px;
+    }
+}

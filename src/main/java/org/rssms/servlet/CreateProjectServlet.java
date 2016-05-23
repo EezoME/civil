@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.awt.*;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -56,53 +55,56 @@ public class CreateProjectServlet extends HttpServlet {
         String description = req.getParameter("desc");
         Category category = Category.valueOf(req.getParameter("category"));
         String expirationDate = req.getParameter("date");
-        int goalCost = Integer.valueOf(req.getParameter("sum"));
-        Status status = Status.OPEN;
-
-
-        Part filePart = req.getPart("img");
-        InputStream is = filePart.getInputStream();
-        BufferedImage originalImage = ImageIO.read(is);
-        Image resizedImage = originalImage.getScaledInstance(-1, 500, Image.SCALE_SMOOTH);
-
-        BufferedImage bufferedThumbnail = new BufferedImage(resizedImage.getWidth(null),
-                resizedImage.getHeight(null),
-                BufferedImage.TYPE_INT_RGB);
-        bufferedThumbnail.getGraphics().drawImage(resizedImage, 0, 0, null);
-
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ImageIO.write(bufferedThumbnail, "png", baos);
-        baos.flush();
-        byte[] imageData = baos.toByteArray();
-        baos.close();
-
-
-        Project project = new Project();
-        project.setTitle(title);
-        project.setDescription(description);
-        project.setCategory(category);
-        project.setRegistrationDate(new Date());
-        project.setGoalCost(goalCost);
-        project.setStatus(status);
-        project.setPrivilegedStatus(false);
-        project.setAvatar(imageData);
         try {
+            int goalCost = 0;
+            goalCost = Integer.valueOf(req.getParameter("sum"));
+            Status status = Status.OPEN;
+            Part filePart = req.getPart("img");
+            InputStream is = filePart.getInputStream();
+            BufferedImage originalImage = ImageIO.read(is);
+            byte[] imageData = null;
+
+            Image resizedImage = originalImage.getScaledInstance(-1, 500, Image.SCALE_SMOOTH);
+            BufferedImage bufferedThumbnail = new BufferedImage(resizedImage.getWidth(null),
+                    resizedImage.getHeight(null),
+                    BufferedImage.TYPE_INT_RGB);
+            bufferedThumbnail.getGraphics().drawImage(resizedImage, 0, 0, null);
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(bufferedThumbnail, "png", baos);
+            baos.flush();
+            imageData = baos.toByteArray();
+            baos.close();
+            Project project = new Project();
+            project.setTitle(title);
+            project.setDescription(description);
+            project.setCategory(category);
+            project.setRegistrationDate(new Date());
+            project.setGoalCost(goalCost);
+            project.setStatus(status);
+            project.setPrivilegedStatus(false);
+            project.setAvatar(imageData);
+
             User creator = userService.findUser(req.getRemoteUser());
             project.setCreator(creator);
             project.setExpirationDate(dateFormat.parse(expirationDate));
             projectService.addProject(project);
-        } catch (ParseException e) {
-            project.setExpirationDate(new Date());
         } catch (InvalidProjectException e) {
             req.setAttribute("error", e.getMessage());
             req.getRequestDispatcher("/user/newProject.jsp").forward(req, resp);
-            return;
         } catch (EJBTransactionRolledbackException e) {
             req.setAttribute("error", "Перевірте правильність вводу даних: назва проекту від 5 до 64 символів, опис - не менше 15 символів.");
             req.getRequestDispatcher("/user/newProject.jsp").forward(req, resp);
-            return;
         } catch (UserNotFoundException e) {
             e.printStackTrace();
+        } catch (NullPointerException e) {
+            req.setAttribute("error", "Додайте зображення проекту");
+            req.getRequestDispatcher("/user/newProject.jsp").forward(req, resp);
+        } catch (NumberFormatException e) {
+            req.setAttribute("error", "Поле 'Необхідна сума' пусте");
+            req.getRequestDispatcher("/user/newProject.jsp").forward(req, resp);
+        } catch (ParseException e) {
+            req.setAttribute("error", "Не вказана дата завершення");
         }
         resp.sendRedirect("/");
         //req.getRequestDispatcher("/explore.html").forward(req, resp);

@@ -8,13 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div id="footer">
-    <div id="footer-slogan">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        Fusce hendrerit enim eget sem sodales, at semper...
-    </div>
-    <br/><br/>
-    <div id="credits">
-        Інформаційна Система Підтримки Громадських Ініціатив &copy; 2016<br/><br/>
-        Смирнов Кирило, Стадник Дмитро, Чуріков Дмитро
+    <div class="container">
+        <p class="credit">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce hendrerit enim eget sem
+            sodales, at semper... Інформаційна Система Підтримки Громадських Ініціатив &copy; 2016
+            <br/>
+            <br/> Смирнов Кирило, Стадник Дмитро, Чуріков Дмитро</p>
     </div>
 </div>
