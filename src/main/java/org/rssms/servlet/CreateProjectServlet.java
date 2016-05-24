@@ -52,6 +52,16 @@ public class CreateProjectServlet extends HttpServlet {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String title = req.getParameter("title");
+        if (title == null || title.trim().isEmpty()){
+            req.setAttribute("error", "Вкажіть назву проекту.");
+            req.getRequestDispatcher("/user/newProject.jsp").forward(req, resp);
+            return;
+        }
+        if (title.length() < 5 || title.length() > 64){
+            req.setAttribute("error", "Назва проекту повина бути від 5 до 64 символів.");
+            req.getRequestDispatcher("/user/newProject.jsp").forward(req, resp);
+            return;
+        }
         String description = req.getParameter("desc");
         Category category = Category.valueOf(req.getParameter("category"));
         String expirationDate = req.getParameter("date");
