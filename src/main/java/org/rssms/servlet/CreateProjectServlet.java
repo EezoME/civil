@@ -106,7 +106,8 @@ public class CreateProjectServlet extends HttpServlet {
             req.setAttribute("error", "Перевірте правильність вводу даних: назва проекту від 5 до 64 символів, опис - не менше 15 символів.");
             req.getRequestDispatcher("/user/newProject.jsp").forward(req, resp);
         } catch (UserNotFoundException e) {
-            e.printStackTrace();
+            req.setAttribute("error", e.getMessage());
+            req.getRequestDispatcher("/user/newProject.jsp").forward(req, resp);
         } catch (NullPointerException e) {
             req.setAttribute("error", "Додайте зображення проекту");
             req.getRequestDispatcher("/user/newProject.jsp").forward(req, resp);
@@ -115,6 +116,7 @@ public class CreateProjectServlet extends HttpServlet {
             req.getRequestDispatcher("/user/newProject.jsp").forward(req, resp);
         } catch (ParseException e) {
             req.setAttribute("error", "Не вказана дата завершення");
+            req.getRequestDispatcher("/user/newProject.jsp").forward(req, resp);
         }
         resp.sendRedirect("/");
         //req.getRequestDispatcher("/explore.html").forward(req, resp);
