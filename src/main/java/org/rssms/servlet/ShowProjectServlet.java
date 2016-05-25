@@ -2,6 +2,7 @@ package org.rssms.servlet;
 
 import org.rssms.entity.Project;
 import org.rssms.exception.ProjectNotFoundException;
+import org.rssms.service.interfaces.LiqPayService;
 import org.rssms.service.interfaces.ProjectService;
 
 import javax.ejb.EJB;
@@ -21,6 +22,9 @@ public class ShowProjectServlet extends HttpServlet {
     @EJB
     private ProjectService projectService;
 
+    @EJB
+    private LiqPayService liqPayService;
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Project project = null;
         try {
@@ -30,6 +34,7 @@ public class ShowProjectServlet extends HttpServlet {
         }
         if(project != null) {
             request.setAttribute("project", project);
+            request.setAttribute("liqpay_params", liqPayService.generateLiqPayParams(project));
             request.getRequestDispatcher("/project.jsp").forward(request, response);
         } else {
             response.sendRedirect("/");
