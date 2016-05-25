@@ -11,7 +11,7 @@ import java.util.List;
  * Created by User on 16.03.2016.
  */
 public interface DonationService {
-    void createDonation(User user, int amount, String comment, Project project) throws InvalidDonationException;
+    void createDonation(User user, double amount, String comment, Project project) throws InvalidDonationException;
     Donation findDonation(int id);
 
     List<Donation> findDonations(int amount);

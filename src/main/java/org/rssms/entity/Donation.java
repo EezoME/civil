@@ -20,7 +20,7 @@ public class Donation implements Serializable {
     @NotNull
     @Min(1)
     @Column(name = "amount", nullable = false)
-    private int amount;
+    private double amount;
 
     @Column(name = "comment", nullable = true)
     private String comment;
@@ -57,11 +57,11 @@ public class Donation implements Serializable {
         this.donationId = donationId;
     }
 
-    public int getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 

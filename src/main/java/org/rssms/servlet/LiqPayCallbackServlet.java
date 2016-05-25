@@ -37,10 +37,12 @@ public class LiqPayCallbackServlet extends HttpServlet {
         User user = null;
         Project project = null;
         try {
-            //user = userService.findUser(req.getRemoteUser());
+            if(req.getRemoteUser() != null) {
+                user = userService.findUser(req.getRemoteUser());
+            }
             project = projectService.findProject(projectId);
-        //} catch (UserNotFoundException e) {
-        //    e.printStackTrace();
+        } catch (UserNotFoundException e) {
+            e.printStackTrace();
         } catch (ProjectNotFoundException e) {
             e.printStackTrace();
         }
@@ -48,6 +50,11 @@ public class LiqPayCallbackServlet extends HttpServlet {
             liqPayService.checkPayment(orderId, user, project);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        if(project != null) {
+            req.setAttribute("project", project);
+            req.setAttribute("liqpay_params", liqPayService.generateLiqPayParams(project));
+            req.getRequestDispatcher("partial/project-funds.jsp").forward(req, resp);
         }
     }
 }

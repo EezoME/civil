@@ -47,7 +47,7 @@ public class ExploreServlet extends HttpServlet {
                     Collections.sort(projects, new Comparator<Project>() {
                         @Override
                         public int compare(Project o1, Project o2) {
-                            return o1.getFundedSum() - o2.getFundedSum();
+                            return (int) (o1.getFundedSum() - o2.getFundedSum());
                         }
                     });
                     break;

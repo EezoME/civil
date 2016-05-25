@@ -26,7 +26,7 @@ public class DonationServiceBean extends AbstractService<Donation> implements Do
 
 
     @Override
-    public void createDonation(User user, int amount, String comment, Project project) throws InvalidDonationException {
+    public void createDonation(User user, double amount, String comment, Project project) throws InvalidDonationException {
         Donation donation = new Donation();
         donation.setUser(user);
         donation.setAmount(amount);

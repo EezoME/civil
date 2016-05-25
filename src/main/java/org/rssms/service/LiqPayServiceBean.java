@@ -8,6 +8,7 @@ import org.rssms.entity.Project;
 import org.rssms.entity.User;
 import org.rssms.service.interfaces.DonationService;
 import org.rssms.service.interfaces.LiqPayService;
+import org.rssms.service.interfaces.ProjectService;
 import org.rssms.service.interfaces.PropertyService;
 
 import javax.ejb.EJB;
@@ -23,6 +24,7 @@ import java.util.Properties;
 public class LiqPayServiceBean implements LiqPayService {
     private PropertyService propertyService;
     private DonationService donationService;
+    private ProjectService projectService;
 
     @EJB
     public void setPropertyService(PropertyService propertyService) {
@@ -34,6 +36,11 @@ public class LiqPayServiceBean implements LiqPayService {
         this.donationService = donationService;
     }
 
+    @EJB
+    public void setProjectService(ProjectService projectService) {
+        this.projectService = projectService;
+    }
+
     @Override
     public HashMap<String, String> generateLiqPayParams(Project project) {
         HashMap liqpayParams = new HashMap();
@@ -43,7 +50,7 @@ public class LiqPayServiceBean implements LiqPayService {
         params.put("amount", "10");
         params.put("currency", "UAH");
         params.put("description", "Project support " + project.getTitle().substring(0, Math.min(project.getTitle().length(), 100)));
-        params.put("order_id", "project-" + Integer.toString(project.getProjectId()) + "@" + new Date().toString());
+        params.put("order_id", "project-" + Integer.toString(project.getProjectId()) + "@" + new Date().getTime());
         params.put("sandbox", "1");
 
         String public_key = properties.getProperty("liqpay.public_key");
@@ -62,7 +69,6 @@ public class LiqPayServiceBean implements LiqPayService {
 
     @Override
     public void checkPayment(String orderId, User user, Project project) throws Exception {
-        // FIX FIX FIX !!!
         Properties properties = propertyService.getProperties("liqpay.properties");
         HashMap params = new HashMap();
         params.put("version", "3");
@@ -74,8 +80,9 @@ public class LiqPayServiceBean implements LiqPayService {
         LiqPay liqpay = new LiqPay(public_key, private_key);
         HashMap res = (HashMap) liqpay.api("payment/status", params);
         if (res.get("status").equals("sandbox") || res.get("status").equals("success")) {
-            donationService.createDonation(user, (int) res.get("amount"), "", project);
+            donationService.createDonation(user, (double) res.get("amount"), (String) res.get("description"), project);
+            project.setFundedSum((double) Math.round((project.getFundedSum() + (double) res.get("amount")) * 100d) / 100d);
+            projectService.updateProject(project);
         }
-        //System.out.println(res.get("status"));
     }
 }

@@ -56,7 +56,7 @@ public class Project implements Serializable {
     private int goalCost;
 
     @Column(name = "fundedSum")
-    private int fundedSum;
+    private double fundedSum;
 
     @Column(name = "status")
     private Status status;
@@ -177,11 +177,11 @@ public class Project implements Serializable {
         this.goalCost = goalCost;
     }
 
-    public int getFundedSum() {
+    public double getFundedSum() {
         return fundedSum;
     }
 
-    public void setFundedSum(int fundedSum) {
+    public void setFundedSum(double fundedSum) {
         this.fundedSum = fundedSum;
     }
 
