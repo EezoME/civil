@@ -176,7 +176,7 @@
                                 Статус:
                                 <c:forEach items="${statuses}" var="status">
                                     <div class="badge" style="background-color: green;">
-                                        <a href="${pageContext.request.contextPath}/admin?action=projects&status=${status.name()}">${status.ukrainianName}</a>
+                                        <a href="${pageContext.request.contextPath}/admin?action=projects&status=${status}">${status.ukrainianName}</a>
                                     </div>
                                 </c:forEach>
                             </div>
@@ -283,7 +283,7 @@
                         <ul class="pagination">
                             <c:if test="${currentPage!=1}">
                                 <li>
-                                    <a href="${pageContext.request.pathInfo}?page=${currentPage-1}&${not empty status ? 'status=' : ''}${status}&action=projects"
+                                    <a href="${pageContext.request.pathInfo}?page=${currentPage-1}&action=projects&${not empty status ? 'status=' : ''}${status}"
                                        aria-label="Previous">
                                         <span aria-hidden="true">&laquo;</span>
                                     </a>
@@ -296,7 +296,7 @@
                                     </c:when>
                                     <c:otherwise>
                                         <li>
-                                            <a href="${pageContext.request.pathInfo}?page=${i}&${not empty status ? 'status=' : ''}${status}&action=projects">${i}</a>
+                                            <a href="${pageContext.request.pathInfo}?page=${i}&action=projects&${not empty status ? 'status=' : ''}${status}">${i}</a>
                                         </li>
                                     </c:otherwise>
                                 </c:choose>
@@ -304,7 +304,7 @@
                             </c:forEach>
                             <c:if test="${currentPage lt noOfPages}">
                                 <li>
-                                    <a href="${pageContext.request.pathInfo}?page=${currentPage+1}&${not empty status ? 'status=' : ''}${status}&action=projects"
+                                    <a href="${pageContext.request.pathInfo}?page=${currentPage+1}&action=projects&${not empty status ? 'status=' : ''}${status}"
                                        aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>
                                     </a>
@@ -316,23 +316,20 @@
             </c:if>
 
         </div>
-
+        <div id="push"></div>
+        <footer>
+            <div id="footer">
+                <div class="container admin-container">
+                    <p class="credit">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce hendrerit enim eget sem
+                        sodales, at semper... Інформаційна Система Підтримки Громадських Ініціатив &copy; 2016
+                        <br/>
+                        <br/> Смирнов Кирило, Стадник Дмитро, Чуріков Дмитро</p>
+                </div>
+            </div>
+        </footer>
     </div>
-
-
-    <div id="push"></div>
-
 </div>
-<footer>
-    <div id="footer">
-        <div class="container admin-container">
-            <p class="credit">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce hendrerit enim eget sem
-                sodales, at semper... Інформаційна Система Підтримки Громадських Ініціатив &copy; 2016
-                <br/>
-                <br/> Смирнов Кирило, Стадник Дмитро, Чуріков Дмитро</p>
-        </div>
-    </div>
-</footer>
+
 </div>
 
 

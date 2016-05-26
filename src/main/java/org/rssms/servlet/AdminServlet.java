@@ -85,6 +85,7 @@ public class AdminServlet extends HttpServlet {
                             req.setAttribute("error", e.getMessage());
                             req.setAttribute("noOfPages", noOfPages);
                             req.setAttribute("currentPage", page);
+                            req.setAttribute("status",status);
                             req.getRequestDispatcher("/admin/index.jsp").forward(req, resp);
                         }
                     } else {
@@ -98,6 +99,7 @@ public class AdminServlet extends HttpServlet {
                     }
                     req.setAttribute("noOfPages", noOfPages);
                     req.setAttribute("currentPage", page);
+                    req.setAttribute("status",status);
                     req.getSession().setAttribute("lastAction", action);
                     req.getRequestDispatcher("/admin/index.jsp").forward(req, resp);
                     break;
