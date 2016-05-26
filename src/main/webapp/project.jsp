@@ -1,6 +1,3 @@
-<%@ page import="org.rssms.entity.Project" %>
-<%@ page import="java.util.Date" %>
-<%@ page import="org.rssms.entity.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -87,27 +84,38 @@
                         ${fn:length(comments)} коментарів <% }%>
                     </h3>
                 </div>
+
                 <div class="panel-body">
                     <c:forEach items="${comments}" var="comment">
                         <div class="comment">
+
+                            <!--a href="#" class="comment-author-avatar"><img src="data:image/png;base64,></a-->
                             <span class="author">${comment.author.username}</span><br/>
                             <span class="date-posted"><fmt:formatDate pattern="yyyy-MM-dd"
-                                                                      value="${comment.timePosted}"/></span><br/>
+                                                                      value="${comment.timePosted}"/></span>
+                            <c:if test="${comment.author.username == pageContext.request.remoteUser || pageContext.request.isUserInRole(\"ADMINISTRATOR\")}">
+                                <a href="${pageContext.request.pathInfo}?delete=${comment.commentId}" class="delete">Видалити</a>
+                            </c:if>
+                            <br/>
+
                             <div class="comment-content">
                                     ${comment.content}
                             </div>
                         </div>
+                        <hr class="comment-divider">
                     </c:forEach>
                 </div>
+
                 <div class="do-comment">
                     <form action="projects/" method="post" class="comment-from">
                         <input type="hidden" name="projectID" value="${project.projectId}"/>
                         <% if (request.getRemoteUser() == null){%>
-                        <span class="alert-info"><a href="/login">Авторизуйтеся</a>, щоб мати можливість залишати коментарі.</span>
+                        <span class="error"><a href="/login">Авторизуйтеся</a>, щоб мати можливість залишати коментарі.</span>
                         <% } else {%>
-                        <span class="author">Ви: <% request.getRemoteUser(); %></span><br/>
-                        <textarea class="form-control" name="content" id="prj-comment" placeholder="Comment..."></textarea>
-                        <button type="submit" class="btn btn-primary form-button">Post</button>
+                        <h4>Залишити коментар</h4>
+                        <span class="author">Ви: ${pageContext.request.remoteUser}</span><br/>
+                        <textarea class="comment-post" name="content" id="prj-comment" placeholder="Comment..."></textarea><br/>
+                        <button type="submit" class="btn btn-primary form-button comment-post">Коментувати</button>
                         <% } %>
                     </form>
                 </div>

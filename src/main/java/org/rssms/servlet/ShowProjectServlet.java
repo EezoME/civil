@@ -47,7 +47,15 @@ public class ShowProjectServlet extends HttpServlet {
         List<Comment> comments = null;
 
         try {
-            project = projectService.findProject(Integer.parseInt(request.getPathInfo().substring(1)));
+            if (request.getParameter("delete") != null){
+                commentService.removeComment(Integer.parseInt(request.getParameter("delete")));
+            }
+
+            if (request.getAttribute("project") == null) {
+                project = projectService.findProject(Integer.parseInt(request.getPathInfo().substring(1)));
+            } else {
+                project = (Project)request.getAttribute("project");
+            }
             comments = commentService.findCommentsByProject(project);
         } catch (ProjectNotFoundException e) {
             e.printStackTrace();
@@ -70,6 +78,7 @@ public class ShowProjectServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Comment comment = new Comment();
+        Project project;
         try {
             User user = userService.findUser(req.getRemoteUser());
             if (user == null){
@@ -79,7 +88,9 @@ public class ShowProjectServlet extends HttpServlet {
             }
             comment.setAuthor(user);
             comment.setContent(req.getParameter("content"));
-            comment.setProject(projectService.findProject(Integer.parseInt(req.getParameter("projectID"))));
+            project = projectService.findProject(Integer.parseInt(req.getParameter("projectID")));
+            comment.setProject(project);
+            req.setAttribute("project", project);
             comment.setTimePosted(new Date());
             commentService.addComment(comment);
         } catch (UserNotFoundException e) {
@@ -93,6 +104,6 @@ public class ShowProjectServlet extends HttpServlet {
             req.setAttribute("error", e.getMessage());
         }
 
-        req.getRequestDispatcher("/project.jsp").forward(req, resp);
+        doGet(req, resp);
     }
 }
