@@ -159,4 +159,11 @@ public class ProjectServiceBean extends AbstractService<Project> implements Proj
         }
         return list;
     }
+
+    @Override
+    public List<Project> cutListForPage(List<Project> projects, int page, int recordsPerPage) {
+        int startIndex = (page - 1) * recordsPerPage;
+        int endIndex = page * recordsPerPage > projects.size() ? projects.size() : page * recordsPerPage;
+        return projects.subList(startIndex, endIndex);
+    }
 }

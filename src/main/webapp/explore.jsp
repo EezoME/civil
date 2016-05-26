@@ -118,23 +118,33 @@
             </c:forEach>
         </div>
         <div class="row">
-            <nav id="pages">
+            <nav class="pages">
                 <ul class="pagination">
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
+                    <c:if test="${currentPage!=1}">
+                        <li>
+                            <a href="${pageContext.request.pathInfo}?page=${currentPage-1}&${not empty sort ? 'sort=' : ''}${sort}&${not empty category ? 'category=' : ''}${category}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    </c:if>
+                    <c:forEach begin="1" end="${noOfPages}" var="i">
+                        <c:choose>
+                            <c:when test="${currentPage eq i}">
+                                <li><a href="">${i}</a></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li><a href="${pageContext.request.pathInfo}?page=${i}&${not empty sort ? 'sort=' : ''}${sort}&${not empty category ? 'category=' : ''}${category}">${i}</a></li>
+                            </c:otherwise>
+                        </c:choose>
+
+                    </c:forEach>
+                    <c:if test="${currentPage lt noOfPages}">
+                        <li>
+                            <a href="${pageContext.request.pathInfo}?page=${currentPage+1}&${not empty sort ? 'sort=' : ''}${sort}&${not empty category ? 'category=' : ''}${category}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </c:if>
                 </ul>
             </nav>
         </div>

@@ -39,6 +39,8 @@ public interface ProjectService {
 
     List<Project> findProjectByStatus(Status status) throws ProjectNotFoundException;
 
+    List<Project> cutListForPage(List<Project> projects, int page, int recordsPerPage);
+
 
 
     /**

@@ -23,8 +23,21 @@ public class ProjectIndexServlet extends HttpServlet {
     private ProjectService projectService;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int page = 1;
+        int recordsPerPage = 3;/////////////////////////////////////
+        int noOfPages=1;
+        if (request.getParameter("page") != null)
+            page = Integer.parseInt(request.getParameter("page"));
+
         List<Project> projects = projectService.findAllPopularProjects();
-        request.setAttribute("projects", projects);
+        if (projects != null) {
+            int noOfRecords = projects.size();
+            noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+            projects = projectService.cutListForPage(projects, page, recordsPerPage);
+            request.setAttribute("projects", projects);
+        }
+        request.setAttribute("noOfPages", noOfPages);
+        request.setAttribute("currentPage", page);
         request.getRequestDispatcher("/home.jsp").forward(request, response);
     }
 }

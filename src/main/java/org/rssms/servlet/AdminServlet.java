@@ -36,6 +36,12 @@ public class AdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
         String status = req.getParameter("status");
+        int page = 1;
+        int recordsPerPage = 3;//////////////
+        int noOfPages = 1;
+        if(req.getParameter("page")!=null){
+            page = Integer.parseInt(req.getParameter("page"));
+        }
         if (action == null) {
             resp.sendRedirect("/admin?action=users");
         } else {
@@ -43,6 +49,14 @@ public class AdminServlet extends HttpServlet {
             switch (action) {
                 case "users":
                     users = userService.findAllUsers();
+                    if (users != null) {
+                        int noOfRecords = users.size();
+                        noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+                        users = userService.cutListForPage(users, page, recordsPerPage);
+                        req.setAttribute("list", users);
+                    }
+                    req.setAttribute("noOfPages", noOfPages);
+                    req.setAttribute("currentPage", page);
                     req.setAttribute("list", users);
                     req.getRequestDispatcher("/admin/index.jsp").forward(req, resp);
                     break;
@@ -73,6 +87,14 @@ public class AdminServlet extends HttpServlet {
                     } else {
                         projects = projectService.findAllProjects();
                     }
+                    if (projects != null) {
+                        int noOfRecords = projects.size();
+                        noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+                        projects = projectService.cutListForPage(projects, page, recordsPerPage);
+                        req.setAttribute("projects", projects);
+                    }
+                    req.setAttribute("noOfPages", noOfPages);
+                    req.setAttribute("currentPage", page);
                     req.setAttribute("list", projects);
                     req.getSession().setAttribute("lastAction", action);
                     req.getRequestDispatcher("/admin/index.jsp").forward(req, resp);
@@ -103,7 +125,6 @@ public class AdminServlet extends HttpServlet {
                         req.setAttribute("error", e.getMessage());
                         req.getRequestDispatcher("/admin/index.jsp").forward(req, resp);
                     }
-
             }
         }
     }

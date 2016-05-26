@@ -29,4 +29,6 @@ public interface UserService {
     void verifyUser(String username, String confirmationCode) throws EmailConfirmationNotFoundException, UserNotFoundException;
 
     boolean authUser(String username, String password) throws UserNotFoundException;
+
+    List<User> cutListForPage(List<User> users, int page, int recordsPerPage);
 }

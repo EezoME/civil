@@ -142,6 +142,13 @@ public class UserServiceBean extends AbstractService<User> implements UserServic
         return false;
     }
 
+    @Override
+    public List<User> cutListForPage(List<User> users, int page, int recordsPerPage) {
+        int startIndex = (page - 1) * recordsPerPage;
+        int endIndex = page * recordsPerPage > users.size() ? users.size() : page * recordsPerPage;
+        return users.subList(startIndex, endIndex);
+    }
+
     public List<User> findAllUsers() {
         return userDao.findAll();
     }

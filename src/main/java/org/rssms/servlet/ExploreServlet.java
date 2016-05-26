@@ -30,6 +30,11 @@ public class ExploreServlet extends HttpServlet {
         String category = request.getParameter("category");
         String sortBy = request.getParameter("sort");
         List<Project> projects = null;
+        int page = 1;
+        int recordsPerPage = 3;//////////////
+        int noOfPages = 1;
+        if (request.getParameter("page") != null)
+            page = Integer.parseInt(request.getParameter("page"));
 
         if (category != null) {
             try {
@@ -40,7 +45,6 @@ public class ExploreServlet extends HttpServlet {
         } else {
             projects = projectService.findAllPopularProjects();
         }
-
         if (projects != null && sortBy != null) {
             switch (sortBy) {
                 case "popularity":
@@ -73,7 +77,14 @@ public class ExploreServlet extends HttpServlet {
         if (projects == null || projects.isEmpty()) {
             request.setAttribute("error", "У цій категорії немає жодного проекту.\nВи можете <a href='/newProject'>додати свій</a>.");
         }
-        request.setAttribute("projects", projects);
+        if (projects != null) {
+            int noOfRecords = projects.size();
+            noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+            projects = projectService.cutListForPage(projects, page, recordsPerPage);
+            request.setAttribute("projects", projects);
+        }
+        request.setAttribute("noOfPages", noOfPages);
+        request.setAttribute("currentPage", page);
         request.setAttribute("sort", sortBy);
         request.setAttribute("category", category);
         request.setAttribute("categories", Category.values());
