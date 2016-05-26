@@ -133,8 +133,25 @@ html, body {
 }
 
 #footer {
-
     background-color: #f5f5f5;
+}
+
+.author {
+    margin: inherit;
+    color: #1b6d85;
+}
+
+.date-posted {
+    margin: inherit;
+    color: #3c3c3c;
+}
+
+.comment-content {
+    margin: 5px;
+}
+
+.comment-from {
+    margin: 10px;
 }
 
 .credit {

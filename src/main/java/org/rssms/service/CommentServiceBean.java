@@ -9,12 +9,14 @@ import org.rssms.exception.InvalidCommentException;
 import org.rssms.service.interfaces.CommentService;
 
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import java.util.Date;
 import java.util.List;
 
 /**
  * Created by Eezo on 13.04.2016.
  */
+@Stateless
 public class CommentServiceBean extends AbstractService<Comment> implements CommentService {
 
     private CommentDao commentDao;
