@@ -57,7 +57,6 @@ public class AdminServlet extends HttpServlet {
                     }
                     req.setAttribute("noOfPages", noOfPages);
                     req.setAttribute("currentPage", page);
-                    req.setAttribute("list", users);
                     req.getRequestDispatcher("/admin/index.jsp").forward(req, resp);
                     break;
                 case "deleteUser":
@@ -72,6 +71,8 @@ public class AdminServlet extends HttpServlet {
                         userService.updateUser(user);
                     } catch (UserNotFoundException | InvalidUserException e) {
                         req.setAttribute("error", e.getMessage());
+                        req.setAttribute("noOfPages", noOfPages);
+                        req.setAttribute("currentPage", page);
                     }
                     resp.sendRedirect("/admin?action=users");
                     break;
@@ -82,6 +83,8 @@ public class AdminServlet extends HttpServlet {
                             projects = projectService.findProjectByStatus(Status.valueOf(status));
                         } catch (ProjectNotFoundException e) {
                             req.setAttribute("error", e.getMessage());
+                            req.setAttribute("noOfPages", noOfPages);
+                            req.setAttribute("currentPage", page);
                             req.getRequestDispatcher("/admin/index.jsp").forward(req, resp);
                         }
                     } else {
@@ -91,11 +94,10 @@ public class AdminServlet extends HttpServlet {
                         int noOfRecords = projects.size();
                         noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
                         projects = projectService.cutListForPage(projects, page, recordsPerPage);
-                        req.setAttribute("projects", projects);
+                        req.setAttribute("list", projects);
                     }
                     req.setAttribute("noOfPages", noOfPages);
                     req.setAttribute("currentPage", page);
-                    req.setAttribute("list", projects);
                     req.getSession().setAttribute("lastAction", action);
                     req.getRequestDispatcher("/admin/index.jsp").forward(req, resp);
                     break;
@@ -112,6 +114,7 @@ public class AdminServlet extends HttpServlet {
                         projectService.updateProject(project);
                     } catch (ProjectNotFoundException | InvalidProjectException e) {
                         req.setAttribute("error", e.getMessage());
+
                     }
                     resp.sendRedirect("/admin?action=projects");
                     break;
@@ -125,6 +128,7 @@ public class AdminServlet extends HttpServlet {
                         req.setAttribute("error", e.getMessage());
                         req.getRequestDispatcher("/admin/index.jsp").forward(req, resp);
                     }
+                    break;
             }
         }
     }
