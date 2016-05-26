@@ -46,7 +46,7 @@
                                     <span class="icon-bar"></span>
                                     <span class="icon-bar"></span>
                                 </button>
-                                <a class="navbar-brand" href="#">
+                                <a class="navbar-brand" href="/">
                                     <img alt="sss" width="150" height="30" src="http://placehold.it/150x30"/>
                                 </a>
                                 <a href="${pageContext.request.contextPath}/newProject">
