@@ -13,9 +13,9 @@ import org.rssms.service.interfaces.PropertyService;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Properties;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
+import java.util.*;
 
 /**
  * Created by WRKSPACE2 on 5/25/2016.
@@ -42,14 +42,14 @@ public class LiqPayServiceBean implements LiqPayService {
     }
 
     @Override
-    public HashMap<String, String> generateLiqPayParams(Project project) {
+    public HashMap<String, String> generateLiqPayParams(Project project) throws UnsupportedEncodingException {
         HashMap liqpayParams = new HashMap();
         Properties properties = propertyService.getProperties("liqpay.properties");
         HashMap params = new HashMap();
         params.put("action", "paydonate"); // User can set custom amount
         params.put("amount", "10");
         params.put("currency", "UAH");
-        params.put("description", "Project support " + project.getTitle().substring(0, Math.min(project.getTitle().length(), 100)));
+        params.put("description", "Project Support");
         params.put("order_id", "project-" + Integer.toString(project.getProjectId()) + "@" + new Date().getTime());
         params.put("sandbox", "1");
 

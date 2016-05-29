@@ -8,4 +8,4 @@ window.addEventListener("popstate", function() {
 
 setInterval(function() {
     history.pushState(null, document.title, location.pathname);
-}, 1000);
+}, 2000);
