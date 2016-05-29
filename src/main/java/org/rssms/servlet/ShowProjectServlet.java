@@ -1,16 +1,14 @@
 package org.rssms.servlet;
 
 import org.rssms.entity.Comment;
+import org.rssms.entity.Donation;
 import org.rssms.entity.Project;
 import org.rssms.entity.User;
 import org.rssms.exception.CommentNotFoundException;
 import org.rssms.exception.InvalidCommentException;
 import org.rssms.exception.ProjectNotFoundException;
 import org.rssms.exception.UserNotFoundException;
-import org.rssms.service.interfaces.CommentService;
-import org.rssms.service.interfaces.LiqPayService;
-import org.rssms.service.interfaces.ProjectService;
-import org.rssms.service.interfaces.UserService;
+import org.rssms.service.interfaces.*;
 
 import javax.ejb.EJB;
 import javax.ejb.EJBTransactionRolledbackException;
@@ -40,11 +38,15 @@ public class ShowProjectServlet extends HttpServlet {
     private CommentService commentService;
 
     @EJB
+    private DonationService donationService;
+
+    @EJB
     private LiqPayService liqPayService;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Project project = null;
         List<Comment> comments = null;
+        List<Donation> donations = null;
 
         try {
             if (request.getParameter("delete") != null){
@@ -57,6 +59,7 @@ public class ShowProjectServlet extends HttpServlet {
                 project = (Project)request.getAttribute("project");
             }
             comments = commentService.findCommentsByProject(project);
+            donations = donationService.findDonations(project);
         } catch (ProjectNotFoundException e) {
             e.printStackTrace();
         } catch (CommentNotFoundException e) {
@@ -65,6 +68,7 @@ public class ShowProjectServlet extends HttpServlet {
         }
 
         request.setAttribute("comments", comments);
+        request.setAttribute("donations", donations);
 
         if (project != null) {
             request.setAttribute("project", project);
@@ -104,6 +108,6 @@ public class ShowProjectServlet extends HttpServlet {
             req.setAttribute("error", e.getMessage());
         }
 
-        doGet(req, resp);
+        resp.sendRedirect(req.getHeader("referer"));
     }
 }

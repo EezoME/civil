@@ -13,8 +13,6 @@ import org.rssms.service.interfaces.PropertyService;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 import java.util.*;
 
 /**
@@ -42,7 +40,7 @@ public class LiqPayServiceBean implements LiqPayService {
     }
 
     @Override
-    public HashMap<String, String> generateLiqPayParams(Project project) throws UnsupportedEncodingException {
+    public HashMap<String, String> generateLiqPayParams(Project project) {
         HashMap liqpayParams = new HashMap();
         Properties properties = propertyService.getProperties("liqpay.properties");
         HashMap params = new HashMap();

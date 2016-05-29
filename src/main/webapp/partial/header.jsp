@@ -12,7 +12,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="/">
-                        <img alt="sss" width="150" height="30" src="http://placehold.it/150x30"/>
+                        <img alt="logo" class="navbar-logo" width="150" height="30" src="http://placehold.it/150x30"/>
                     </a>
                     <a href="newProject">
                         <input type="button" class="btn btn-primary navbar-btn" value="Запропонувати проект"/>

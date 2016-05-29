@@ -70,15 +70,15 @@ html, body {
     text-overflow: ellipsis;
 }
 
-.badge {
+.category-badge {
     color: #FFF;
     margin: 2px 0;
-    padding: 10px;
+    padding: 5px;
     font-size: smaller;
     border-radius: 3px;
 }
 
-.badge a {
+.category-badge a {
     color: white;
 }
 
@@ -137,8 +137,12 @@ html, body {
 }
 
 .author {
-    margin: 5px;
-    color: #1b6d85;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.current-author {
+    font-weight: bold;
 }
 
 .date-posted {
@@ -148,6 +152,7 @@ html, body {
 
 .comment-content {
     margin: 5px;
+    text-indent: 10px;
     word-wrap: break-word;
 }
 
@@ -200,6 +205,10 @@ a.delete {
     margin-bottom: 15px;
 }
 
+.category-wrapper {
+    margin: 10px 0px;
+}
+
 /*.sort-by a {*/
 /*color: #FFF;*/
 /*border-radius: 4px;*/
@@ -221,6 +230,14 @@ a.delete {
     margin: 0;
 }
 
+.project-summary {
+    margin-left: 15px;
+}
+
+.navbar-logo {
+    margin-top: -5px;
+}
+
 .profile-page-header {
     text-align: center;
     color: cadetblue;
@@ -239,6 +256,10 @@ iframe {
     margin-left: -33.5px;
     margin-top: -32px;
     margin-bottom: -32px;
+}
+
+#comments, #details, #donations {
+    padding: 10px;
 }
 
 /* Lastly, apply responsive CSS fixes as necessary */
