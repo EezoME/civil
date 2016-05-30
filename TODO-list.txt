@@ -5,6 +5,11 @@
             req.setAttribute("error", "Додайте зображення проекту");
             req.getRequestDispatcher("/user/newProject.jsp").forward(req, resp);
 
+Старые комментарии показывают время 0:00 !
+@Temporal(TemporalType.DATE)
+    @Column(name = "timePosted", nullable = false)
+    private Date timePosted;
+
 Веб-морда:
 - сохранение данных с формы при перезагрузке страницы (для вывода ошибок)
 - resize для страниц - чтобы всё красиво

@@ -52,7 +52,7 @@
 
                                             <!--a href="#" class="comment-author-avatar"><img src="data:image/png;base64,></a-->
                                             <span class="author"><a href="/users/${comment.author.userId}">${comment.author.username}</a></span><br/>
-                                            <span class="date-posted"><fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${comment.timePosted}"/></span>
+                                            <span class="date-posted"><fmt:formatDate pattern="yyyy.MM.dd 'at' HH:mm:ss" value="${comment.timePosted}"/></span>
                                             <c:if test="${comment.author.username == pageContext.request.remoteUser || pageContext.request.isUserInRole(\"ADMINISTRATOR\")}">
                                                 <a href="${pageContext.request.pathInfo}?delete=${comment.commentId}" class="delete">Видалити</a>
                                             </c:if>
@@ -81,6 +81,7 @@
                                     <% } %>
                                 </div>
                             </div>
+
                             <div class="tab-pane" id="donations">
                                 <table class="table table-striped">
                                     <thead>
@@ -102,7 +103,7 @@
                                                     </c:if>
                                                 </td>
                                                 <td>
-                                                    ${donation.amount}
+                                                    ${donation.amount} ₴
                                                 </td>
                                                 <td>
                                                     ${donation.comment}

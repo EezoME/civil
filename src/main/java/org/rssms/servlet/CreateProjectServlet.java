@@ -3,6 +3,7 @@ package org.rssms.servlet;
 import org.rssms.entity.Project;
 import org.rssms.entity.User;
 import org.rssms.enums.Category;
+import org.rssms.enums.Role;
 import org.rssms.enums.Status;
 import org.rssms.exception.InvalidProjectException;
 import org.rssms.exception.UserNotFoundException;
@@ -128,7 +129,7 @@ public class CreateProjectServlet extends HttpServlet {
         String ctx = req.getContextPath();
         String uri = req.getRequestURI();
         String base = url.substring(0, url.length() - uri.length() + ctx.length());
-        if (req.getUserPrincipal() != null) req.getRequestDispatcher("/user/newProject.jsp").forward(req, resp);
+        if (req.getUserPrincipal() != null && !req.isUserInRole(Role.UNCONFIRMED.toString())) req.getRequestDispatcher("/user/newProject.jsp").forward(req, resp);
         else resp.sendRedirect(base + "/login");
 
     }
