@@ -209,6 +209,16 @@ a.delete {
     margin: 10px 0px;
 }
 
+.project-label {
+    margin-left: 8px;
+}
+
+.project-label a {
+    color: white;
+    text-decoration: none;
+    font-weight: lighter;
+}
+
 /*.sort-by a {*/
 /*color: #FFF;*/
 /*border-radius: 4px;*/

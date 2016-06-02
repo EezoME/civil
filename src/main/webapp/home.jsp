@@ -43,7 +43,7 @@
                             </a>
                     </div>
                         <br>
-                        <p><span class="badge" style="background-color: ${project.category.tagColor}">
+                        <p><span class="label project-label" style="background-color: ${project.category.tagColor}">
                         <a href="/explore?category=${project.category}">${project.category.ukrainianName}</a></span></p>
                         <div class="project-footer">
                             <div class="project-author">
@@ -65,7 +65,7 @@
                                     double width = ((double) project.getFundedSum() / (double) project.getGoalCost()) * 100;
                                 %>
                                 <div class="progress-bar" role="progressbar" aria-valuemin="0"
-                                     aria-valuemax="100" style="width: <%=width%>;%">
+                                     aria-valuemax="100" style="width: <%=width%>%;">
                                 </div>
                             </div>
                             <div class="funds">

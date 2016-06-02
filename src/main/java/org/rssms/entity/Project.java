@@ -33,7 +33,7 @@ public class Project implements Serializable {
 
     @NotNull
     @Size(min = 15)
-    @Column(name = "description", nullable = false)
+    @Column(name = "description", nullable = false, columnDefinition = "TEXT")
     private String description;
 
     @NotNull
