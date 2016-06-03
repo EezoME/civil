@@ -29,14 +29,14 @@
                 <div id="filter">
                     <div class="sort-by">
                         Впорядковувати за:
-                        <div class="badge"
+                        <div class="category-badge"
                              style="background-color: ${sort == "popularity" ? 'dodgerblue' : 'darkgray'};">
                             <a href="/explore?sort=popularity&${not empty category ? 'category=' : ''}${category}">популярністью</a>
                         </div>
-                        <div class="badge" style="background-color: ${sort == "date" ? 'dodgerblue' : 'darkgray'};">
+                        <div class="category-badge" style="background-color: ${sort == "date" ? 'dodgerblue' : 'darkgray'};">
                             <a href="/explore?sort=date&${not empty category ? 'category=' : ''}${category}">датою</a>
                         </div>
-                        <div class="badge" style="background-color: ${sort == "goal" ? 'dodgerblue' : 'darkgray'};">
+                        <div class="category-badge" style="background-color: ${sort == "goal" ? 'dodgerblue' : 'darkgray'};">
                             <a href="/explore?sort=goal&${not empty category ? 'category=' : ''}${category}">фінальною
                                 сумою</a>
                         </div>
@@ -45,13 +45,13 @@
                     <div class="category">
                         Категорія:
                         <c:forEach items="${categories}" var="ctg">
-                            <div class="badge" style="background-color: ${ctg == category ? ctg.tagColor : 'darkgray'}">
+                            <div class="category-badge" style="background-color: ${ctg == category ? ctg.tagColor : 'darkgray'}">
                                 <a href="${pageContext.request.contextPath}/explore?category=${ctg}&${not empty sort ? 'sort=' : ''}${sort}">${ctg.ukrainianName}</a>
                             </div>
                         </c:forEach>
                     </div>
                     <a class="pull-right" href="${pageContext.request.contextPath}/explore">
-                        <button type="button" class="btn btn-danger">Очистити</button>
+                        <button type="button" class="btn btn-sm btn-danger">Очистити</button>
                     </a>
                     <br>
                 </div>
@@ -73,7 +73,7 @@
                             </a>
                         </div>
                         <br>
-                        <p><span class="badge" style="background-color: ${project.category.tagColor}">
+                        <p><span class="category-badge" style="background-color: ${project.category.tagColor}; margin-left: 8px;">
                         <a href="/explore?category=${project.category}">${project.category.ukrainianName}</a></span></p>
                         <div class="project-footer">
                             <div class="project-author">

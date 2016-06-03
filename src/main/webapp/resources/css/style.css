@@ -76,6 +76,7 @@ html, body {
     padding: 5px;
     font-size: smaller;
     border-radius: 3px;
+    display: inline-block;
 }
 
 .category-badge a {
