@@ -66,12 +66,7 @@
 </div>
 <footer>
     <div id="footer">
-        <div class="container">
-            <p class="credit">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce hendrerit enim eget sem
-                sodales, at semper... Інформаційна Система Підтримки Громадських Ініціатив &copy; 2016
-                <br/>
-                <br/> Смирнов Кирило, Стадник Дмитро, Чуріков Дмитро</p>
-        </div>
+        <jsp:include page="/partial/footer.jsp"/>
     </div>
 </footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

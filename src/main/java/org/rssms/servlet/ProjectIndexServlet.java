@@ -38,6 +38,6 @@ public class ProjectIndexServlet extends HttpServlet {
         }
         request.setAttribute("noOfPages", noOfPages);
         request.setAttribute("currentPage", page);
-        request.getRequestDispatcher("/home.jsp").forward(request, response);
+        request.getRequestDispatcher("/init").forward(request, response);
     }
 }
