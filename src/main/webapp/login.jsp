@@ -26,12 +26,12 @@
                 <form action="j_security_check" method="POST">
                     <div class="form-group">
                         <label for="login">Ім'я користувача</label>
-                        <input type="text" class="form-control" name="j_username" id="login" placeholder="Username">
+                        <input type="text" class="form-control" name="j_username" id="login" placeholder="Ім'я користувача">
                     </div>
                     <div class="form-group">
                         <label for="password">Пароль</label>
                         <input type="password" class="form-control" name="j_password" id="password"
-                               placeholder="Password">
+                               placeholder="Пароль">
                     </div>
                     <div class="checkbox">
                         <label>

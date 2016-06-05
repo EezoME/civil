@@ -6,6 +6,7 @@ import org.rssms.exception.InvalidUserException;
 import org.rssms.service.interfaces.UserService;
 
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -57,7 +58,13 @@ public class RegistrationServlet extends HttpServlet {
             try {
                 userServiceBean.addUser(user);
             } catch (InvalidUserException e) {
+                e.printStackTrace();
                 request.setAttribute("error", e.getMessage());
+                request.getRequestDispatcher("/signup.jsp").forward(request, response);
+                return;
+            } catch (EJBException e) {
+                e.printStackTrace();
+                request.setAttribute("error", "Користувач з таким логіном вже існує.");
                 request.getRequestDispatcher("/signup.jsp").forward(request, response);
                 return;
             }

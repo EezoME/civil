@@ -74,7 +74,7 @@
                                             <h4>Залишити коментар</h4>
                                             Ви: <span class="current-author text-primary">${pageContext.request.remoteUser}</span><br/>
                                             <div class="form-group">
-                                                <textarea class="form-control" style="width: 100%; margin-top: 5px;" rows="5" name="content" id="comment" placeholder="Коментар..."></textarea>
+                                                <textarea class="form-control" style="width: 100%; margin-top: 5px;" rows="5" name="content" id="comment" placeholder="Коментар мінімум 5 символів..."></textarea>
                                             </div>
                                             <button type="submit" style="margin: 0" class="btn btn-primary form-button">Коментувати</button>
                                         </form>

@@ -27,7 +27,7 @@
                 <form action="newProject" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="title">Назва проекту</label>
-                        <input type="text" class="form-control" name="title" id="title" placeholder="Назва"
+                        <input type="text" class="form-control" name="title" id="title" placeholder="Назва від 5 до 64 символів"
                                value="${not empty savedValues.title ? savedValues.title[0] : ''}">
                     </div>
                     <div class="form-group">
@@ -36,7 +36,7 @@
                     </div>
                     <div class="form-group">
                         <label for="prj-description">Опис</label>
-                        <textarea class="form-control" name="desc" id="prj-description" placeholder="Опис">${not empty savedValues.desc ? savedValues.desc[0] : ''}</textarea>
+                        <textarea class="form-control" name="desc" id="prj-description" placeholder="Опис мінімум 15 символів">${not empty savedValues.desc ? savedValues.desc[0] : ''}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="prj-sum">Необхідна сума (₴)</label>
@@ -45,7 +45,7 @@
                     </div>
                     <div class="form-group">
                         <label for="prj-date">Дата завершення</label>
-                        <input type="date" class="form-control" name="date" id="prj-date" placeholder="Назва"
+                        <input type="date" class="form-control" name="date" id="prj-date" placeholder="Дата у форматі РРРР-ММ-ДД"
                                value="${not empty savedValues.date ? savedValues.date[0] : ''}">
                     </div>
                     <div class="form-group">

@@ -6,6 +6,7 @@ import org.rssms.enums.Category;
 import org.rssms.enums.Role;
 import org.rssms.enums.Status;
 import org.rssms.exception.InvalidProjectException;
+import org.rssms.exception.ProjectNotFoundException;
 import org.rssms.exception.UserNotFoundException;
 import org.rssms.service.interfaces.ProjectService;
 import org.rssms.service.interfaces.UserService;
@@ -62,6 +63,14 @@ public class CreateProjectServlet extends HttpServlet {
             req.setAttribute("error", "Назва проекту повина бути від 5 до 64 символів.");
             req.getRequestDispatcher("/user/newProject.jsp").forward(req, resp);
             return;
+        }
+        try {
+            projectService.findProject(title);
+            req.setAttribute("error", "Проект з такою назвою вже існує.");
+            req.getRequestDispatcher("/user/newProject.jsp").forward(req, resp);
+            return;
+        } catch (ProjectNotFoundException e) {
+            // this is fine
         }
         String description = req.getParameter("desc");
         Category category = Category.valueOf(req.getParameter("category"));

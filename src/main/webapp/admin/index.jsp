@@ -38,6 +38,10 @@
         <div id="wrap">
             <jsp:include page="/partial/header-small.jsp"/>
             <div class="container admin-container">
+                <c:if test="${not empty error}">
+                    <div class="error"><%= request.getAttribute("error").toString() %>
+                    </div>
+                </c:if>
                 <%--Users--%>
                 <c:if test='${param.action=="users"}'>
                     <div class="row">

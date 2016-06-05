@@ -23,14 +23,6 @@ public abstract class AbstractJpaDao<T extends Serializable> implements GenericD
         this.entityClass = (Class<T>) genericSuperclass.getActualTypeArguments()[0];
     }
 
-//    public AbstractJpaDao(Class<T> entityClass) {
-//        this.entityClass = entityClass;
-//    }
-
-//    public AbstractJpaDao() {
-//
-//    }
-
     public EntityManager getEntityManager() {
         return em;
     }
