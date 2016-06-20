@@ -69,7 +69,8 @@ public class ProjectDaoImpl extends AbstractJpaDao<Project> implements ProjectDa
 
     @Override
     public List<Project> findAllPopularProjects() {
-        return getEntityManager().createQuery("select p from Project p order by p.fundedSum desc").getResultList();
+        Status status = Status.OPEN;
+        return getEntityManager().createQuery("select p from Project p where p.status=:status order by p.fundedSum desc").setParameter("status", status).getResultList();
     }
 
     @Override

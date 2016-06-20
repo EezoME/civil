@@ -78,7 +78,7 @@ public class CreateProjectServlet extends HttpServlet {
         try {
             int goalCost = 0;
             goalCost = Integer.valueOf(req.getParameter("sum"));
-            Status status = Status.OPEN;
+            Status status = Status.CLOSED;
             Part filePart = req.getPart("img");
             InputStream is = filePart.getInputStream();
             BufferedImage originalImage = ImageIO.read(is);
