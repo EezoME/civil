@@ -1,5 +1,6 @@
 package org.rssms.servlet;
 
+import org.apache.commons.codec.binary.Base64;
 import org.rssms.entity.Project;
 import org.rssms.entity.User;
 import org.rssms.enums.Category;
@@ -17,10 +18,7 @@ import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
+import javax.servlet.http.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
@@ -64,14 +62,14 @@ public class CreateProjectServlet extends HttpServlet {
             req.getRequestDispatcher("/user/newProject.jsp").forward(req, resp);
             return;
         }
-        try {
-            projectService.findProject(title);
-            req.setAttribute("error", "Проект з такою назвою вже існує.");
-            req.getRequestDispatcher("/user/newProject.jsp").forward(req, resp);
-            return;
-        } catch (ProjectNotFoundException e) {
-            // this is fine
-        }
+//        try {
+//            projectService.findProject(title);
+//            req.setAttribute("error", "Проект з такою назвою вже існує.");
+//            req.getRequestDispatcher("/user/newProject.jsp").forward(req, resp);
+//            return;
+//        } catch (ProjectNotFoundException e) {
+//            // this is fine
+//        }
         String description = req.getParameter("desc");
         Category category = Category.valueOf(req.getParameter("category"));
         String expirationDate = req.getParameter("date");
@@ -128,8 +126,8 @@ public class CreateProjectServlet extends HttpServlet {
             req.setAttribute("error", "Не вказана дата завершення");
             req.getRequestDispatcher("/user/newProject.jsp").forward(req, resp);
         }
-        resp.sendRedirect("/");
-        //req.getRequestDispatcher("/explore.html").forward(req, resp);
+        req.setAttribute("info", "Ваш проект успішно додано! Після проходження модерації він буде доступний для перегляду");
+        req.getRequestDispatcher("/user/newProject.jsp").forward(req, resp);
     }
 
     @Override

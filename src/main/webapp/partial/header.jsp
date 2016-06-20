@@ -14,11 +14,15 @@
                     <a class="navbar-brand" href="/">
                         <img alt="logo" class="navbar-logo" width="150" height="30" src="http://placehold.it/150x30"/>
                     </a>
-                    <a href="newProject">
-                        <input type="button" class="btn btn-primary navbar-btn" value="Запропонувати проект"/>
-                    </a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNav">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li>
+                            <a href="${pageContext.request.contextPath}/newProject" class="btn btn-primary navbar-btn">
+                                Запропонувати проект
+                            </a>
+                        </li>
+                    </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <% if (request.isUserInRole("ADMINISTRATOR")) {%>
                         <li><a href="${pageContext.request.contextPath}/admin">Панель адміністратора</a></li>

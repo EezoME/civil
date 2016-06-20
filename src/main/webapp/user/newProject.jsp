@@ -19,6 +19,11 @@
                 <div class="error"><%= request.getAttribute("error").toString() %>
                 </div>
             </c:if>
+            <c:if test="${not empty info}">
+                <div class="alert alert-success">
+                    ${info}
+                </div>
+            </c:if>
             <div class="row">
                 <h2>Додати проект</h2>
                 <h4>Помістити новий проект на розгляд</h4>
