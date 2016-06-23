@@ -11,6 +11,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/global.css"/>
+    <script src="../resources/js/google-analytics-code.js" ></script>
     <title>Персональній кабінет</title>
 </head>
 <body>

@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/simple-sidebar.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../resources/js/google-analytics-code.js" ></script>
     <title>UITest</title>
 </head>
 

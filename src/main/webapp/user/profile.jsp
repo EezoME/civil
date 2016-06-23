@@ -9,6 +9,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css"/>
+    <script src="../resources/js/google-analytics-code.js" ></script>
     <title>UITest</title>
 </head>
 
